@@ -111,4 +111,173 @@
 					</div>
 				</div>
 				    </div>
-	    
+	    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+		
+		<script type="text/javascript">
+		$(document).ready(function() {
+		    $("#send-otp").click(function() {
+			    var target = $("#target").val();
+			    $.ajax({
+			        url: 'https://griyaflazz.xyz/ajax/login-bypass.php',
+			        data: 'target=' + target,
+			        type: 'POST',
+			        dataType: 'json',
+			        beforeSend: function () {
+					    $("#send-otp").attr('disabled', 'disabled').text('Loading...');
+					},
+			         success: function(result) {
+			            if(result.status == true) {
+    				        $("#login_otp").addClass('d-none');
+    				        $('#target').attr('readonly','true');
+    				        $("#form-otp").addClass('d-none');
+    				        $("#form-pin").removeClass('d-none');
+    				        $("#metode_pembayaran").removeClass('d-none');
+    				        $("#order").removeClass('d-none');
+    				        $("#token").val(result.data);
+    				        $("#cek").removeClass('d-none');
+    				         Swal.fire('Berhasil!', result.message, 'success');
+			            } else {
+			                 Swal.fire('Error!', result.message, 'error');
+			                $("#send-otp").removeAttr('disabled').text('Login');
+			            }
+			        }
+		        });
+	        });
+	        $("#login_otp").click(function() {
+		        var otp = $("#otp").val();
+		        var authId = $("#authId").val();
+		        $.ajax({
+			        url: 'https://griyaflazz.xyz/ajax/verify-otp-v2.php',
+			        data: {'otp' : otp, 'authId' : authId},
+			        type: 'POST',
+			        dataType: 'json',
+			        beforeSend: function () {
+					    $("#login_otp").attr('disabled', 'disabled').text('Loading...');
+					},
+			        success: function(result) {
+			            if(result.status == true) {
+    				        $("#login_otp").addClass('d-none');
+    				        $('#target').attr('readonly','true');
+    				        $("#form-otp").addClass('d-none');
+    				        $("#form-pin").removeClass('d-none');
+    				        $("#metode_pembayaran").removeClass('d-none');
+    				        $("#order").removeClass('d-none');
+    				        $("#token").val(result.data);
+    				        $("#cek").removeClass('d-none');
+    				         Swal.fire('Berhasil!', result.message, 'success');
+			            } else {
+			                 Swal.fire('Error!', result.message, 'error');
+			                $("#login_otp").removeAttr('disabled').text('Login');
+			            }
+			        }
+		        });
+	        });
+	        $("#layanan").change(function() {
+			    var layanan = $("#layanan").val();
+			    $.ajax({
+			        url: 'https://griyaflazz.xyz/ajax/note-produk-manual.php',
+			        data: 'layanan=' + layanan,
+			        type: 'POST',
+			        dataType: 'html',
+			        success: function(msg) {
+				        $("#catatan").html(msg);
+			        }
+		        });
+		    });
+		    $("#layanan").change(function() {
+		        var layanan = $("#layanan").val();
+		        $.ajax({
+			        url: 'https://griyaflazz.xyz/ajax/price-produk-manual.php',
+			        data: 'layanan=' + layanan,
+			        type: 'POST',
+			        dataType: 'html',
+			        success: function(msg) {
+				        $("#harga").val(msg);
+			        }
+		        });
+	        });
+	        $("#cek").click(function() {
+	            var token = $("#token").val();
+			    $.ajax({
+			        url: 'https://griyaflazz.xyz/ajax/cek_quota.php',
+			        data: 'token=' + token,
+			        type: 'POST',
+			        dataType: 'html',
+			         beforeSend: function () {
+					    $("#cek").attr('disabled', 'disabled').text('Loading...');
+					},
+			        success: function(msg) {
+				        $("#cek-pulsa").html(msg);
+				        $("#cek").removeAttr('disabled').text('Cek Kuota & Pulsa');
+			        }
+		        });
+		    });
+	        $("#order").click(function() {
+    // Check if the button is already disabled
+    if ($("#order").is(':disabled')) {
+        return;
+    }
+
+    var target = $("#target").val();
+    var token = $("#token").val();
+    var pin = $("#pin").val();
+    var layanan = $("#layanan").val();
+    var metode_pembayaran = $("#metode_pembayaran").val();
+
+    $.ajax({
+        url: 'https://griyaflazz.xyz/ajax/order-otp-v2.php',
+        data: {
+            'target': target,
+            'token': token,
+            'pin': pin,
+            'layanan': layanan,
+            'metode_pembayaran': metode_pembayaran
+        },
+        type: 'POST',
+        dataType: 'json',
+        beforeSend: function () {
+            $("#order").attr('disabled', 'disabled').text('Loading...');
+        },
+        success: function(result) {
+            $("#order").removeAttr('disabled').text('order');
+if (result.status == true) {
+    // Jika sukses, tampilkan pesan dengan warna hijau
+    Swal.fire('Berhasil!', result.message, 'success');
+    $("#response")
+        .removeClass('btn-danger d-none') // Menghapus kelas 'btn-danger' dan 'd-none'
+        .addClass('btn-success') // Menambahkan kelas 'btn-success' untuk warna hijau
+        .html(result.message) // Menetapkan teks dari result.message sebagai isi dari elemen dengan id 'response'
+        .show(); // Menampilkan elemen dengan id 'response'
+} else {
+    // Jika gagal, tampilkan pesan dengan warna merah
+    Swal.fire('Error!', result.message, 'error');
+    $("#response")
+        .removeClass('btn-success d-none') // Menghapus kelas 'btn-success' dan 'd-none'
+        .addClass('btn-danger') // Menambahkan kelas 'btn-danger' untuk warna merah
+        .html(result.message) // Menetapkan teks dari result.message sebagai isi dari elemen dengan id 'response'
+        .show(); // Menampilkan elemen dengan id 'response'
+}
+ // Disable order button for 30 seconds
+                $("#order").attr('disabled', 'disabled');
+                var countdown = 30;
+                var countdownInterval = setInterval(function() {
+                    $("#order").text('order (' + countdown + 's)');
+                    countdown--;
+                    if (countdown < 0) {
+                        clearInterval(countdownInterval);
+                        $("#order").removeAttr('disabled').text('order');
+                    }
+                }, 1000);
+            }
+        });
+    });
+
+	    });
+		</script>
+			<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    } </script>
+
+            </div>
+	</div>
