@@ -1,251 +1,114 @@
+<div class="row">
+	        <div class="col-lg-7">
+		        <div class="kt-portlet">
+			        <div class="kt-portlet__head">
+				        <div class="kt-portlet__head-label">
+					        <h3 class="kt-portlet__head-title">
+					            <i class="flaticon2-shopping-cart text-primary"></i>
+					            Produk XL v2
+					        </h3>
+				        </div>
+			        </div>
+			        <div class="kt-portlet__body">
+                                            <!--<form class="form-horizontal" method="POST">
+	                        <input type="hidden" name="csrf_token" value="3fb6e5fab8e8e99d35923fdf7767af15578b5b4095bc5d9baf96aa514c1ec844">-->
+	                        <input type="hidden" id="authId">
+	                        <input type="hidden" id="token">
+	                        <button type="button" id="cek" class="btn btn-info btn-elevate btn-pill btn-elevate-air d-none">Cek Kuota & Pulsa</button>
+	                        <div id="cek-pulsa"></div>
 
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
+							<div class="form-group row">
+								<label class="col-xl-3 col-lg-3 col-form-label">Nomor</label>
+								<div class="col-lg-9 col-xl-6">
+								    <input type="number" name="target" id="target" class="form-control" placeholder="ID Pelanggan">
+								    <span class="form-text text-muted"></span>
+								</div>
+							</div>
+							<div id="response" class="btn btn-info btn-elevate btn-pill btn-elevate-air d-none"></div>
+							<div class="form-group row" id="form-otp">
+								<!--<label class="col-xl-3 col-lg-3 col-form-label">OTP</label>-->
+								<div class="col-lg-9 col-xl-6">
+								    <!--<input type="text" name="otp" id="otp" class="form-control" placeholder="OTP">-->
+								    <button type="button" class="btn btn-primary btn-elevate btn-pill btn-elevate-air mt-1" id="send-otp">Login</button>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-xl-3 col-lg-3 col-form-label">Layanan</label>
+								<div class="col-lg-9 col-xl-6">
+								    <select class="form-control" name="layanan" id="layanan">
+									    <option value="0">Pilih Layanan</option>
+									    										    <option value="274420">Xtra Combo Plus 5GB</option>
+									    										    <option value="274429">Addon Flex Reguler 4 GB + Reguler malam 45 GB (PULSA ONLY)</option>
+									    										    <option value="274430">Xtra Combo Lite M</option>
+									    										    <option value="274431">Addon XCL Unlimited Vidio,facebook,instagram</option>
+									    										    <option value="274432">Addon XCL Unlimited Youtube,facebook,instagram</option>
+									    										    <option value="274433">Addon XCL Unlimited Netflix,facebook,instagram</option>
+									    										    <option value="274453">Pengelola Akrab XXL</option>
+									    										    <option value="274454">Pengelola Akrab XL</option>
+									    										    <option value="274435">Pengelola Akrab L</option>
+									    										    <option value="274655">Unlock slot tambahan akrab (PULSA ONLY)</option>
+									    										    <option value="274421">Addon XCP Instagram 22 GB + Facebook 22 GB (PULSA ONLY)</option>
+									    										    <option value="274663">Biz Data+ 12GB</option>
+									    										    <option value="274725">Reguler 70 GB ( Biz stater )</option>
+									    										    <option value="274422">Addon XCP Youtube 22 GB + Tiktok 22 GB (PULSA ONLY)</option>
+									    										    <option value="274423">Addon XCP Vidio 22 GB + Spottify 22 GB (PULSA ONLY)</option>
+									    										    <option value="274424">Addon XCP Netflix 22 GB + Viu 22 GB (Pulsa Only)</option>
+									    										    <option value="274425">Addon XCP  Mobile Legends 22 GB + Free Fire 22 GB (Pulsa Only)</option>
+									    										    <option value="274426">Addon XCP Pubg 22 GB + Joox 22 GB (Pulsa Only)</option>
+									    										    <option value="274427"> Xtra Combo Flex S</option>
+									    										    <option value="274428">Addon Flex Youtube 20GB + Tiktok 20GB (Pulsa Only)</option>
+									    										    <option value="274662">MINI REWARD (Baca Deskripsi)</option>
+									    										    <option value="274656">BASIC REWARD (Baca Deskripsi)</option>
+									    									</select>
+									<span class="form-text text-muted"></span>
+								</div>
+							</div>
+						<div class="form-group row">
+								<label class="col-xl-3 col-lg-3 col-form-label">Metode Pembayaran</label>
+								<div class="col-lg-9 col-xl-6">
+								    <select class="form-control" name="pembayaran" id="metode_pembayaran">
+    <option value="PULSA">PULSA</option>
+    <option value="GOPAY">GOPAY</option>
+    <option value="DANA">DANA</option>
+</select>
+	</div>
+							</div>
 
-<head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Member Panel | GriyaFlazz</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta content="Griya Flazz adalah Pusat untuk para Reseller Produk Digital, Pulsa All Operator, Token PLN, Paket Data,  Paket Akrab (Paket Data XL), Saldo E-money, Voucher Game, Akun Premium, Top Up Game dengan harga termurah di Indonesia Dan Deposit Otomatis Hanya Hitungan Detik Tanpa Biaya Admin. Yuk Daftar Dan Sukseslah Bersama GriyaFlazz" name="description" />
-        <meta content="Griya Flazz" name="author" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-        <!-- Start Favicon Icon -->
-        <link rel="shortcut icon" href="https://griyaflazz.my.id/assets/media/logos/11zon_cropped(1).png" />
-        <!-- End Favicon Icon -->
-
-        <!-- Start CSS -->
-        <link href="https://griyaflazz.xyz/assets/css/pages/support-center/home-2.css" rel="stylesheet" type="text/css" />
-        <link href="https://griyaflazz.xyz/assets/css/pages/voucher/voucher-1.css" rel="stylesheet" type="text/css" />
-        <link href="https://griyaflazz.xyz/assets/css/pages/pricing/pricing-3.css" rel="stylesheet" type="text/css" />
-        <link href="https://griyaflazz.xyz/assets/css/pages/invoices/invoice-1.css" rel="stylesheet" type="text/css" />
-        <link href="https://griyaflazz.xyz/assets/css/pages/invoices/invoice-2.css" rel="stylesheet" type="text/css" />
-        <link href="https://griyaflazz.xyz/assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
-        <link href="https://griyaflazz.xyz/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
-        <link href="https://griyaflazz.xyz/assets/css/pages/support-center/faq-2.css" rel="stylesheet" type="text/css" />
-        <link href="https://griyaflazz.xyz/assets/css/pages/login/style.css" rel="stylesheet" type="text/css" />
-        <link href="https://griyaflazz.xyz/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-        <link href="https://griyaflazz.xyz/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-        <link href="https://griyaflazz.xyz/assets/css/style.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-        <!-- End CSS -->
-    
-        <!-- Start Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
-        <!-- End Fonts -->
-
-        <!-- Start Script JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-        <!-- End Script JS -->
-        
-        <!-- Start Script Morris Chart -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-        <!-- End Script Morris Chart -->
-
-        <!-- Start Hotjar Tracking -->
-        
-        <!-- End Hotjar Tracking -->
-        
-        <!-- Start Global Site Tag (gtag.js) - Google Analytics -->
-        
-        <!-- End Global Site Tag (gtag.js) - Google Analytics -->
-
-<!--<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "0e29f1c9-2cdd-4cd9-9d3e-311ccfeeba6f",
-    });
-  });
-</script>-->
-
-</head>
-
-
-        <!-- Start Body -->
-        <body style="background: rgb(0,150,136);background:linear-gradient(0deg,rgba(0,150,136,1)0%,rgba(0,150,136,1)100%);" class="kt-page--loading-enabled kt-page--loading kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header--minimize-menu kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-page--loading">
-
-        <!-- Start Page -->
-
-        <!-- Start Header Mobile -->
-        <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed">
-            <div class="kt-header-mobile__toolbar">
-            <button class="kt-header-mobile__toolbar-toggler" id="kt_header_mobile_toggler"><span></span></button>
-            </div>
-	        <div class="kt-header-mobile__logo">
-		        <a href="https://griyaflazz.xyz/">
-			        <img alt="Logo" src="https://griyaflazz.my.id/assets/media/logos/griyaflazz.png" style="width: 180px;"/>
-		        </a>
-	        </div>
-	        <div class="kt-header-mobile__toolbar">
-	            <div class="kt-header__topbar-item dropdown">
-		    <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
-			    <span class="kt-header__topbar-icon kt-pulse kt-pulse--light">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <rect x="0" y="0" width="24" height="24"/>
-                            <path d="M2.56066017,10.6819805 L4.68198052,8.56066017 C5.26776695,7.97487373 6.21751442,7.97487373 6.80330086,8.56066017 L8.9246212,10.6819805 C9.51040764,11.267767 9.51040764,12.2175144 8.9246212,12.8033009 L6.80330086,14.9246212 C6.21751442,15.5104076 5.26776695,15.5104076 4.68198052,14.9246212 L2.56066017,12.8033009 C1.97487373,12.2175144 1.97487373,11.267767 2.56066017,10.6819805 Z M14.5606602,10.6819805 L16.6819805,8.56066017 C17.267767,7.97487373 18.2175144,7.97487373 18.8033009,8.56066017 L20.9246212,10.6819805 C21.5104076,11.267767 21.5104076,12.2175144 20.9246212,12.8033009 L18.8033009,14.9246212 C18.2175144,15.5104076 17.267767,15.5104076 16.6819805,14.9246212 L14.5606602,12.8033009 C13.9748737,12.2175144 13.9748737,11.267767 14.5606602,10.6819805 Z" fill="#000000" opacity="0.3"/>
-                            <path d="M8.56066017,16.6819805 L10.6819805,14.5606602 C11.267767,13.9748737 12.2175144,13.9748737 12.8033009,14.5606602 L14.9246212,16.6819805 C15.5104076,17.267767 15.5104076,18.2175144 14.9246212,18.8033009 L12.8033009,20.9246212 C12.2175144,21.5104076 11.267767,21.5104076 10.6819805,20.9246212 L8.56066017,18.8033009 C7.97487373,18.2175144 7.97487373,17.267767 8.56066017,16.6819805 Z M8.56066017,4.68198052 L10.6819805,2.56066017 C11.267767,1.97487373 12.2175144,1.97487373 12.8033009,2.56066017 L14.9246212,4.68198052 C15.5104076,5.26776695 15.5104076,6.21751442 14.9246212,6.80330086 L12.8033009,8.9246212 C12.2175144,9.51040764 11.267767,9.51040764 10.6819805,8.9246212 L8.56066017,6.80330086 C7.97487373,6.21751442 7.97487373,5.26776695 8.56066017,4.68198052 Z" fill="#000000"/>
-                        </g>
-		            </svg>
-			        <span class="kt-pulse__ring"></span>
-			    </span>
-		    </div>
-
-			<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
-			    <form>
-
-                    <!-- Start Head -->
-                    <div class="kt-head kt-head--skin-dark kt-head--fit-x kt-head--fit-b" style="background: rgb(0,150,136);background:linear-gradient(0deg,rgba(0,150,136,1)0%,rgba(0,150,136,1)100%);">
-                        <h3 class="kt-head__title">
-                            Notifikasi Mobile
-                        </h3>
-                        <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-success kt-notification-item-padding-x" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active show" data-toggle="tab" href="#topbar_notifications_logs" role="tab" aria-selected="true">Riwayat</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#topbar_notifications_notifications" role="tab" aria-selected="false">Detail Riwayat</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#topbar_notifications_events" role="tab" aria-selected="false">Promo</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- End Head -->
-
-                    <div id="header-container" class="tab-content">
-                        <div class="tab-pane active show" id="topbar_notifications_logs" role="tabpanel">
-                            <div class="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll" data-scroll="true" data-height="300" data-mobile-height="200">
-                                                                <a href="https://griyaflazz.xyz/page/receipt?oid=gfVPQwv6m5568181" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="flaticon2-shopping-cart kt-font-primary"></i>
+							<div id="catatan"></div>
+							<div class="form-group row d-none" id="form-pin">
+                                <label class="col-xl-3 col-lg-3 col-form-label">PIN</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-lock text-primary"></i></span></div>
+                                        <input type="number" name="pin" id="pin" class="form-control" placeholder="Masukkan PIN Kamu">
                                     </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title">
-                                            Pembelian membersihkan akrab keseluruhan bonus + kuber ( baca deskripi )                                        </div>
-                                        <div class="kt-notification__item-time">
-                                            24 Juni 2024, 15:25:33                                        </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+								<label class="col-xl-3 col-lg-3 col-form-label">Harga</label>
+								<div class="col-lg-9 col-xl-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text text-primary">Rp</span></div>
+                                        <input type="text" class="form-control" id="harga" placeholder="0" readonly>
                                     </div>
-                                </a>
-                                                                <a href="https://griyaflazz.xyz/page/receipt?oid=gfh6d69U47957388" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="flaticon2-shopping-cart kt-font-primary"></i>
-                                    </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title">
-                                            Pembelian membersihkan akrab keseluruhan bonus + kuber ( baca deskripi )                                        </div>
-                                        <div class="kt-notification__item-time">
-                                            24 Juni 2024, 15:18:58                                        </div>
-                                    </div>
-                                </a>
-                                                                <a href="https://griyaflazz.xyz/page/receipt?oid=gfwlKH1LP3655976" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="flaticon2-shopping-cart kt-font-primary"></i>
-                                    </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title">
-                                            Pembelian Addon XCL Unlimited Vidio,facebook,instagram                                        </div>
-                                        <div class="kt-notification__item-time">
-                                            23 Juni 2024, 08:50:59                                        </div>
-                                    </div>
-                                </a>
-                                                                <a href="https://griyaflazz.xyz/page/receipt?oid=gfj1oRGZO7442236" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="flaticon2-shopping-cart kt-font-primary"></i>
-                                    </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title">
-                                            Pembelian Xtra Combo Lite M                                        </div>
-                                        <div class="kt-notification__item-time">
-                                            22 Juni 2024, 09:29:19                                        </div>
-                                    </div>
-                                </a>
-                                                                <a href="https://griyaflazz.xyz/page/receipt?oid=gfVkrh4pn7967842" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="flaticon2-shopping-cart kt-font-primary"></i>
-                                    </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title">
-                                            Pembelian Addon XCL Unlimited Vidio,facebook,instagram                                        </div>
-                                        <div class="kt-notification__item-time">
-                                            18 Juni 2024, 16:01:05                                        </div>
-                                    </div>
-                                </a>
-                                                                <a href="https://griyaflazz.xyz/page/receipt?oid=gfLqkHjix2554842" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="flaticon2-shopping-cart kt-font-primary"></i>
-                                    </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title">
-                                            Pembelian Addon XCL Unlimited Youtube,facebook,instagram                                        </div>
-                                        <div class="kt-notification__item-time">
-                                            17 Juni 2024, 15:00:20                                        </div>
-                                    </div>
-                                </a>
-                                                                <a href="https://griyaflazz.xyz/page/receipt?oid=gfgp6tVSy2469949" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="flaticon2-shopping-cart kt-font-primary"></i>
-                                    </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title">
-                                            Pembelian Xtra Combo Lite M                                        </div>
-                                        <div class="kt-notification__item-time">
-                                            17 Juni 2024, 14:56:32                                        </div>
-                                    </div>
-                                </a>
-                                                                <a href="https://griyaflazz.xyz/page/receipt?oid=gf3wzhudw2152458" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="flaticon2-shopping-cart kt-font-primary"></i>
-                                    </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title">
-                                            Pembelian Addon XCL Unlimited Youtube,facebook,instagram                                        </div>
-                                        <div class="kt-notification__item-time">
-                                            16 Juni 2024, 18:06:45                                        </div>
-                                    </div>
-                                </a>
-                                                                <a href="https://griyaflazz.xyz/page/receipt?oid=gfhNHwrXD5613416" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="flaticon2-shopping-cart kt-font-primary"></i>
-                                    </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title">
-                                            Pembelian Xtra Combo Lite M                                        </div>
-                                        <div class="kt-notification__item-time">
-                                            16 Juni 2024, 17:41:51                                        </div>
-                                    </div>
-                                </a>
-                                                                <a href="https://griyaflazz.xyz/page/receipt?oid=gfmYcnBUr3543566" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="flaticon2-shopping-cart kt-font-primary"></i>
-                                    </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title">
-                                            Pembelian SUPERBIG 20GB+LOKAL                                        </div>
-                                        <div class="kt-notification__item-time">
-                                            14 Juni 2024, 16:38:29                                        </div>
-                                    </div>
-                                </a>
-                                                            </div>
-                        </div>
-                        <div class="tab-pane" id="topbar_notifications_notifications" role="tabpanel">
-                            <div class="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll" data-scroll="true" data-height="300" data-mobile-height="200">
-                                                                <a href="https://griyaflazz.xyz/history/balance-coins" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="fa fa-minus kt-font-danger"></i>
-                                    </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title">
-                                            Pengurangan Saldo (Rp 4.000,00)
+								</div>
+							</div>
+                            <div class="kt-portlet__foot">
+                                <div class="kt-form__actions">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-xl-3">
                                         </div>
-                                        <div class="kt-notification__item-time">
-                                            24 Juni 2024, 15:25:33                                        </div>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <!--<button type="submit" id="login_otp" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Login</button>-->
+                                            <button type="button" id="order" class="btn btn-primary btn-elevate btn-pill btn-elevate-air d-none">order</button>
+                                            <a href="javascript:window.top.location.reload(true)" class="btn btn-danger btn-elevate btn-pill btn-elevate-air">Ulangi</a>
+                                        </div>
                                     </div>
-                                </a>
-                                    
+                                </div>
+                            </div>
+						<!--</form>-->
+					</div>
+				</div>
+				    </div>
+	    
