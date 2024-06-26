@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Member Panel | GriyaFlazz</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="Griya Flazz adalah Pusat untuk para Reseller Produk Digital, Pulsa All Operator, Token PLN, Paket Data,  Paket Akrab (Paket Data XL), Saldo E-money, Voucher Game, Akun Premium, Top Up Game dengan harga termurah di Indonesia Dan Deposit Otomatis Hanya Hitungan Detik Tanpa Biaya Admin. Yuk Daftar Dan Sukseslah Bersama GriyaFlazz" name="description" />
+        <meta content="Griya Flazz" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!-- Start Favicon Icon -->
+        <link rel="shortcut icon" href="https://griyaflazz.my.id/assets/media/logos/11zon_cropped(1).png" />
+        <!-- End Favicon Icon -->
+
+        <!-- Start CSS -->
+        <link href="https://griyaflazz.xyz/assets/css/pages/support-center/home-2.css" rel="stylesheet" type="text/css" />
+        <link href="https://griyaflazz.xyz/assets/css/pages/voucher/voucher-1.css" rel="stylesheet" type="text/css" />
+        <link href="https://griyaflazz.xyz/assets/css/pages/pricing/pricing-3.css" rel="stylesheet" type="text/css" />
+        <link href="https://griyaflazz.xyz/assets/css/pages/invoices/invoice-1.css" rel="stylesheet" type="text/css" />
+        <link href="https://griyaflazz.xyz/assets/css/pages/invoices/invoice-2.css" rel="stylesheet" type="text/css" />
+        <link href="https://griyaflazz.xyz/assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
+        <link href="https://griyaflazz.xyz/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="https://griyaflazz.xyz/assets/css/pages/support-center/faq-2.css" rel="stylesheet" type="text/css" />
+        <link href="https://griyaflazz.xyz/assets/css/pages/login/style.css" rel="stylesheet" type="text/css" />
+        <link href="https://griyaflazz.xyz/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="https://griyaflazz.xyz/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="https://griyaflazz.xyz/assets/css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <!-- End CSS -->
+    
+        <!-- Start Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+        <!-- End Fonts -->
+
+        <!-- Start Script JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+        <!-- End Script JS -->
+        
+        <!-- Start Script Morris Chart -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+        <!-- End Script Morris Chart -->
+
+        <!-- Start Hotjar Tracking -->
+        
+        <!-- End Hotjar Tracking -->
+        
+        <!-- Start Global Site Tag (gtag.js) - Google Analytics -->
+        
+        <!-- End Global Site Tag (gtag.js) - Google Analytics -->
+
+<!--<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "0e29f1c9-2cdd-4cd9-9d3e-311ccfeeba6f",
+    });
+  });
+</script>-->
+
+</head>
+<div id="cover-spin"></div>
+<div class="container atur1" style="margin-top: 150px; margin-bottom: 150px;">
+<center><h3 style="font-weight: bold;">SIDOMPUL CEK KUOTA XL</h3><b>By KMSP-STORE<br>v2.0.0</b></center>
+<br>
+<div class="alert alert-success" style="text-align: justify;">
+  <strong><i class="fa fa-bullhorn" aria-hidden="true"></i> INFO</strong><br>Unlimited pengecekan kuota/paket, mohon jangan melakukan SPAM. Proses pengecekan bisa memakan waktu hingga 30 detikan.</a>
+</div>
+<div id="formnya">
+  <div class="form-group">
+    <label for="msisdn">MSISDN/Nomor XL Kamu:</label>
+    <input type="number" class="form-control" id="msisdn" placeholder="Ex: 08xxx/628xxx" value="" maxlength="16" required>
+  </div>
+  <button type="button" id="submitCekKuota" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Cek</button>
+  <div id="hasilnya" style="text-align: justify;"></div>
+</div><br>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#submitCekKuota').click(function(){
+    $.ajax({
+        type:'GET',
+        crossDomain: true,
+        url: "https://apigw.kmsp-store.com/sidompul/v2/cek_kuota?msisdn=" + $('#msisdn').val() + "&isJSON=true",
+        data:{},
+        dataType:'JSON',
+        'contentType': 'application/x-www-form-urlencoded',
+        error:function(xhr, ajaxOptions, thrownError){
+        //error
+        $('#cover-spin').hide();
+        toastr.error('Terjadi kesalahan. Silakan coba lagi!');
+        },
+        cache:false,
+        beforeSend:function(request){
+          request.setRequestHeader('Authorization', 'Basic c2lkb21wdWxhcGk6YXBpZ3drbXNw');
+          request.setRequestHeader('X-API-Key', '6fb99971-2a2f-40ed-815d-a64df9f3c975');
+          request.setRequestHeader('X-App-Version', '2.0.0');
+        //sebelum kirim
+        $('#cover-spin').show(0);
+        },
+        success:function(s){
+          //console.log(s);
+
+          $('#cover-spin').hide();
+
+          if(s['status'] == false)
+          {
+            toastr.error(s['message']);
+            $('#hasilnya').html('');
+            $('#hasilnya').html("<br>" + '<font style="color: red;"><b>' + s['data']['keteranganError'] + '</b></font>');
+          }
+
+          if(s['status'] == true)
+          {
+            toastr.success(s['message']);
+            $('#hasilnya').html('');
+            $('#hasilnya').html("<br>" + s['data']['hasil']);
+          }
+        }
+      });
+  });
+});
+
+$(document).on('keypress',function(e) {
+  if(e.which == 13 && $("#msisdn").is(":focus"))
+  {
+    $.ajax({
+        type:'GET',
+        crossDomain: true,
+        url: "https://apigw.kmsp-store.com/sidompul/v2/cek_kuota?msisdn=" + $('#msisdn').val() + "&isJSON=true",
+        data:{},
+        dataType:'JSON',
+        'contentType': 'application/x-www-form-urlencoded',
+        error:function(xhr, ajaxOptions, thrownError){
+        //error
+        $('#cover-spin').hide();
+        toastr.error('Terjadi kesalahan. Silakan coba lagi!');
+        },
+        cache:false,
+        beforeSend:function(request){
+          request.setRequestHeader('Authorization', 'Basic c2lkb21wdWxhcGk6YXBpZ3drbXNw');
+          request.setRequestHeader('X-API-Key', '6fb99971-2a2f-40ed-815d-a64df9f3c975');
+          request.setRequestHeader('X-App-Version', '2.0.0');
+        //sebelum kirim
+        $('#cover-spin').show(0);
+        },
+        success:function(s){
+          //console.log(s);
+
+          $('#cover-spin').hide();
+
+          if(s['status'] == false)
+          {
+            toastr.error(s['message']);
+            $('#hasilnya').html('');
+            $('#hasilnya').html("<br>" + '<font style="color: red;"><b>' + s['data']['keteranganError'] + '</b></font>');
+          }
+
+          if(s['status'] == true)
+          {
+            toastr.success(s['message']);
+            $('#hasilnya').html('');
+            $('#hasilnya').html("<br>" + s['data']['hasil']);
+          }
+        }
+      });
+  }
+});
+</script>
+<script src="https://my.kmsp-store.com/assets/toastr.js"></script>
+</body>
+</html>
