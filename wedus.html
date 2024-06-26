@@ -1,283 +1,161 @@
-<div class="row">
-	        <div class="col-lg-7">
-		        <div class="kt-portlet">
-			        <div class="kt-portlet__head">
-				        <div class="kt-portlet__head-label">
-					        <h3 class="kt-portlet__head-title">
-					            <i class="flaticon2-shopping-cart text-primary"></i>
-					            Produk XL v2
-					        </h3>
-				        </div>
-			        </div>
-			        <div class="kt-portlet__body">
-                                            <!--<form class="form-horizontal" method="POST">
-	                        <input type="hidden" name="csrf_token" value="3fb6e5fab8e8e99d35923fdf7767af15578b5b4095bc5d9baf96aa514c1ec844">-->
-	                        <input type="hidden" id="authId">
-	                        <input type="hidden" id="token">
-	                        <button type="button" id="cek" class="btn btn-info btn-elevate btn-pill btn-elevate-air d-none">Cek Kuota & Pulsa</button>
-	                        <div id="cek-pulsa"></div>
 
-							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Nomor</label>
-								<div class="col-lg-9 col-xl-6">
-								    <input type="number" name="target" id="target" class="form-control" placeholder="ID Pelanggan">
-								    <span class="form-text text-muted"></span>
-								</div>
-							</div>
-							<div id="response" class="btn btn-info btn-elevate btn-pill btn-elevate-air d-none"></div>
-							<div class="form-group row" id="form-otp">
-								<!--<label class="col-xl-3 col-lg-3 col-form-label">OTP</label>-->
-								<div class="col-lg-9 col-xl-6">
-								    <!--<input type="text" name="otp" id="otp" class="form-control" placeholder="OTP">-->
-								    <button type="button" class="btn btn-primary btn-elevate btn-pill btn-elevate-air mt-1" id="send-otp">Login</button>
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Layanan</label>
-								<div class="col-lg-9 col-xl-6">
-								    <select class="form-control" name="layanan" id="layanan">
-									    <option value="0">Pilih Layanan</option>
-									    										    <option value="274420">Xtra Combo Plus 5GB</option>
-									    										    <option value="274429">Addon Flex Reguler 4 GB + Reguler malam 45 GB (PULSA ONLY)</option>
-									    										    <option value="274430">Xtra Combo Lite M</option>
-									    										    <option value="274431">Addon XCL Unlimited Vidio,facebook,instagram</option>
-									    										    <option value="274432">Addon XCL Unlimited Youtube,facebook,instagram</option>
-									    										    <option value="274433">Addon XCL Unlimited Netflix,facebook,instagram</option>
-									    										    <option value="274453">Pengelola Akrab XXL</option>
-									    										    <option value="274454">Pengelola Akrab XL</option>
-									    										    <option value="274435">Pengelola Akrab L</option>
-									    										    <option value="274655">Unlock slot tambahan akrab (PULSA ONLY)</option>
-									    										    <option value="274421">Addon XCP Instagram 22 GB + Facebook 22 GB (PULSA ONLY)</option>
-									    										    <option value="274663">Biz Data+ 12GB</option>
-									    										    <option value="274725">Reguler 70 GB ( Biz stater )</option>
-									    										    <option value="274422">Addon XCP Youtube 22 GB + Tiktok 22 GB (PULSA ONLY)</option>
-									    										    <option value="274423">Addon XCP Vidio 22 GB + Spottify 22 GB (PULSA ONLY)</option>
-									    										    <option value="274424">Addon XCP Netflix 22 GB + Viu 22 GB (Pulsa Only)</option>
-									    										    <option value="274425">Addon XCP  Mobile Legends 22 GB + Free Fire 22 GB (Pulsa Only)</option>
-									    										    <option value="274426">Addon XCP Pubg 22 GB + Joox 22 GB (Pulsa Only)</option>
-									    										    <option value="274427"> Xtra Combo Flex S</option>
-									    										    <option value="274428">Addon Flex Youtube 20GB + Tiktok 20GB (Pulsa Only)</option>
-									    										    <option value="274662">MINI REWARD (Baca Deskripsi)</option>
-									    										    <option value="274656">BASIC REWARD (Baca Deskripsi)</option>
-									    									</select>
-									<span class="form-text text-muted"></span>
-								</div>
-							</div>
-						<div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Metode Pembayaran</label>
-								<div class="col-lg-9 col-xl-6">
-								    <select class="form-control" name="pembayaran" id="metode_pembayaran">
-    <option value="PULSA">PULSA</option>
-    <option value="GOPAY">GOPAY</option>
-    <option value="DANA">DANA</option>
-</select>
-	</div>
-							</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Sidompul Cek Kuota XL - KMSP-STORE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="format-detection" content="telephone=no" />
+<meta name="robots" content="index, follow">
+<meta name="author" content="Wira Dwi Susanto">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="https://my.kmsp-store.com/css/jquery.ccpicker.css">
+<link rel="stylesheet" href="https://my.kmsp-store.com/assets/css/spinner.css">
+<link href="https://my.kmsp-store.com/assets/build/toastr.css" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144237878-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-							<div id="catatan"></div>
-							<div class="form-group row d-none" id="form-pin">
-                                <label class="col-xl-3 col-lg-3 col-form-label">PIN</label>
-                                <div class="col-lg-9 col-xl-6">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-lock text-primary"></i></span></div>
-                                        <input type="number" name="pin" id="pin" class="form-control" placeholder="Masukkan PIN Kamu">
-                                    </div>
-                                    <span class="form-text text-muted"></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-								<label class="col-xl-3 col-lg-3 col-form-label">Harga</label>
-								<div class="col-lg-9 col-xl-6">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text text-primary">Rp</span></div>
-                                        <input type="text" class="form-control" id="harga" placeholder="0" readonly>
-                                    </div>
-								</div>
-							</div>
-                            <div class="kt-portlet__foot">
-                                <div class="kt-form__actions">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-xl-3">
-                                        </div>
-                                        <div class="col-lg-9 col-xl-9">
-                                            <!--<button type="submit" id="login_otp" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Login</button>-->
-                                            <button type="button" id="order" class="btn btn-primary btn-elevate btn-pill btn-elevate-air d-none">order</button>
-                                            <a href="javascript:window.top.location.reload(true)" class="btn btn-danger btn-elevate btn-pill btn-elevate-air">Ulangi</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-						<!--</form>-->
-					</div>
-				</div>
-				    </div>
-	    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-		
-		<script type="text/javascript">
-		$(document).ready(function() {
-		    $("#send-otp").click(function() {
-			    var target = $("#target").val();
-			    $.ajax({
-			        url: 'https://griyaflazz.xyz/ajax/login-bypass.php',
-			        data: 'target=' + target,
-			        type: 'POST',
-			        dataType: 'json',
-			        beforeSend: function () {
-					    $("#send-otp").attr('disabled', 'disabled').text('Loading...');
-					},
-			         success: function(result) {
-			            if(result.status == true) {
-    				        $("#login_otp").addClass('d-none');
-    				        $('#target').attr('readonly','true');
-    				        $("#form-otp").addClass('d-none');
-    				        $("#form-pin").removeClass('d-none');
-    				        $("#metode_pembayaran").removeClass('d-none');
-    				        $("#order").removeClass('d-none');
-    				        $("#token").val(result.data);
-    				        $("#cek").removeClass('d-none');
-    				         Swal.fire('Berhasil!', result.message, 'success');
-			            } else {
-			                 Swal.fire('Error!', result.message, 'error');
-			                $("#send-otp").removeAttr('disabled').text('Login');
-			            }
-			        }
-		        });
-	        });
-	        $("#login_otp").click(function() {
-		        var otp = $("#otp").val();
-		        var authId = $("#authId").val();
-		        $.ajax({
-			        url: 'https://griyaflazz.xyz/ajax/verify-otp-v2.php',
-			        data: {'otp' : otp, 'authId' : authId},
-			        type: 'POST',
-			        dataType: 'json',
-			        beforeSend: function () {
-					    $("#login_otp").attr('disabled', 'disabled').text('Loading...');
-					},
-			        success: function(result) {
-			            if(result.status == true) {
-    				        $("#login_otp").addClass('d-none');
-    				        $('#target').attr('readonly','true');
-    				        $("#form-otp").addClass('d-none');
-    				        $("#form-pin").removeClass('d-none');
-    				        $("#metode_pembayaran").removeClass('d-none');
-    				        $("#order").removeClass('d-none');
-    				        $("#token").val(result.data);
-    				        $("#cek").removeClass('d-none');
-    				         Swal.fire('Berhasil!', result.message, 'success');
-			            } else {
-			                 Swal.fire('Error!', result.message, 'error');
-			                $("#login_otp").removeAttr('disabled').text('Login');
-			            }
-			        }
-		        });
-	        });
-	        $("#layanan").change(function() {
-			    var layanan = $("#layanan").val();
-			    $.ajax({
-			        url: 'https://griyaflazz.xyz/ajax/note-produk-manual.php',
-			        data: 'layanan=' + layanan,
-			        type: 'POST',
-			        dataType: 'html',
-			        success: function(msg) {
-				        $("#catatan").html(msg);
-			        }
-		        });
-		    });
-		    $("#layanan").change(function() {
-		        var layanan = $("#layanan").val();
-		        $.ajax({
-			        url: 'https://griyaflazz.xyz/ajax/price-produk-manual.php',
-			        data: 'layanan=' + layanan,
-			        type: 'POST',
-			        dataType: 'html',
-			        success: function(msg) {
-				        $("#harga").val(msg);
-			        }
-		        });
-	        });
-	        $("#cek").click(function() {
-	            var token = $("#token").val();
-			    $.ajax({
-			        url: 'https://griyaflazz.xyz/ajax/cek_quota.php',
-			        data: 'token=' + token,
-			        type: 'POST',
-			        dataType: 'html',
-			         beforeSend: function () {
-					    $("#cek").attr('disabled', 'disabled').text('Loading...');
-					},
-			        success: function(msg) {
-				        $("#cek-pulsa").html(msg);
-				        $("#cek").removeAttr('disabled').text('Cek Kuota & Pulsa');
-			        }
-		        });
-		    });
-	        $("#order").click(function() {
-    // Check if the button is already disabled
-    if ($("#order").is(':disabled')) {
-        return;
-    }
-
-    var target = $("#target").val();
-    var token = $("#token").val();
-    var pin = $("#pin").val();
-    var layanan = $("#layanan").val();
-    var metode_pembayaran = $("#metode_pembayaran").val();
-
-    $.ajax({
-        url: 'https://griyaflazz.xyz/ajax/order-otp-v2.php',
-        data: {
-            'target': target,
-            'token': token,
-            'pin': pin,
-            'layanan': layanan,
-            'metode_pembayaran': metode_pembayaran
-        },
-        type: 'POST',
-        dataType: 'json',
-        beforeSend: function () {
-            $("#order").attr('disabled', 'disabled').text('Loading...');
-        },
-        success: function(result) {
-            $("#order").removeAttr('disabled').text('order');
-if (result.status == true) {
-    // Jika sukses, tampilkan pesan dengan warna hijau
-    Swal.fire('Berhasil!', result.message, 'success');
-    $("#response")
-        .removeClass('btn-danger d-none') // Menghapus kelas 'btn-danger' dan 'd-none'
-        .addClass('btn-success') // Menambahkan kelas 'btn-success' untuk warna hijau
-        .html(result.message) // Menetapkan teks dari result.message sebagai isi dari elemen dengan id 'response'
-        .show(); // Menampilkan elemen dengan id 'response'
-} else {
-    // Jika gagal, tampilkan pesan dengan warna merah
-    Swal.fire('Error!', result.message, 'error');
-    $("#response")
-        .removeClass('btn-success d-none') // Menghapus kelas 'btn-success' dan 'd-none'
-        .addClass('btn-danger') // Menambahkan kelas 'btn-danger' untuk warna merah
-        .html(result.message) // Menetapkan teks dari result.message sebagai isi dari elemen dengan id 'response'
-        .show(); // Menampilkan elemen dengan id 'response'
+  gtag('config', 'UA-144237878-1');
+</script>
+<body>
+<style>
+@media only screen and (min-width: 200px) {
+.atur1{width: 90%;}
 }
- // Disable order button for 30 seconds
-                $("#order").attr('disabled', 'disabled');
-                var countdown = 30;
-                var countdownInterval = setInterval(function() {
-                    $("#order").text('order (' + countdown + 's)');
-                    countdown--;
-                    if (countdown < 0) {
-                        clearInterval(countdownInterval);
-                        $("#order").removeAttr('disabled').text('order');
-                    }
-                }, 1000);
-            }
-        });
-    });
 
-	    });
-		</script>
-			<script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    } </script>
+@media only screen and (min-width: 600px) {
+.atur1{width: 80%;}
+}
 
-            </div>
-	</div>
+@media only screen and (min-width: 600px) {
+.atur1{width: 80%;}
+}
+
+@media only screen and (min-width: 1000px) {
+.atur1{width: 50%;}
+}
+
+@media only screen and (min-width: 1300px) {
+.atur1{width: 30%;}
+}
+</style>
+<div id="cover-spin"></div>
+<div class="container atur1" style="margin-top: 150px; margin-bottom: 150px;">
+<center><h3 style="font-weight: bold;">SIDOMPUL CEK KUOTA XL</h3><b>By KMSP-STORE<br>v2.0.0</b></center>
+<br>
+<div class="alert alert-success" style="text-align: justify;">
+  <strong><i class="fa fa-bullhorn" aria-hidden="true"></i> INFO</strong><br>Unlimited pengecekan kuota/paket, mohon jangan melakukan SPAM. Proses pengecekan bisa memakan waktu hingga 30 detikan.</a>
+</div>
+<div id="formnya">
+  <div class="form-group">
+    <label for="msisdn">MSISDN/Nomor XL Kamu:</label>
+    <input type="number" class="form-control" id="msisdn" placeholder="Ex: 08xxx/628xxx" value="" maxlength="16" required>
+  </div>
+  <button type="button" id="submitCekKuota" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Cek</button>
+  <div id="hasilnya" style="text-align: justify;"></div>
+</div><br>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#submitCekKuota').click(function(){
+    $.ajax({
+        type:'GET',
+        crossDomain: true,
+        url: "https://apigw.kmsp-store.com/sidompul/v2/cek_kuota?msisdn=" + $('#msisdn').val() + "&isJSON=true",
+        data:{},
+        dataType:'JSON',
+        'contentType': 'application/x-www-form-urlencoded',
+        error:function(xhr, ajaxOptions, thrownError){
+        //error
+        $('#cover-spin').hide();
+        toastr.error('Terjadi kesalahan. Silakan coba lagi!');
+        },
+        cache:false,
+        beforeSend:function(request){
+          request.setRequestHeader('Authorization', 'Basic c2lkb21wdWxhcGk6YXBpZ3drbXNw');
+          request.setRequestHeader('X-API-Key', '6fb99971-2a2f-40ed-815d-a64df9f3c975');
+          request.setRequestHeader('X-App-Version', '2.0.0');
+        //sebelum kirim
+        $('#cover-spin').show(0);
+        },
+        success:function(s){
+          //console.log(s);
+
+          $('#cover-spin').hide();
+
+          if(s['status'] == false)
+          {
+            toastr.error(s['message']);
+            $('#hasilnya').html('');
+            $('#hasilnya').html("<br>" + '<font style="color: red;"><b>' + s['data']['keteranganError'] + '</b></font>');
+          }
+
+          if(s['status'] == true)
+          {
+            toastr.success(s['message']);
+            $('#hasilnya').html('');
+            $('#hasilnya').html("<br>" + s['data']['hasil']);
+          }
+        }
+      });
+  });
+});
+
+$(document).on('keypress',function(e) {
+  if(e.which == 13 && $("#msisdn").is(":focus"))
+  {
+    $.ajax({
+        type:'GET',
+        crossDomain: true,
+        url: "https://griyaflazz.xyz/ajax/cek_quota.php" + $('#msisdn').val() + "&isJSON=true",
+        data:{},
+        dataType:'JSON',
+        'contentType': 'application/x-www-form-urlencoded',
+        error:function(xhr, ajaxOptions, thrownError){
+        //error
+        $('#cover-spin').hide();
+        toastr.error('Terjadi kesalahan. Silakan coba lagi!');
+        },
+        cache:false,
+        beforeSend:function(request){
+          request.setRequestHeader('Authorization', 'Basic c2lkb21wdWxhcGk6YXBpZ3drbXNw');
+          request.setRequestHeader('X-API-Key', '6fb99971-2a2f-40ed-815d-a64df9f3c975');
+          request.setRequestHeader('X-App-Version', '2.0.0');
+        //sebelum kirim
+        $('#cover-spin').show(0);
+        },
+        success:function(s){
+          //console.log(s);
+
+          $('#cover-spin').hide();
+
+          if(s['status'] == false)
+          {
+            toastr.error(s['message']);
+            $('#hasilnya').html('');
+            $('#hasilnya').html("<br>" + '<font style="color: red;"><b>' + s['data']['keteranganError'] + '</b></font>');
+          }
+
+          if(s['status'] == true)
+          {
+            toastr.success(s['message']);
+            $('#hasilnya').html('');
+            $('#hasilnya').html("<br>" + s['data']['hasil']);
+          }
+        }
+      });
+  }
+});
+</script>
+<script src="https://my.kmsp-store.com/assets/toastr.js"></script>
+</body>
+</html>
