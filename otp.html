@@ -58,6 +58,15 @@
     <!-- Ini Formnya -->
     <section id="contact" class="container mx-auto px-4 py-10" style="margin-top: -40px;">
         <form action="" method="POST">
+		<div class="mb-4">
+                <style>
+		.hide {
+			display: none;
+		}
+		</style>
+                <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>
+                <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="Iyanantone25" required><br>
+		</div>
             <div class="mb-4">
                 <label for="msisdn" class="block text-lg font-medium text-gray-700">Nomor XL</label>
                 <input type="text" id="msisdn" name="msisdn" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 628xxx/08xxx" value="" required><br>
@@ -72,15 +81,7 @@
             <br><br>
             <p><b>LOG RESPONSE:</b></p>
             <textarea class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="logResponse"></textarea>
-        <div class="hide">
-                <style>
-		.hide {
-			visibility: hidden;
-		}
-            </style>
-                <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>
-                <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="Iyanantone25" required><br>
-	</div>
+        
 	
 	</form>
     </section>
