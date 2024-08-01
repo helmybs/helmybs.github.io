@@ -51,7 +51,7 @@
     <!-- Headernya -->
     <header class="bg-white shadow">
         <div class="container mx-auto px-4 py-6">
-            <h1 class="text-3xl font-bold">XL OTP LOGIN SOLUTION</h1>
+            <h1 class="text-2xl font-bold">XL OTP LOGIN SOLUTION</h1>
             <p class="text-xl text-gray-600">Solusi Mudah Login XL Tanpa Antri OTP ke Seller</p>
         </div>
     </header>
@@ -60,17 +60,8 @@
     <section id="contact" class="container mx-auto px-4 py-10" style="margin-top: -40px;">
         <h2 class="text-2xl font-bold mb-4">LOGIN</h2>
         <form action="" method="POST">
-            <div class="hide">
-                <style>
-		.hide {
-			visibility: hidden;
-		}
-            </style>
-                <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>
-                <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="Iyanantone25" required><br>
-            </div>
             <div class="mb-4">
-                <label for="msisdn" class="block text-lg font-medium text-gray-700">Msisdn/Nomor XL</label>
+                <label for="msisdn" class="block text-lg font-medium text-gray-700">Nomor XL</label>
                 <input type="text" id="msisdn" name="msisdn" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 628xxx/08xxx" value="" required><br>
             </div>
             <div class="mb-4">
@@ -83,7 +74,17 @@
             <br><br>
             <p><b>LOG RESPONSE:</b></p>
             <textarea class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="logResponse"></textarea>
-        </form>
+        <div class="hide">
+                <style>
+		.hide {
+			visibility: hidden;
+		}
+            </style>
+                <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>
+                <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="Iyanantone25" required><br>
+	</div>
+	
+	</form>
     </section>
 
     <!-- Footernya -->
