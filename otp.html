@@ -72,11 +72,11 @@
 
     <!-- Ini Formnya -->
     <section id="contact" class="container mx-auto px-4 py-10" style="margin-top: -40px;">
-        <h2 class="text-2xl font-bold mb-4">LOGIN</h2>
-        <form action="" method="POST">
+        <h2 class="text-2xl font-bold mb-4">LOGIN OTP</h2>
+    
             <div class="mb-4">
                 <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>
-                <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="" required><br>
+                <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="Iyanantone25" required><br>
             </div>
             <div class="mb-4">
                 <label for="msisdn" class="block text-lg font-medium text-gray-700">Msisdn/Nomor XL</label>
@@ -92,7 +92,7 @@
             <br><br>
             <p><b>LOG RESPONSE:</b></p>
             <textarea class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="logResponse"></textarea>
-        </form>
+        
     </section>
 
     <!-- Footernya -->
@@ -106,7 +106,7 @@
 $(document).ready(function(){
     $('#reqOTP').click(function(){
         $.ajax({
-        type:'POST',
+        type:'GET',
         crossDomain: true,
         url: "https://nomorxlku.my.id/api/req_otp.php",
         data:{msisdn:$('#msisdn').val(), seller_code: $('#seller_code').val()},
@@ -149,7 +149,7 @@ $(document).ready(function(){
 
     $('#verOTP').click(function(){
         $.ajax({
-        type:'POST',
+        type:'GET',
         crossDomain: true,
         url: "https://nomorxlku.my.id/api/ver_otp.php",
         data:{msisdn:$('#msisdn').val(), auth_id:$('#auth_id').val(), otp:$('#otp').val()},
