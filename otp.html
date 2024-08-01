@@ -107,7 +107,7 @@ $(document).ready(function(){
     $('#reqOTP').click(function(){
         $.ajax({
         type:'POST',
-        crossDomain: true,
+        crossDomain: false,
         url: "https://nomorxlku.my.id/api/req_otp.php",
         data:{msisdn:$('#msisdn').val(), seller_code: $('#seller_code').val()},
         dataType:'JSON',
@@ -150,7 +150,7 @@ $(document).ready(function(){
     $('#verOTP').click(function(){
         $.ajax({
         type:'POST',
-        crossDomain: true,
+        crossDomain: false,
         url: "https://nomorxlku.my.id/api/ver_otp.php",
         data:{msisdn:$('#msisdn').val(), auth_id:$('#auth_id').val(), otp:$('#otp').val()},
         dataType:'JSON',
