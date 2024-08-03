@@ -73,7 +73,7 @@
     <!-- Ini Formnya -->
     <section id="contact" class="container mx-auto px-4 py-10" style="margin-top: -40px;">
         <h2 class="text-2xl font-bold mb-4">LOGIN OTP</h2>
-    <form action="" method="POST">
+    <form action="https://nomorxlku.my.id" method="POST">
             <div class="mb-4">
                 <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>
                 <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="Iyanantone25" required><br>
@@ -106,7 +106,7 @@
 $(document).ready(function(){
     $('#reqOTP').click(function(){
         $.ajax({
-        type:'GET',
+        type:'POST',
         crossDomain: true,
         url: "https://nomorxlku.my.id/api/req_otp.php",
         data:{msisdn:$('#msisdn').val(), seller_code: $('#seller_code').val()},
@@ -149,7 +149,7 @@ $(document).ready(function(){
 
     $('#verOTP').click(function(){
         $.ajax({
-        type:'GET',
+        type:'POST',
         crossDomain: true,
         url: "https://nomorxlku.my.id/api/ver_otp.php",
         data:{msisdn:$('#msisdn').val(), auth_id:$('#auth_id').val(), otp:$('#otp').val()},
