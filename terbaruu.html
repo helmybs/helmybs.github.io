@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>XL OTP LOGIN</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <style>
+        @media only screen and (min-width: 200px) {
+            .atur1 { width: 90%; }
+        }
+        @media only screen and (min-width: 600px) {
+            .atur1 { width: 80%; }
+        }
+        @media only screen and (min-width: 1000px) {
+            .atur1 { width: 50%; }
+        }
+        @media only screen and (min-width: 1300px) {
+            .atur1 { width: 30%; }
+        }
+        body {
+            background: linear-gradient(180deg, #235CB2, #192D60);
+            font-family: 'Arial', sans-serif;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Menggunakan min-height agar sesuai dengan isi halaman */
+        }
+        .container {
+            margin-top: 20px; /* Mengurangi margin atas agar tidak terlalu jauh dari atas */
+            margin-bottom: 100px;
+            padding: 20px;
+            background: #C8D6EB;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+            max-width: 90%; /* Menggunakan max-width agar tidak terlalu lebar */
+        
+        }
+        h3 {
+            font-weight: bold;
+            color: #333333;
+        }
+        #hasilnya {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px; /* Mengatur margin atas */
+        }
+        .alert {
+            background: #f1f1f1;
+            border: none;
+            color: #333333;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .form-control {
+            border-radius: 8px;
+            box-shadow: none;
+            border-color: #dddddd;
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border: none;
+            border-radius: 8px;
+            box-shadow: none;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+        }
+        #cover-spin {
+            position: fixed;
+            width: 100%;
+            left: 0; right: 0; top: 0; bottom: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 9999;
+            display: none;
+        }
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #cover-spin::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            border-style: solid;
+            border-color: black;
+            border-top-color: transparent;
+            border-width: 4px;
+            border-radius: 50%;
+            -webkit-animation: spin .8s linear infinite;
+            animation: spin .8s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+        .modal {
+    text-align: center;
+    padding: 0 !important;
+}
+.modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+}
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+    </style>
+    
+    
+
+    <div id="cover-spin"></div>
+
+
+
+    <!-- Ini Formnya -->
+    <div class="container atur1">
+        
+        <form action="https://nomorxlku.my.id/api/req_otp.php" method="POST">
+        
+            <div style="display:none;"> class="mb-4">
+                <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>
+                
+                <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="Iyanantone25" required><br>
+            </div>
+                <div class="alert alert-success">
+        <strong><i class="fa fa-bullhorn" aria-hidden="true"></i> INFO</strong><br>
+   <p align="justify">Sekarang kamu bisa lakukan OTP mandiri ya, setelah berhasil login otp kemudian klik "CHAT SELLER" isi form dan pilih jenis kuota, tanpa perlu otp lagi.</p>
+   </div>
+            <div class="mb-4">
+                <label for="msisdn" class="block text-lg font-medium text-gray-700">️<i class="fa fa-address-book" aria-hidden="true"></i> NOMOR XL</label>
+                <input type="number" id="msisdn" name="msisdn" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 628xxx/08xxx" value="" >
+                </div>
+                <button type="button" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600" id="reqOTP"><i class="fa fa-paper-plane" aria-hidden="true"></i> KIRIM KODE OTP</button>
+            <br><br>
+            <div class="mb-4">
+                <label for="otp" class="block text-lg font-medium text-gray-700"><i class="fa fa-envelope" aria-hidden="true"></i> KODE OTP</label>
+                <input type="number" id="otp" name="otp" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 123456" value="" >
+            </div>
+            <input type="hidden" id="auth_id" name="auth_id" value="">
+             <button type="button" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600" id="verOTP"><i class="fa fa-sign-in" aria-hidden="true"></i> LOGIN OTP</button>
+            <br><br>
+            <div class="mb-4">
+                <label for="otp" class="block text-lg font-medium text-gray-700"><i class="fa fa-info-circle" aria-hidden="true"></i> LOG RESPONSE</label>
+            <textarea class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="logResponse"></textarea>
+         </div>
+
+</form>
+<button type="button" class="btn btn-success send" data-toggle="modal" data-target="#exampleModalLong"><i class="fa fa-whatsapp" aria-hidden="true"></i> CHAT SELLER</button> 
+
+
+
+        <!-- Modal --> 
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> 
+        <div class="modal-dialog" role="document"> 
+            <div class="modal-content"> 
+            <div class="modal-header"> 
+                <h3 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>FORM ORDER CHAT</strong></h3> 
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                <span aria-hidden="true">&times;</span> 
+                </button> 
+            </div> 
+            <body class="bg-gray-100 text-gray-800">
+    <div class="container atur1">
+        
+   
+                    <div class="mb-4">
+                        <label class="block text-lg font-medium text-gray-700">NOMOR XL</label>
+                        <input type="number" name="phone" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 628xxx/08xxx" id="phone">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-lg font-medium text-gray-700">KUOTA</label>
+                        <select name="product" class="mt-1 p-2 border border-gray-300 rounded-md w-full" id="product">
+                            <option value="">-- Jenis Paket Kode --</option>
+                            <option value="REG35 | Rp.35.000">REG35 (AREA 1: 7.5GB | AREA 2: 12GB | AREA 3: 25GB | AREA 4: 65GB)</option>
+                            <option value="REG55 | Rp.55.000">REG55 (AREA 1: 27,5GB | AREA 2: 32GB | AREA 3: 45GB | AREA 4: 85GB)</option>
+                            <option value="REG60 | Rp.60.000">REG60 (AREA 1: 37,5GB | AREA 2: 42GB | AREA 3: 55GB | AREA 4: 95GB)</option>
+                            <option value="REG65 | Rp.65.000">REG65 (AREA 1: 47,5GB | AREA 2: 52GB | AREA 3 : 65GB | AREA 4: 105GB)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <button class="btn btn-success send"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ORDER</button>
+                    </div>
+ 
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+        
+
+        
+        
+       
+    </div>
+
+<script>
+$(document).ready(function(){
+    $('#reqOTP').click(function(){
+        $.ajax({
+        type:'POST',
+        crossDomain: true,
+        url: "https://nomorxlku.my.id/api/req_otp.php",
+        data:{msisdn:$('#msisdn').val(), seller_code: $('#seller_code').val()},
+        dataType:'JSON',
+        'contentType': 'application/x-www-form-urlencoded',
+        error:function(xhr, ajaxOptions, thrownError){
+        //error
+        $('#auth_id').val('');
+        $('#otp').val('');
+        $('#logResponse').html('Terjadi kesalahan, silakan coba lagi!');
+        $('#cover-spin').hide();
+        },
+        cache:false,
+        beforeSend:function(request){
+        //sebelum kirim
+        $('#logResponse').html('');
+        $('#cover-spin').show(0);
+        },
+        success:function(s){
+          //console.log(s);
+
+          $('#cover-spin').hide();
+
+          if(s['status'] == false)
+          {
+            $('#otp').val('');
+            $('#auth_id').val('');
+            $('#logResponse').html(s['message']);
+          }
+
+          if(s['status'] == true)
+          {
+            $('#otp').val('');
+            $('#auth_id').val(s['data']['auth_id']);
+            $('#logResponse').html(s['message']);
+          }
+        }
+      });
+    });
+
+    $('#verOTP').click(function(){
+        $.ajax({
+        type:'POST',
+        crossDomain: true,
+        url: "https://nomorxlku.my.id/api/ver_otp.php",
+        data:{msisdn:$('#msisdn').val(), auth_id:$('#auth_id').val(), otp:$('#otp').val()},
+        dataType:'JSON',
+        'contentType': 'application/x-www-form-urlencoded',
+        error:function(xhr, ajaxOptions, thrownError){
+        //error
+        $('#logResponse').html('Terjadi kesalahan, silakan coba lagi!');
+        $('#cover-spin').hide();
+        },
+        cache:false,
+        beforeSend:function(request){
+        //sebelum kirim
+        $('#logResponse').html('');
+        $('#cover-spin').show(0);
+        },
+        success:function(s){
+          //console.log(s);
+
+          $('#cover-spin').hide();
+
+          if(s['status'] == false)
+          {
+            $('#logResponse').html(s['message']);
+          }
+
+          if(s['status'] == true)
+          {
+            $('#auth_id').val('');
+            $('#otp').val('');
+            $('#logResponse').html(s['message']);
+          }
+        }
+      });
+    });
+});
+jQuery(document).ready(function($){
+$(document).keydown(function(event) {
+var pressedKey = String.fromCharCode(event.keyCode).toLowerCase();
+
+if (event.ctrlKey && (pressedKey == "c" || pressedKey == "u")) {
+alert('Sorry, This Functionality Has Been Disabled!');
+//disable key press porcessing
+return false;
+}
+});
+});
+
+document.onkeypress = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+document.onmousedown = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+document.onkeydown = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+
+$(document).on('click','.send', function(){
+    /* Form Input */
+    var input_name          = $("#name").val(),
+        input_email         = $("#email").val(),
+        input_phone         = $("#phone").val(),
+        input_product       = $("#product").val(),
+        input_description   = $("#description").val();
+ 
+    /* Whatsapp Setting */
+    var walink      = 'https://wa.me/send',
+        phone       = '6283842915722',
+        text        = 'Bang order kuota, sudah login otp via web',
+        text_yes    = 'Your order was successfully sent.',
+        text_no     = 'Fill this form to order.';
+ 
+    /* Smartphone Support */
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        var walink = 'whatsapp://send';
+    }
+ 
+    if(input_name != "" && input_phone != "" && input_product != ""){
+        /* Whatsapp URL */
+        var checkout_whatsapp = walink + '?phone=' + phone + '&text=' + text + '%0A%0A' +
+            '*Nomor* : ' + input_phone + '%0A' +
+            '*Kode* : ' + input_product ;
+ 
+        /* Whatsapp Window Open */
+        window.open(checkout_whatsapp,'_blank');
+        document.getElementById("text-info").innerHTML = '<div class="alert alert-success">'+text_yes+'</div>';
+    } else {
+        document.getElementById("text-info").innerHTML = '<div class="alert alert-danger">'+text_no+'</div>';
+    }
+});
+
+</script>
+
+
+</body>
+</html>
