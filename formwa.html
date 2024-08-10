@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>XL OTP LOGIN</title>
+    <link rel="icon" type="image/x-icon" href="https://images.app.goo.gl/zpSX37uDMbbRdTWX6">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -149,21 +150,12 @@ ol#explanatoryText li.descriptor {
     display: list-item;
 }
     </style>
-    
-    
-
     <div id="cover-spin"></div>
-
-
-
     <!-- Ini Formnya -->
     <div class="container">
-        
         <form action="https://nomorxlku.my.id/api/req_otp.php" method="POST">
-        
             <div style="display:none;"> class="mb-4">
-                <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>
-                
+                <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>      
                 <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="Iyanantone25" required><br>
             </div>
                 <div class="alert alert-success">
@@ -200,7 +192,7 @@ ol#explanatoryText li.descriptor {
             <div class="modal-content"> 
             <div class="modal-header"> 
             
-                <h3 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>FORM ORDER CHAT</strong></h3> 
+                <h3 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-whatsapp" aria-hidden="true"></i> <strong>FORM ORDER CHAT</strong></h3> 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
                 
                 <span aria-hidden="true">&times;</span> 
@@ -211,20 +203,20 @@ ol#explanatoryText li.descriptor {
                      <div class="container">   
 
 						<div class="mb-4">
-                        <label class="block text-lg font-medium text-gray-700">NOMOR XL</label>
+                        <label class="block text-lg font-medium text-gray-700"><i class="fa fa-address-book" aria-hidden="true"></i> NOMOR XL</label>
                         <input type="number" name="phone" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 628xxx/08xxx" id="phone">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-lg font-medium text-gray-700">KUOTA</label>
+                        <label class="block text-lg font-medium text-gray-700"><i class="fa fa-bolt" aria-hidden="true"></i> KUOTA</label>
                         
                         
                         <select name="product" class="mt-1 p-2 border border-gray-300 rounded-md w-full" id="product">
-                            <option value="">-- Jenis Paket Kode --</option>
+                            <option value="">Select Kode Paket</option>
                             <option value="REG35 | Rp. 35.000">REG35 | Rp. 35.000</option>
                             <option value="REG55 | Rp. 55.000">REG55 | Rp. 55.000</option>
                             <option value="REG60 | Rp. 60.000">REG60 | Rp. 60.000</option>
                             <option value="REG65 | Rp. 65.000">REG65 | Rp. 65.000</option>
-                            <option value="REG65 | Rp. 65.000">MASIF30 (MASA AKTIF XL SEUMUR HIDUP *snk)</option>
+                            <option value="MSA30 | Rp. 30.000">MSA30 | Rp. 30.000 [BACA DESKRIPSI]</option>
                         </select>
                         <br>
                         <br>
@@ -233,11 +225,12 @@ ol#explanatoryText li.descriptor {
                         
                         </textarea>
                          <ol id="explanatoryText">
-                         <li></li>
+                         <li>Silahkan masukkan nomor yang dituju, dan pilih kode paket.</li>
                          <li>AREA 1 : 7.5GB<br>AREA 2 : 12GB<br>AREA 3 : 25GB<br>AREA 4 : 65GB</li>
                          <li>AREA 1 : 27,5GB<br>AREA 2 : 32GB<br>AREA 3 : 45GB<br>AREA 4 : 85GB</li>
                          <li>AREA 1 : 37,5GB<br>AREA 2 : 42GB<br>AREA 3 : 55GB<br>AREA 4 : 95GB</li>
-                         <li>AREA 1 : 47,5GB<br>AREA 2 : 52G<br>AREA 3 : 65GB <br>AREA 4 : 105GB</li>
+                         <li>AREA 1 : 47,5GB<br>AREA 2 : 52GB<br>AREA 3 : 65GB<br>AREA 4 : 105GB</li>
+                         <li>Masa aktif seumur hidup asal tidak hilang paketnya. Tidak ada kuotanya, cocok untuk menambah masa aktif kartu. Masa aktif kartu akan secara otomatis diperpanjang tiap bulannya selama paket ini tidak hilang.</li>
                          </ol>
                          </div>
                     </div>
