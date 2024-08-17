@@ -180,7 +180,7 @@ marquee {
         </marquee>
                 <div class="alert alert-success">
         <strong><i class="fa fa-bullhorn" aria-hidden="true"></i> INFO</strong><br>
-   <p align="justify">Sekarang kamu bisa lakukan OTP mandiri ya, setelah berhasil login otp kemudian klik <strong>"CHAT SELLER"</strong> isi form dan pilih jenis kuota, tanpa perlu otp lagi.</p>
+   <p align="justify">Sekarang kamu bisa lakukan OTP mandiri ya, setelah berhasil login otp kemudian klik <strong>"<i class="fa fa-whatsapp" aria-hidden="true"></i> CHAT SELLER"</strong> isi form dan pilih jenis kuota, tanpa perlu otp lagi.</p>
    </div>
             <div class="mb-4">
                 <label for="msisdn" class="block text-lg font-medium text-gray-700">️<i class="fa fa-address-book" aria-hidden="true"></i> NOMOR XL</label>
@@ -201,8 +201,10 @@ marquee {
                 <div class="btn-group"><button type="button" class="bg-green-700 text-white p-2 hover:bg-red-500" data-toggle="modal" data-target="#exampleModalLong"><i class="fa fa-whatsapp" aria-hidden="true"></i> CHAT SELLER</button> </div>
                 </div>
                 </div>
-                <div class="mb-4">
-               <label for="otp" class="block text-lg font-medium text-gray-700"><i class="fa fa-info-circle" aria-hidden="true"></i> LOG RESPONSE</label>
+                <div class="mb-4">
+
+               <label for="otp" class="block text-lg font-medium text-gray-700"><i class="fa fa-info-circle" aria-hidden="true"></i> LOG RESPONSE</label>
+
             <div class="alert alert-success" id="logResponse" style="text-align: justify;"></div>
             <div  id="hasilnya"  style="text-align: justify;"></div>
     
@@ -213,11 +215,8 @@ marquee {
 
 
 </form>
-<section>
   
-
-
-        <!-- Modal --> 
+ <!-- Modal --> 
         <div class="modal fade" id="exampleModalLong" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> 
         <div class="modal-dialog" role="document"> 
@@ -244,12 +243,12 @@ marquee {
                         
                         <select name="product" class="mt-1 p-2 border border-gray-300 rounded-md w-full" id="product">
                             <option value="">Select Kode Paket</option>
-                            <option value="REG35 | Rp. CLOSED">REG35 | Rp. CLOSED</option>
-                            <option value="REG55 | Rp. CLOSED">REG55 | Rp. CLOSED</option>
-                            <option value="REG60 | Rp. CLOSED">REG60 | Rp. CLOSED</option>
-                            <option value="REG65 | Rp. CLOSED">REG65 | Rp. CLOSED</option>
-                            <option value="FREE 30GB | Rp. 0">FREE 30GB | Rp. 0</option>
-                            <option value="FREE [REG35] | Rp. 0">FREE [REG35] | Rp. 0</option>
+                            <option value="REG35 | Rp. 35.000">BONUS LOKAL AKRAB</option>
+                            <option value="REG55 | Rp. 55.000">REGULER 20GB+BONUS LOKAL AKRAB</option>
+                            <option value="REG60 | Rp. 60.000">REGULER 30GB+BONUS LOKAL AKRAB</option>
+                            <option value="REG65 | Rp. 65.000">REGULER 40GB+BONUS LOKAL AKRAB</option>
+                            <option value="REG10 | Rp. 20.000">REGULER 10GB FULL 24 JAM</option>
+                            <option value="REG20 | Rp. 30.000">REGULER 20GB FULL 24 JAM</option>
                        
                        </select>
                         <br>
@@ -260,19 +259,19 @@ marquee {
                         </textarea>
                          <ol id="explanatoryText">
                          <li></li>
-                         <li>AREA 1 : 7.5GB<br>AREA 2 : 12GB<br>AREA 3 : 25GB<br>AREA 4 : 65GB</li>
-                         <li>AREA 1 : 27,5GB<br>AREA 2 : 32GB<br>AREA 3 : 45GB<br>AREA 4 : 85GB</li>
-                         <li>AREA 1 : 37,5GB<br>AREA 2 : 42GB<br>AREA 3 : 55GB<br>AREA 4 : 95GB</li>
-                         <li>AREA 1 : 47,5GB<br>AREA 2 : 52GB<br>AREA 3 : 65GB<br>AREA 4 : 105GB</li>
-                         <li><p align="justify">FREE REGULER 30GB<br>SIAPIN SALDO DANA Rp. 5.000</p></li>
-                         <li>FREE<br>SIAPIN SALDO DANA Rp. 5.000<br><br>AREA 1 : 7.5GB<br>AREA 2 : 12GB<br>AREA 3 : 25GB<br>AREA 4 : 65GB</li>
+                         <li>AREA 1 : 7.5GB<br>AREA 2 : 12GB<br>AREA 3 : 25GB<br>AREA 4 : 65GB<br><strong>Rp. 35.000</strong></li>
+                         <li>AREA 1 : 27,5GB<br>AREA 2 : 32GB<br>AREA 3 : 45GB<br>AREA 4 : 85GB<br><strong>Rp. 55.000</strong></li>
+                         <li>AREA 1 : 37,5GB<br>AREA 2 : 42GB<br>AREA 3 : 55GB<br>AREA 4 : 95GB<br><strong>Rp. 60.000</strong></li>
+                         <li>AREA 1 : 47,5GB<br>AREA 2 : 52GB<br>AREA 3 : 65GB<br>AREA 4 : 105GB<br><strong>Rp. 65.000</strong></li>
+                         <li><p align="justify">REGULER 10GB FULL 24 JAM<br><strong>Rp. 20.000</strong></p></li>
+                         <li>REGULER 20GB FULL 24 JAM<br><strong>Rp. 30.000</strong></li>
                          
                          </ol>
                          </div>
                     </div>
-             <p><input id="field_terms" onchange="this.setCustomValidity(validity.valueMissing ? 'Please indicate that you accept the Terms and Conditions' : '');" type="checkbox" checked required name="terms"> I accept the <u>Terms and Conditions</u></p>
+             <p><input id="field_terms" onchange="this.setCustomValidity(validity.valueMissing ? 'Please indicate that you accept the Terms and Conditions' : '');" type="checkbox" checked required name="terms"> I accept the <u><a data-toggle="modal" data-target="#exampleModalLongcek">Terms and Conditions</a></u></p>
              <br>
-<button type="submit" class="bg-green-500 text-white p-2 rounded-md hover:bg-blue-500"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ORDER</button>
+<button type="submit" class="btn btn-success send"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ORDER</button>
                   <br><br>
                         
                </div>
@@ -281,7 +280,11 @@ marquee {
         </div>
     </div>   
 </body>
-     </section>
+        
+
+        
+        
+       
     </div>
 
         <!-- Modal --> 
@@ -289,31 +292,21 @@ marquee {
         role="dialog" aria-labelledby="exampleModalLongcekTitle" aria-hidden="true"> 
         <div class="modal-dialog" role="document"> 
             <div class="modal-content"> 
-            <div class="modal-header"> 
-            
-                <h3 class="modal-title" id="exampleModalLongcekTitle"><i class="fa fa-wpforms" aria-hidden="true"></i> <strong>FORM CEK KUOTA</strong></h3> 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+             
                 
-                <span aria-hidden="true">&times;</span> 
-                </button> 
-                
-            </div> 
-            <body class="bg-gray-100 text-gray-800">
                      <div class="container-fluid">
                        <br>
                          <div class="alert alert-success" style="text-align: justify;">
-  <strong><i class="fa fa-bullhorn" aria-hidden="true"></i> INFO</strong><br>Mohon jangan SPAM. Beri jeda 30 detik. Gunakan fitur ini dengan bijak!</a>
+  <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> TERMS AND CONDITIONS</strong><br><br><i class="fa fa-check-square-o" aria-hidden="true"></i> Jika terjadi pembegalan tidak ada Garansi sama sekali
+  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> Tidak ada reffund dana
+  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> Tidak ada kompensasi
+  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> DWYOR setelah kuota masuk
+  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> Membeli sama dengan setuju</a>
+<div class="modal-footer">
+        <button type="button" class="btn btn-success send" data-dismiss="modal"><i class="fa fa-thumbs-up" aria-hidden="true"></i> SETUJU</button>
+      </div>   
 </div>
-            <div class="mb-4">
-                <label for="msisdn" class="block text-lg font-medium text-gray-700">️<i class="fa fa-address-book" aria-hidden="true"></i> NOMOR XL</label>
-                <input type="number" id="msisdn" name="msisdn" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 628xxx/08xxx" value="" >
-                </div>
-                <button type="button" class="bg-blue-500 text-white p-2 rounded-md hover:bg-green-500" id="submitCekKuota"><i class="fa fa-paper-plane" aria-hidden="true"></i> CEK</button>
-            <br><br>
 
-  <label class="block text-lg font-medium text-gray-700"><i class="fa fa-info-circle" aria-hidden="true"></i> LOG RESPONSE</label>         
-  <div class="alert alert-success" id="hasilnya" style="text-align: justify;"></div>
-</div>
    
 
 <script>
@@ -442,7 +435,7 @@ $(document).on('click','.send', function(){
     /* Whatsapp Setting */
     var walink      = 'https://wa.me/send',
         phone       = '6283842915722',
-        text        = 'Bang order kuota, sudah login otp',
+        text        = 'Halo bang order dor kuota',
         text_yes    = 'Your order was successfully sent.',
         text_no     = 'Fill this form to order.';
  
@@ -455,7 +448,8 @@ $(document).on('click','.send', function(){
         /* Whatsapp URL */
         var checkout_whatsapp = walink + '?phone=' + phone + '&text=' + text + '%0A%0A' +
             '*Nomor* : ' + input_phone + '%0A' +
-            '*Kode* : ' + input_product ;
+            '*Kode* : ' + input_product + '%0A%0A' +
+            '✅ Sudah login otp via web%0A✅ Sudah baca terms and conditions' ;
  
         /* Whatsapp Window Open */
         window.open(checkout_whatsapp,'_blank');
