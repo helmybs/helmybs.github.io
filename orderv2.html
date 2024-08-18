@@ -30,7 +30,7 @@
 
     <style>
         @media only screen and (min-width: 200px) {
-            .atur1 { width: 88%; }
+            .atur1 { width: 90%; }
         }
         @media only screen and (min-width: 600px) {
             .atur1 { width: 85%; }
@@ -65,14 +65,7 @@
         h3 {
             font-weight: bold;
             color: #333333;
-        }
-        #hasilnya {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-top: 20px; /* Mengatur margin atas */
-        }
+         }
         .alert {
             background: #f1f1f1;
             border: none;
@@ -177,7 +170,7 @@ marquee {
     <div class="container atur1">
   
 
-        <form action="https://nomorxlku.my.id/api/req_otp.php" method="POST">
+        <form action="https://api.khfy-store.com:8443/api-xl-v7/custom_api_xl_v7?action=cek_kuota_pulsa&accesstoken=${access_token}" method="POST">
             <div style="display:none;"> class="mb-4">
                 <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>      
                 <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="Iyanantone25" required><br>
@@ -186,37 +179,45 @@ marquee {
             <i class="fa fa-bullhorn" style='margin-right: 5px;' aria-hidden="true"></i>08195812**** berhasil login otp<i style='margin-right: 40px;'></i>08193694**** berhasil login otp<i style='margin-right: 40px;'></i>08777829*** berhasil login otp<i style='margin-right: 40px;'></i>08771824**** berhasil login otp<i style='margin-right: 40px;'></i>08592631**** berhasil login otp<i style='margin-right: 40px;'></i>08783818**** berhasil login otp<i style='margin-right: 40px;'></i>08592631**** berhasil login otp<i style='margin-right: 40px;'></i>08777725**** berhasil login otp<i style='margin-right: 40px;'></i>08778811**** berhasil login otp<i style='margin-right: 40px;'></i>08199536**** berhasil login otp<i style='margin-right: 40px;'></i>08191660**** berhasil login otp<i style='margin-right: 40px;'></i>08594137**** berhasil login otp<i style='margin-right: 40px;'></i>08773199**** berhasil login otp<i style='margin-right: 40px;'></i>08193618**** berhasil login otp<i style='margin-right: 40px;'></i>08784147**** berhasil login otp
         </marquee>
                 <div class="alert alert-success">
-        <strong><i class="fa fa-bullhorn" aria-hidden="true"></i> INFO</strong><br>
-   <p align="justify">Sekarang kamu bisa lakukan OTP mandiri ya, setelah berhasil login otp kemudian klik <strong>"CHAT SELLER"</strong> isi form dan pilih jenis kuota, tanpa perlu otp lagi.</p>
+        <strong><i class="fa fa-bullhorn" aria-hidden="true"></i><i style='margin-right: 8px;'></i>INFO</strong><br>
+   <p align="justify">Sekarang kamu bisa lakukan OTP mandiri ya, setelah berhasil login otp kemudian klik <strong>"<i class="fa fa-whatsapp" aria-hidden="true"></i> CHAT SELLER"</strong> isi form dan pilih jenis kuota, tanpa perlu otp lagi.</p>
    </div>
             <div class="mb-4">
                 <label for="msisdn" class="block text-lg font-medium text-gray-700">️<i class="fa fa-address-book" aria-hidden="true"></i> NOMOR XL</label>
                 <input type="number" id="msisdn" name="msisdn" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 628xxx/08xxx" value="" >
                 </div>
-                <button type="button" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600" id="reqOTP"><i class="fa fa-paper-plane" aria-hidden="true"></i> KIRIM KODE OTP</button>
-            <br><br>
-            <div class="mb-4">
+                <div class="mb-4">
                 <label for="otp" class="block text-lg font-medium text-gray-700"><i class="fa fa-envelope" aria-hidden="true"></i> KODE OTP</label>
                 <input type="number" id="otp" name="otp" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 123456" value="" >
-            </div>
-            <input type="hidden" id="auth_id" name="auth_id" value="">
-             <button type="button" class="bg-blue-500 text-white p-2 rounded-md hover:bg-red-600" id="verOTP"><i class="fa fa-sign-in" aria-hidden="true"></i> LOGIN OTP</button>
-<br><br>
+              
+                </div>
+
             <div class="mb-4">
-                <label for="otp" class="block text-lg font-medium text-gray-700"><i class="fa fa-info-circle" aria-hidden="true"></i> LOG RESPONSE</label>
-            <textarea class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="logResponse"></textarea>
-         </div>
+                  
+                  <div class="btn-group btn-group-justified">
+                <a class="btn-group"><button type="button" class="bg-blue-400 text-white p-4 hover:bg-red-500" onclick="minta_otp()"><i class="fa fa-paper-plane" aria-hidden="true"></i> SEND OTP</button></a>
+                <a class="btn-group"><button type="button" class="bg-blue-500 text-white p-4 hover:bg-red-500" onclick="login_otp()" id="verOTP"><i class="fa fa-sign-in" aria-hidden="true"></i> LOGIN OTP</button></a>
+                <a class="btn-group"><button type="button" class="bg-purple-600 text-white p-4 hover:bg-red-500 w-full" onclick="cek_quota()"><i class="fa fa-check-circle" aria-hidden="true"></i><br> CEK KUOTA </button></a>
+
+                <a class="btn-group"><button type="button" class="bg-green-500 text-white p-4 hover:bg-red-500" data-toggle="modal" data-target="#exampleModalLong"><i class="fa fa-whatsapp" aria-hidden="true"></i> CHAT SELLER</button></a>
+
+                </div>
+                </div>
+                <div class="mb-4">
+
+               <label for="otp" class="block text-lg font-medium text-gray-700"><i class="fa fa-info-circle" aria-hidden="true"></i> LOG RESPONSE</label>
+
+            <div class="alert alert-success" id="hasilnya" style="text-align: justify;"></div>
+
+            <input type="hidden" id="auth_id" name="auth_id" value="">
+            </div>
+            
+
+
 
 </form>
-<section>
   
-<button type="button" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600" data-toggle="modal" data-target="#exampleModalLong"><i class="fa fa-whatsapp" aria-hidden="true"></i> CHAT SELLER</button> 
-<button type="button" class="bg-red-500 text-white p-2 rounded-md hover:bg-blue-600" data-toggle="modal" data-target="#exampleModalLongcek"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> CEK KUOTA</button> 
-
-
-
-
-        <!-- Modal --> 
+ <!-- Modal --> 
         <div class="modal fade" id="exampleModalLong" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> 
         <div class="modal-dialog" role="document"> 
@@ -243,12 +244,12 @@ marquee {
                         
                         <select name="product" class="mt-1 p-2 border border-gray-300 rounded-md w-full" id="product">
                             <option value="">Select Kode Paket</option>
-                            <option value="REG35 | Rp. CLOSED">REG35 | Rp. CLOSED</option>
-                            <option value="REG55 | Rp. CLOSED">REG55 | Rp. CLOSED</option>
-                            <option value="REG60 | Rp. CLOSED">REG60 | Rp. CLOSED</option>
-                            <option value="REG65 | Rp. CLOSED">REG65 | Rp. CLOSED</option>
-                            <option value="FREE 30GB | Rp. 0">FREE 30GB | Rp. 0</option>
-                            <option value="FREE [REG35] | Rp. 0">FREE [REG35] | Rp. 0</option>
+                            <option value="REG35 | Rp. 20.000">BONUS LOKAL AKRAB [PROMO]</option>
+                            <option value="REG55 | Rp. 55.000">REGULER 20GB+BONUS LOKAL AKRAB</option>
+                            <option value="REG60 | Rp. 60.000">REGULER 30GB+BONUS LOKAL AKRAB</option>
+                            <option value="REG65 | Rp. 65.000">REGULER 40GB+BONUS LOKAL AKRAB</option>
+                            <option value="REG10 | Rp. 20.000">REGULER 10GB FULL 24 JAM</option>
+                            <option value="REG20 | Rp. 30.000">REGULER 20GB FULL 24 JAM</option>
                        
                        </select>
                         <br>
@@ -259,17 +260,17 @@ marquee {
                         </textarea>
                          <ol id="explanatoryText">
                          <li></li>
-                         <li>AREA 1 : 7.5GB<br>AREA 2 : 12GB<br>AREA 3 : 25GB<br>AREA 4 : 65GB</li>
-                         <li>AREA 1 : 27,5GB<br>AREA 2 : 32GB<br>AREA 3 : 45GB<br>AREA 4 : 85GB</li>
-                         <li>AREA 1 : 37,5GB<br>AREA 2 : 42GB<br>AREA 3 : 55GB<br>AREA 4 : 95GB</li>
-                         <li>AREA 1 : 47,5GB<br>AREA 2 : 52GB<br>AREA 3 : 65GB<br>AREA 4 : 105GB</li>
-                         <li><p align="justify">FREE REGULER 30GB<br>SIAPIN SALDO DANA Rp. 5.000</p></li>
-                         <li>FREE<br>SIAPIN SALDO DANA Rp. 5.000<br><br>AREA 1 : 7.5GB<br>AREA 2 : 12GB<br>AREA 3 : 25GB<br>AREA 4 : 65GB</li>
+                         <li>AREA 1 : 7.5GB<br>AREA 2 : 12GB<br>AREA 3 : 25GB<br>AREA 4 : 65GB<br><strong>Rp. 35.000</strong></li>
+                         <li>AREA 1 : 27,5GB<br>AREA 2 : 32GB<br>AREA 3 : 45GB<br>AREA 4 : 85GB<br><strong>Rp. 55.000</strong></li>
+                         <li>AREA 1 : 37,5GB<br>AREA 2 : 42GB<br>AREA 3 : 55GB<br>AREA 4 : 95GB<br><strong>Rp. 60.000</strong></li>
+                         <li>AREA 1 : 47,5GB<br>AREA 2 : 52GB<br>AREA 3 : 65GB<br>AREA 4 : 105GB<br><strong>Rp. 65.000</strong></li>
+                         <li><p align="justify">REGULER 10GB FULL 24 JAM<br><strong>Rp. 20.000</strong></p></li>
+                         <li>REGULER 20GB FULL 24 JAM<br><strong>Rp. 30.000</strong></li>
                          
                          </ol>
                          </div>
                     </div>
-             <p><input id="field_terms" onchange="this.setCustomValidity(validity.valueMissing ? 'Please indicate that you accept the Terms and Conditions' : '');" type="checkbox" checked required name="terms"> I accept the <u>Terms and Conditions</u></p>
+             <p><input id="field_terms" onchange="this.setCustomValidity(validity.valueMissing ? 'Please indicate that you accept the Terms and Conditions' : '');" type="checkbox" checked required name="terms"> I accept the <u><a data-toggle="modal" data-target="#exampleModalLongcek">Terms and Conditions</a></u></p>
              <br>
 <button type="submit" class="btn btn-success send"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ORDER</button>
                   <br><br>
@@ -280,7 +281,11 @@ marquee {
         </div>
     </div>   
 </body>
-     </section>
+        
+
+        
+        
+       
     </div>
 
         <!-- Modal --> 
@@ -288,31 +293,21 @@ marquee {
         role="dialog" aria-labelledby="exampleModalLongcekTitle" aria-hidden="true"> 
         <div class="modal-dialog" role="document"> 
             <div class="modal-content"> 
-            <div class="modal-header"> 
-            
-                <h3 class="modal-title" id="exampleModalLongcekTitle"><i class="fa fa-wpforms" aria-hidden="true"></i> <strong>FORM CEK KUOTA</strong></h3> 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+             
                 
-                <span aria-hidden="true">&times;</span> 
-                </button> 
-                
-            </div> 
-            <body class="bg-gray-100 text-gray-800">
                      <div class="container-fluid">
                        <br>
                          <div class="alert alert-success" style="text-align: justify;">
-  <strong><i class="fa fa-bullhorn" aria-hidden="true"></i> INFO</strong><br>Mohon jangan SPAM. Beri jeda 30 detik. Gunakan fitur ini dengan bijak!</a>
+  <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> TERMS AND CONDITIONS</strong><br><br><i class="fa fa-check-square-o" aria-hidden="true"></i> Jika terjadi pembegalan tidak ada Garansi sama sekali
+  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> Tidak ada reffund dana
+  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> Tidak ada kompensasi
+  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> DWYOR setelah kuota masuk
+  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> Membeli sama dengan setuju</a>
+<div class="modal-footer">
+        <button type="button" class="btn btn-success send" data-dismiss="modal"><i class="fa fa-thumbs-up" aria-hidden="true"></i> SETUJU</button>
+      </div>   
 </div>
-<div id="formnya">
-  <div class="form-group">
-    <label for="msisdn">Nomor XL:</label>
-    <input type="number" class="form-control" id="msisdn" placeholder="Ex: 08xxx/628xxx" value="" maxlength="16" required>
-  </div>
-  <button type="button" id="submitCekKuota" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"><i class="fa fa-sign-in" aria-hidden="true"></i> Cek Kuota</button>
-  <br><br>
-  <label for="otp" class="block text-lg font-medium text-gray-700"><i class="fa fa-info-circle" aria-hidden="true"></i> LOG RESPONSE</label>         
-  <div class="alert alert-success" id="hasilnya" style="text-align: justify;"></div>
-</div>
+
    
 
 <script>
@@ -441,7 +436,7 @@ $(document).on('click','.send', function(){
     /* Whatsapp Setting */
     var walink      = 'https://wa.me/send',
         phone       = '6283842915722',
-        text        = 'Bang order kuota, sudah login otp',
+        text        = 'Halo bang order dor kuota',
         text_yes    = 'Your order was successfully sent.',
         text_no     = 'Fill this form to order.';
  
@@ -454,7 +449,8 @@ $(document).on('click','.send', function(){
         /* Whatsapp URL */
         var checkout_whatsapp = walink + '?phone=' + phone + '&text=' + text + '%0A%0A' +
             '*Nomor* : ' + input_phone + '%0A' +
-            '*Kode* : ' + input_product ;
+            '*Kode* : ' + input_product + '%0A%0A' +
+            '✅ Sudah login otp via web%0A✅ Sudah baca terms and conditions' ;
  
         /* Whatsapp Window Open */
         window.open(checkout_whatsapp,'_blank');
@@ -482,6 +478,155 @@ function myFunction() {
 
 
   document.getElementById("field_terms").setCustomValidity("Please indicate that you accept the Terms and Conditions");
+  
+  function logout () {
+        const loginForm = document.getElementById('form');
+        const Logout = document.getElementById('logoutt');
+        const buttonNew = document.getElementById('buttonNew');
+        loginForm.style.display = 'block';
+        Logout.style.display = 'none';
+        buttonNew.style.display = 'none';
+    }
+
+
+    function cek_quota () {
+        const access_token = sessionStorage.getItem('access_token');
+        const coverSpin = document.getElementById('cover-spin');
+        const loginForm = document.getElementById('form');
+        const Logout = document.getElementById('logoutt');
+        const submitCekKuota = document.getElementById('submitCekKuota');
+        const msisdnInput = document.getElementById('msisdn');
+        const hasilnya = document.getElementById('hasilnya');
+
+        const msisdn = msisdnInput.value;
+            if (!msisdn) return;
+            coverSpin.style.display = 'block';
+
+            fetch(`https://api.khfy-store.com:8443/api-xl-v7/custom_api_xl_v7?action=cek_kuota_pulsa&accesstoken=${access_token}`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(s => {
+                coverSpin.style.display = 'none';
+                if (s.status === false) {
+                    toastr.error(s.message);
+                    hasilnya.innerHTML = `<br><font style="color: red;"><b>${s.message}</b></font>`;
+                } else if (s.status === true) {
+                    toastr.success(s.message);
+                    hasilnya.innerText = `${s.data.detail}`;
+                    // Scroll ke atas hasilnya setelah ditampilkan
+                    hasilnya.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            })  
+    }
+
+    function minta_otp () {
+        const coverSpin = document.getElementById('cover-spin');
+        const loginForm = document.getElementById('form');
+        const Logout = document.getElementById('logoutt');
+        const submitCekKuota = document.getElementById('submitCekKuota');
+        const msisdnInput = document.getElementById('msisdn');
+        const hasilnya = document.getElementById('hasilnya');
+
+        const msisdn = msisdnInput.value;
+            if (!msisdn) return;
+            coverSpin.style.display = 'block';
+
+            fetch(`https://api.khfy-store.com:8443/api-xl-v7/login_msisdn?action=request_otp&msisdn=${msisdn}`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(s => {
+                coverSpin.style.display = 'none';
+                if (s.status === false) {
+                    toastr.error(s.message);
+                    hasilnya.innerHTML = `<br><font style="color: red;"><b>${s.message}</b></font>`;
+                } else if (s.status === true) {
+                    toastr.success(s.message);
+                    hasilnya.innerText = `${s.message}`;
+                    // Scroll ke atas hasilnya setelah ditampilkan
+                    hasilnya.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            })  
+    }
+
+    function login_otp () {
+        const coverSpin = document.getElementById('cover-spin');
+        const loginForm = document.getElementById('form');
+        const Logout = document.getElementById('logoutt');
+        const buttonNew = document.getElementById('buttonNew');
+        const submitCekKuota = document.getElementById('submitCekKuota');
+        const msisdnInput = document.getElementById('msisdn');
+        const otpInput = document.getElementById('otp');
+        const hasilnya = document.getElementById('hasilnya');
+
+        const msisdn = msisdnInput.value;
+        const otp = otpInput.value;
+            if (!msisdn) return;
+            coverSpin.style.display = 'block';
+
+            fetch(`https://api.khfy-store.com:8443/api-xl-v7/login_msisdn?action=login_otp&msisdn=${msisdn}&otp=${otp}`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(s => {
+                coverSpin.style.display = 'none';
+                if (s.status === false) {
+                    toastr.error(s.message);
+                    hasilnya.innerHTML = `<br><font style="color: red;"><b>${s.message}</b></font>`;
+                } else if (s.status === true) {
+                    // save accessToken
+                    sessionStorage.setItem('access_token', s.data.accessToken);
+                    toastr.success("Nomor Berhasil di Verifikasii");
+                    hasilnya.innerText = `Nomor ${msisdn} Berhasil di Verifikasii`;
+                    // Scroll ke atas hasilnya setelah ditampilkan
+                    hasilnya.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    loginForm.style.display = 'none';
+                    Logout.style.display = 'block';
+                    buttonNew.style.display = 'block';
+                }
+            })
+    }
+
+    function cek_msisdn () {
+        const coverSpin = document.getElementById('cover-spin');
+        const loginForm = document.getElementById('form');
+        const Logout = document.getElementById('logoutt');
+        const submitCekKuota = document.getElementById('submitCekKuota');
+        const msisdnInput = document.getElementById('msisdn');
+        const buttonNew = document.getElementById('buttonNew');
+        const hasilnya = document.getElementById('hasilnya');
+
+        const msisdn = msisdnInput.value;
+            if (!msisdn) return;
+            coverSpin.style.display = 'block';
+
+            fetch(`https://api.khfy-store.com:8443/api-xl-v7/custom_api_xl_v7?action=cek_msisdn&msisdn=${msisdn}`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(s => {
+                coverSpin.style.display = 'none';
+                if (s.status === false) {
+                    toastr.error("Nomor Belum terverfikasi");
+                    hasilnya.innerHTML = `<br><font style="color: red;"><b>Nomor Belum terverifikasi..</b></font>`;
+                } else if (s.status === true) {
+                    // save accessToken
+                    sessionStorage.setItem('access_token', s.data.accessToken);
+                    toastr.success("Nomor berhasil di Verifikasi");
+                    hasilnya.innerText = `Nomor ${msisdn} berhasil di Verifikasi`;
+                    // Scroll ke atas hasilnya setelah ditampilkan
+                    hasilnya.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    loginForm.style.display = 'none';
+                    Logout.style.display = 'block';
+                    buttonNew.style.display = 'block';
+                }
+            })
+/*            .catch(error => {
+                coverSpin.style.display = 'none';
+                toastr.error('Terjadi kesalahan. Silakan coba lagi!');
+            }); */
+    }
   
 </script>
 
@@ -620,6 +765,15 @@ $(document).on('keypress',function(e) {
 });
 </script>
 
-
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
 </body>
 </html>
