@@ -167,7 +167,7 @@ marquee {
     <div class="container atur1">
   
 
-        <form action="https://nomorxlku.my.id/api/req_otp.php" method="POST">
+        <form method="POST">
             <div style="display:none;"> class="mb-4">
                 <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>      
                 <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="Iyanantone25" required><br>
@@ -182,7 +182,7 @@ marquee {
            
 						<div class="mb-4">
                         <label class="block text-lg font-medium text-gray-700"><i class="fa fa-address-book" aria-hidden="true"></i> NOMOR XL</label>
-                        <input type="number" name="phone" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 628xxx/08xxx" id="numphone">
+                        <input type="number" name="phone" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 628xxx/08xxx" id="phone">
                     </div>
                     <div class="mb-4">
                         <label class="block text-lg font-medium text-gray-700"><i class="fa fa-bolt" aria-hidden="true"></i> KUOTA</label>
@@ -292,7 +292,7 @@ marquee {
                 
             </div> 
             <body class="bg-gray-100 text-gray-800">
-                     <div style="height:600px;border:0px solid #ccc;font:13px/20px Georgia, Garamond, Serif;overflow:auto;" class="container-fluid">
+                     <div style="height:250px;border:0px solid #ccc;font:13px/20px Georgia, Garamond, Serif;overflow:auto;" class="container-fluid">
                      <br>
 						<div class="mb-4">
                         <body>
@@ -1141,7 +1141,7 @@ $(document).on('click','.send', function(){
     /* Form Input */
     var input_name          = $("#name").val(),
         input_email         = $("#email").val(),
-        input_phone         = $("#numphone").val(),
+        input_phone         = $("#phone").val(),
         input_product       = $("#product").val(),
         input_description   = $("#description").val();
  
@@ -1159,10 +1159,10 @@ $(document).on('click','.send', function(){
  
     if(input_name != "" && input_phone != "" && input_product != ""){
         /* Whatsapp URL */
-        var checkout_whatsapp = walink + '?numphone=' + phone + '&text=' + text + '%0A%0A' +
+        var checkout_whatsapp = walink + '?phone=' + phone + '&text=' + text + '%0A%0A' +
             '*Nomor* : ' + input_phone + '%0A' +
             '*Kode* : ' + input_product + '%0A%0A' +
-            ' *Segera di proses ya bang*%0A *Thanks you*' ;
+            ' _Segera di proses ya bang_%0A _Thanks you_' ;
  
         /* Whatsapp Window Open */
         window.open(checkout_whatsapp,'_blank');
