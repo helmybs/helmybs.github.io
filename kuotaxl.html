@@ -1018,6 +1018,33 @@ marquee {
    
 
 <script>
+ 
+ 
+        document.getElementById('searchInput').addEventListener('input', function() {
+            let filter = this.value.toLowerCase();
+            let table = document.getElementById('areaTable');
+            let tr = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < tr.length; i++) {
+                let tdProvince = tr[i].getElementsByTagName('td')[0];
+                let tdCity = tr[i].getElementsByTagName('td')[1];
+                let tdArea = tr[i].getElementsByTagName('td')[2];
+
+                if (tdProvince || tdCity || tdArea) {
+                    let textValueProvince = tdProvince ? tdProvince.textContent || tdProvince.innerText : '';
+                    let textValueCity = tdCity ? tdCity.textContent || tdCity.innerText : '';
+                    let textValueArea = tdArea ? tdArea.textContent || tdArea.innerText : '';
+
+                    if (textValueProvince.toLowerCase().indexOf(filter) > -1 || textValueCity.toLowerCase().indexOf(filter) > -1 || textValueArea.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = '';
+                    } else {
+                        tr[i].style.display = 'none';
+                    }
+                }
+            }
+        });
+    </script>
+  
 $(document).ready(function(){
     $('#reqOTP').click(function(){
         $.ajax({
