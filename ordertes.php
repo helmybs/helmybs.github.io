@@ -13,34 +13,121 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fonnte WA
-define('FONNTE_TOKEN', 'ISI_TOKEN_FONNTE');
-define('ADMIN_WA', '6281234567890'); // Admin WA
-
-// Halaman utama (Order Produk)
+// Halaman utama (Landing Page)
 if ($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/index.php') {
     ?>
-    <h1>Order Pulsa</h1>
-    <form action="index.php" method="POST">
-        <label>Produk:</label>
-        <select name="produk_id" required>
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jual Pulsa Online</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+            }
+            header {
+                background-color: #0044cc;
+                color: white;
+                padding: 20px;
+                font-size: 2em;
+            }
+            .content {
+                padding: 40px;
+                margin-top: 30px;
+            }
+            .produk-list {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 20px;
+                margin-top: 20px;
+            }
+            .produk {
+                background-color: white;
+                border-radius: 8px;
+                padding: 20px;
+                width: 200px;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+            .produk img {
+                max-width: 100px;
+                margin-bottom: 10px;
+            }
+            .produk button {
+                background-color: #0044cc;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .produk button:hover {
+                background-color: #0033a1;
+            }
+        </style>
+    </head>
+    <body>
+
+    <header>
+        <h1>Selamat Datang di JualPulsa.com</h1>
+        <p>Platform Pembelian Pulsa Termudah dan Terpercaya</p>
+    </header>
+
+    <div class="content">
+        <h2>Daftar Produk Pulsa</h2>
+        <div class="produk-list">
             <?php
             $result = $conn->query("SELECT * FROM products");
             while ($row = $result->fetch_assoc()) {
-                echo "<option value='{$row['id']}'>{$row['nama_produk']} - Rp" . number_format($row['harga'], 0, ',', '.') . "</option>";
+                echo "
+                    <div class='produk'>
+                        <img src='icon-pulsa.png' alt='Pulsa'>
+                        <h3>{$row['nama_produk']}</h3>
+                        <p>Rp" . number_format($row['harga'], 0, ',', '.') . "</p>
+                        <a href='index.php?order={$row['id']}'><button>Beli Sekarang</button></a>
+                    </div>
+                ";
             }
             ?>
-        </select><br><br>
+        </div>
+    </div>
 
+    </body>
+    </html>
+    <?php
+}
+
+// Halaman order
+if (isset($_GET['order'])) {
+    $produk_id = $_GET['order'];
+
+    // Cari produk
+    $result = $conn->query("SELECT * FROM products WHERE id = '$produk_id'");
+    $produk = $result->fetch_assoc();
+
+    if (!$produk) {
+        die('Produk tidak ditemukan.');
+    }
+
+    ?>
+    <h1>Order Pulsa - <?php echo $produk['nama_produk']; ?></h1>
+    <form action="index.php" method="POST">
         <label>Nomor HP:</label>
         <input type="text" name="nomor_hp" required><br><br>
 
-        <button type="submit">Lanjut Bayar</button>
+        <input type="hidden" name="produk_id" value="<?php echo $produk['id']; ?>">
+        <button type="submit">Lanjutkan Pembayaran</button>
     </form>
     <?php
 }
 
-// Menangani pembuatan order
+// Menangani pembuatan order dan cek stok
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $produk_id = $_POST['produk_id'];
     $nomor_hp = $_POST['nomor_hp'];
@@ -67,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->query("INSERT INTO transactions (id_produk, nomor_hp, harga, status, invoice_id, created_at) 
     VALUES ('$produk_id', '$nomor_hp', '$harga', 'pending', '$invoice_id', NOW())");
 
-    // Redirect ke QRIS
+    // Redirect ke halaman QRIS
     header("Location: index.php?invoice=$invoice_id");
     exit;
 }
@@ -92,133 +179,5 @@ if (isset($_GET['invoice'])) {
     echo '<img src="qris-gambar.png" style="width:300px;"><br><br>';
     echo '<p>Scan QR di atas untuk bayar.</p>';
     echo '<br>';
-    echo "<a href='index.php?cek_bayar=$invoice_id'><button>Saya Sudah Bayar</button></a>";
-}
-
-// Cek pembayaran manual
-if (isset($_GET['cek_bayar'])) {
-    $invoice_id = $_GET['cek_bayar'];
-
-    $result = $conn->query("SELECT * FROM transactions WHERE invoice_id = '$invoice_id'");
-    $trx = $result->fetch_assoc();
-
-    if (!$trx) {
-        die('Transaksi tidak ditemukan');
-    }
-
-    // Kirim WA ke admin
-    $target = ADMIN_WA;
-    $message = "🚀 Konfirmasi Bayar QRIS\n\nInvoice: {$trx['invoice_id']}\nProduk ID: {$trx['id_produk']}\nNomor: {$trx['nomor_hp']}\nHarga: Rp{$trx['harga']}\n\nCek pembayaran sekarang.";
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://api.fonnte.com/send");
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, [
-        'target' => $target,
-        'message' => $message,
-    ]);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        "Authorization: " . FONNTE_TOKEN
-    ]);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $response = curl_exec($ch);
-    curl_close($ch);
-
-    echo "<h1>✅ Konfirmasi Terkirim!</h1><p>Admin akan cek pembayaran Anda.</p>";
-}
-
-// Panel Admin
-if (isset($_GET['admin'])) {
-    echo "<h1>Admin Panel - Cek Pembayaran</h1>";
-
-    // Ambil semua transaksi pending
-    $result = $conn->query("SELECT t.*, p.nama_produk FROM transactions t JOIN products p ON t.id_produk = p.id WHERE status='pending'");
-    echo '<table border="1" cellpadding="5" cellspacing="0">';
-    echo '<thead><tr><th>Invoice</th><th>Produk</th><th>Nomor HP</th><th>Harga</th><th>Tanggal</th><th>Action</th></tr></thead><tbody>';
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>
-            <td>{$row['invoice_id']}</td>
-            <td>{$row['nama_produk']}</td>
-            <td>{$row['nomor_hp']}</td>
-            <td>Rp" . number_format($row['harga'], 0, ',', '.') . "</td>
-            <td>{$row['created_at']}</td>
-            <td><a href='index.php?approve={$row['invoice_id']}'><button>Sudah Dibayar</button></a></td>
-        </tr>";
-    }
-    echo '</tbody></table>';
-}
-
-// Approve transaksi dan update stok
-if (isset($_GET['approve'])) {
-    $invoice_id = $_GET['approve'];
-
-    // Update status transaksi jadi paid
-    $conn->query("UPDATE transactions SET status='paid' WHERE invoice_id='$invoice_id'");
-
-    // Ambil data transaksi
-    $result = $conn->query("SELECT * FROM transactions WHERE invoice_id = '$invoice_id'");
-    $trx = $result->fetch_assoc();
-
-    // Kurangi stok produk
-    $conn->query("UPDATE products SET stok = stok - 1 WHERE id = '{$trx['id_produk']}' AND stok > 0");
-
-    // Kirim WA ke pembeli
-    $target = $trx['nomor_hp'];
-    $message = "✅ Pembayaran Anda sudah kami terima.\n\nProduk akan segera diproses.\n\nInvoice: {$trx['invoice_id']}";
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://api.fonnte.com/send");
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, [
-        'target' => $target,
-        'message' => $message,
-    ]);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        "Authorization: " . FONNTE_TOKEN
-    ]);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $response = curl_exec($ch);
-    curl_close($ch);
-
-    // Balik ke admin panel
-    header("Location: index.php?admin=true");
-    exit;
-}
-
-// Manajemen Stok Produk
-if (isset($_GET['products'])) {
-    echo "<h1>Manajemen Stok Produk</h1>";
-
-    // Ambil semua produk
-    $result = $conn->query("SELECT * FROM products");
-    echo '<table border="1" cellpadding="5" cellspacing="0">';
-    echo '<thead><tr><th>ID</th><th>Nama Produk</th><th>Harga</th><th>Stok Tersedia</th><th>Tambah Stok</th></tr></thead><tbody>';
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>
-            <td>{$row['id']}</td>
-            <td>{$row['nama_produk']}</td>
-            <td>Rp" . number_format($row['harga'], 0, ',', '.') . "</td>
-            <td>{$row['stok']}</td>
-            <td>
-                <form action='index.php' method='POST' style='display:inline;'>
-                    <input type='hidden' name='produk_id' value='{$row['id']}'>
-                    <input type='number' name='jumlah' required>
-                    <button type='submit' name='tambah_stok'>Tambah Stok</button>
-                </form>
-            </td>
-        </tr>";
-    }
-    echo '</tbody></table>';
-}
-
-// Tambah Stok Produk
-if (isset($_POST['tambah_stok'])) {
-    $produk_id = $_POST['produk_id'];
-    $jumlah = $_POST['jumlah'];
-
-    // Update stok
-    $conn->query("UPDATE products SET stok = stok + $jumlah WHERE id = '$produk_id'");
-
-    // Redirect kembali ke manajemen stok
-    header("Location: index.php?products=true");
-    exit;
-}
-?>
+    echo "<a href='index.php?cek_baya_
+    
