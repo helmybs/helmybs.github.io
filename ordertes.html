@@ -62,9 +62,26 @@
   </div>
 </div>
 
+<!-- Modal QRIS -->
+<div class="modal fade" id="modalQris" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Pembayaran QRIS</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="https://via.placeholder.com/300x300.png?text=QRIS" alt="QRIS" class="img-responsive center-block" style="max-width: 100%; height: auto;">
+        <h4 id="qrisProduct" class="mt-3"></h4>
+        <h4 id="qrisTotal" class="text-primary"></h4>
+        <button id="konfirmasiBayarQris" class="btn btn-success mt-3">Konfirmasi via WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 $(document).ready(function () {
-  // Menangani perubahan pilihan kuota
   $("#product").on("change", function () {
     const val = $(this).val();
     const match = val.match(/Rp\.\s?([\d.]+)/);
@@ -77,7 +94,6 @@ $(document).ready(function () {
     }
   });
 
-  // Tombol ORDER
   $(".send").click(function () {
     const phone = $("#phone").val();
     const product = $("#product").val();
@@ -95,7 +111,6 @@ $(document).ready(function () {
     }
   });
 
-  // Tombol BAYAR QRIS
   $("#bayarQris").click(function () {
     const phone = $("#phone").val();
     const product = $("#product").val();
@@ -108,12 +123,21 @@ $(document).ready(function () {
       return;
     }
 
-    const konfirmasi = confirm(`Total pembayaran: ${formatted}\n\nKlik OK untuk kirim konfirmasi via WhatsApp.`);
-    if (konfirmasi) {
-      const pesan = `*KONFIRMASI BAYAR QRIS*%0A%0A*Nomor:* ${phone}%0A*Paket:* ${product}%0A*Total:* ${formatted}%0A%0A*Berikut bukti bayar QRIS-nya ya bang.*`;
-      const url = `https://wa.me/6283842915722?text=${encodeURIComponent(pesan)}`;
-      window.open(url, '_blank');
-    }
+    $("#qrisProduct").text(product);
+    $("#qrisTotal").text("Total: " + formatted);
+    $('#modalQris').modal('show');
+  });
+
+  $("#konfirmasiBayarQris").click(function () {
+    const phone = $("#phone").val();
+    const product = $("#product").val();
+    const match = product.match(/Rp\.\s?([\d.]+)/);
+    const harga = match ? parseInt(match[1].replace(/\./g, '')) : 0;
+    const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(harga);
+
+    const pesan = `*KONFIRMASI BAYAR QRIS*%0A%0A*Nomor:* ${phone}%0A*Paket:* ${product}%0A*Total:* ${formatted}%0A%0A*Berikut bukti bayar QRIS-nya ya bang.*`;
+    const url = `https://wa.me/6283842915722?text=${encodeURIComponent(pesan)}`;
+    window.open(url, '_blank');
   });
 });
 </script>
