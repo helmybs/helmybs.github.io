@@ -1,183 +1,122 @@
-<?php
-// Koneksi ke database
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "pulsa_db";
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form XL AKRAB</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
 
-// Membuat koneksi
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Cek koneksi
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Halaman utama (Landing Page)
-if ($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/index.php') {
-    ?>
-    <!DOCTYPE html>
-    <html lang="id">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Jual Pulsa Online</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f4;
-                margin: 0;
-                padding: 0;
-                text-align: center;
-            }
-            header {
-                background-color: #0044cc;
-                color: white;
-                padding: 20px;
-                font-size: 2em;
-            }
-            .content {
-                padding: 40px;
-                margin-top: 30px;
-            }
-            .produk-list {
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 20px;
-                margin-top: 20px;
-            }
-            .produk {
-                background-color: white;
-                border-radius: 8px;
-                padding: 20px;
-                width: 200px;
-                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-                text-align: center;
-            }
-            .produk img {
-                max-width: 100px;
-                margin-bottom: 10px;
-            }
-            .produk button {
-                background-color: #0044cc;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            .produk button:hover {
-                background-color: #0033a1;
-            }
-        </style>
-    </head>
-    <body>
-
-    <header>
-        <h1>Selamat Datang di JualPulsa.com</h1>
-        <p>Platform Pembelian Pulsa Termudah dan Terpercaya</p>
-    </header>
-
-    <div class="content">
-        <h2>Daftar Produk Pulsa</h2>
-        <div class="produk-list">
-            <?php
-            $result = $conn->query("SELECT * FROM products");
-            while ($row = $result->fetch_assoc()) {
-                echo "
-                    <div class='produk'>
-                        <img src='icon-pulsa.png' alt='Pulsa'>
-                        <h3>{$row['nama_produk']}</h3>
-                        <p>Rp" . number_format($row['harga'], 0, ',', '.') . "</p>
-                        <a href='index.php?order={$row['id']}'><button>Beli Sekarang</button></a>
-                    </div>
-                ";
-            }
-            ?>
-        </div>
+<div class="container">
+  <h2>Form Pemesanan XL AKRAB</h2>
+  <form>
+    <div class="form-group">
+      <label for="phone"><i class="fa fa-phone"></i> Nomor HP</label>
+      <input type="number" class="form-control" id="phone" placeholder="Contoh: 628xxxxxxx">
     </div>
 
-    </body>
-    </html>
-    <?php
-}
+    <div class="form-group">
+      <label for="product"><i class="fa fa-bolt"></i> Pilih Kuota</label>
+      <select class="form-control" id="product">
+        <option value="">-- Pilih Kuota --</option>
+        <option value="RES60 | OFFICIAL AKRAB XL | Rp. 60.000">Rp 60.000</option>
+        <option value="RES75 | OFFICIAL AKRAB XXL | Rp. 75.000">Rp 75.000</option>
+        <option value="RES95 | OFFICIAL AKRAB XXL | Rp. 95.000">Rp 95.000</option>
+        <option value="RES105 | OFFICIAL AKRAB XXL | Rp. 105.000">Rp 105.000</option>
+        <option value="RES115 | OFFICIAL AKRAB XXL | Rp. 115.000">Rp 115.000</option>
+        <option value="BP150 | Rp. 150.000">Rp 150.000</option>
+      </select>
+      <div id="totalBayar" class="text-info mt-2" style="margin-top: 10px;"></div>
+    </div>
 
-// Halaman order
-if (isset($_GET['order'])) {
-    $produk_id = $_GET['order'];
+    <div id="text-info"></div>
 
-    // Cari produk
-    $result = $conn->query("SELECT * FROM products WHERE id = '$produk_id'");
-    $produk = $result->fetch_assoc();
+    <button type="button" class="btn btn-success send"><i class="fa fa-shopping-cart"></i> ORDER</button>
+    <button type="button" class="btn btn-primary" id="bayarQris"><i class="fa fa-qrcode"></i> BAYAR QRIS</button>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalLong"><i class="fa fa-search"></i> CEK AREA</button>
+  </form>
+</div>
 
-    if (!$produk) {
-        die('Produk tidak ditemukan.');
+<!-- Modal CEK AREA -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">DAFTAR AREA AKRAB</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Silakan cek daftar area sesuai lokasi kamu di sini...</p>
+        <ul>
+          <li>Area 1: Jawa Tengah</li>
+          <li>Area 2: Jakarta & Sekitarnya</li>
+          <li>Area 3: Sumatera</li>
+          <li>Area 4: Kalimantan, Sulawesi, Papua</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {
+  // Menangani perubahan pilihan kuota
+  $("#product").on("change", function () {
+    const val = $(this).val();
+    const match = val.match(/Rp\.\s?([\d.]+)/);
+    if (match) {
+      const total = parseInt(match[1].replace(/\./g, ""));
+      const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(total);
+      $("#totalBayar").text("Total Bayar: " + formatted);
+    } else {
+      $("#totalBayar").text("");
+    }
+  });
+
+  // Tombol ORDER
+  $(".send").click(function () {
+    const phone = $("#phone").val();
+    const product = $("#product").val();
+    const match = product.match(/Rp\.\s?([\d.]+)/);
+    const harga = match ? parseInt(match[1].replace(/\./g, '')) : 0;
+    const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(harga);
+    const pesan = `*ORDER PAKET AKRAB*%0A%0A*Nomor:* ${phone}%0A*Paket:* ${product}%0A*Total:* ${formatted}%0A%0A*Segera diproses ya bang!*`;
+    const url = `https://wa.me/6283842915722?text=${encodeURIComponent(pesan)}`;
+
+    if (phone && product) {
+      window.open(url, '_blank');
+      $('#text-info').html('<div class="alert alert-success">Pesanan berhasil dikirim via WhatsApp.</div>');
+    } else {
+      $('#text-info').html('<div class="alert alert-danger">Nomor dan kuota harus diisi.</div>');
+    }
+  });
+
+  // Tombol BAYAR QRIS
+  $("#bayarQris").click(function () {
+    const phone = $("#phone").val();
+    const product = $("#product").val();
+    const match = product.match(/Rp\.\s?([\d.]+)/);
+    const harga = match ? parseInt(match[1].replace(/\./g, '')) : 0;
+    const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(harga);
+
+    if (!phone || !product) {
+      alert("Silakan isi nomor dan pilih kuota.");
+      return;
     }
 
-    ?>
-    <h1>Order Pulsa - <?php echo $produk['nama_produk']; ?></h1>
-    <form action="index.php" method="POST">
-        <label>Nomor HP:</label>
-        <input type="text" name="nomor_hp" required><br><br>
-
-        <input type="hidden" name="produk_id" value="<?php echo $produk['id']; ?>">
-        <button type="submit">Lanjutkan Pembayaran</button>
-    </form>
-    <?php
-}
-
-// Menangani pembuatan order dan cek stok
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $produk_id = $_POST['produk_id'];
-    $nomor_hp = $_POST['nomor_hp'];
-
-    // Cari produk
-    $result = $conn->query("SELECT * FROM products WHERE id = '$produk_id'");
-    $produk = $result->fetch_assoc();
-
-    if (!$produk) {
-        die('Produk tidak ditemukan.');
+    const konfirmasi = confirm(`Total pembayaran: ${formatted}\n\nKlik OK untuk kirim konfirmasi via WhatsApp.`);
+    if (konfirmasi) {
+      const pesan = `*KONFIRMASI BAYAR QRIS*%0A%0A*Nomor:* ${phone}%0A*Paket:* ${product}%0A*Total:* ${formatted}%0A%0A*Berikut bukti bayar QRIS-nya ya bang.*`;
+      const url = `https://wa.me/6283842915722?text=${encodeURIComponent(pesan)}`;
+      window.open(url, '_blank');
     }
+  });
+});
+</script>
 
-    // Cek stok
-    if ($produk['stok'] <= 0) {
-        die('Maaf, stok produk ini habis.');
-    }
-
-    // Proses order
-    $harga = $produk['harga'];
-    $nama_produk = $produk['nama_produk'];
-    $invoice_id = 'INV' . time();
-
-    // Simpan transaksi
-    $conn->query("INSERT INTO transactions (id_produk, nomor_hp, harga, status, invoice_id, created_at) 
-    VALUES ('$produk_id', '$nomor_hp', '$harga', 'pending', '$invoice_id', NOW())");
-
-    // Redirect ke halaman QRIS
-    header("Location: index.php?invoice=$invoice_id");
-    exit;
-}
-
-// Halaman pembayaran QRIS
-if (isset($_GET['invoice'])) {
-    $invoice_id = $_GET['invoice'];
-
-    $result = $conn->query("SELECT t.*, p.nama_produk FROM transactions t JOIN products p ON t.id_produk = p.id WHERE t.invoice_id = '$invoice_id'");
-    $trx = $result->fetch_assoc();
-
-    if (!$trx) {
-        die('Order tidak ditemukan');
-    }
-
-    echo "<h1>Bayar Menggunakan QRIS</h1>";
-    echo "<p>Produk: {$trx['nama_produk']}</p>";
-    echo "<p>Nomor HP: {$trx['nomor_hp']}</p>";
-    echo "<p>Jumlah: <b>Rp" . number_format($trx['harga'], 0, ',', '.') . "</b></p>";
-
-    // QRIS statis (seharusnya diganti dengan QRIS dinamis)
-    echo '<img src="qris-gambar.png" style="width:300px;"><br><br>';
-    echo '<p>Scan QR di atas untuk bayar.</p>';
-    echo '<br>';
-    echo "<a href='index.php?cek_baya_
-    
+</body>
+</html>
