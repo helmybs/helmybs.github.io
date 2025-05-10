@@ -1,779 +1,145 @@
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>XL OTP LOGIN</title>
-    <link rel="icon" type="image/x-icon" href="https://images.app.goo.gl/zpSX37uDMbbRdTWX6">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://my.kmsp-store.com/css/jquery.ccpicker.css">
-<link rel="stylesheet" href="https://my.kmsp-store.com/assets/css/spinner.css">
-<link href="https://my.kmsp-store.com/assets/build/toastr.css" rel="stylesheet" type="text/css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144237878-1"></script>
-<script src="https://my.kmsp-store.com/assets/toastr.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form XL AKRAB</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<body>
 
-<body class="bg-gray-100 text-gray-800">
-
-    <style>
-        @media only screen and (min-width: 200px) {
-            .atur1 { width: 90%; }
-        }
-        @media only screen and (min-width: 600px) {
-            .atur1 { width: 85%; }
-        }
-        @media only screen and (min-width: 1000px) {
-            .atur1 { width: 50%; }
-        }
-        @media only screen and (min-width: 1300px) {
-            .atur1 { width: 30%; }
-        }
-        body {
-            background: linear-gradient(180deg, #235CB2, #192D60);
-            font-family: 'Arial', sans-serif;
-            color: #333333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Menggunakan min-height agar sesuai dengan isi halaman */
-        }
-        .container {
-            margin-top: 20px; /* Mengurangi margin atas agar tidak terlalu jauh dari atas */
-            margin-bottom: 100px;
-            padding: 20px;
-            background: #C8D6EB;
-            border-radius: 8px;
-            transition: transform 0.3s ease-in-out;
-            max-width: 90%; /* Menggunakan max-width agar tidak terlalu lebar */
-        
-        }
-        h3 {
-            font-weight: bold;
-            color: #333333;
-         }
-        .alert {
-            background: #f1f1f1;
-            border: none;
-            color: #333333;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-        .form-control {
-            border-radius: 8px;
-            box-shadow: none;
-            border-color: #dddddd;
-            padding: 10px;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            border: none;
-            border-radius: 8px;
-            box-shadow: none;
-            padding: 10px 20px;
-            color: white;
-            cursor: pointer;
-            transition: background 0.3s ease-in-out;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #2575fc, #6a11cb);
-        }
-        #cover-spin {
-            position: fixed;
-            width: 100%;
-            left: 0; right: 0; top: 0; bottom: 0;
-            background-color: rgba(255, 255, 255, 0.7);
-            z-index: 9999;
-            display: none;
-        }
-        @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        #cover-spin::after {
-            content: '';
-            display: block;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 40px;
-            height: 40px;
-            border-style: solid;
-            border-color: black;
-            border-top-color: transparent;
-            border-width: 4px;
-            border-radius: 50%;
-            -webkit-animation: spin .8s linear infinite;
-            animation: spin .8s linear infinite;
-            transform: translate(-50%, -50%);
-        }
-        .modal {
-    text-align: center;
-    padding: 0 !important;
-}
-.modal:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -4px;
-}
-.modal-dialog {
-    display: inline-block;
-    text-align: left;
-    vertical-align: middle;
-}
-
-ol#explanatoryText li {
-    display: none;
-}
-
-ol#explanatoryText li.descriptor {
-    display: list-item;
-}
-marquee {
-            font-weight: lighter;
-            font-family: 'Arial', sans-serif;
-            margin-bottom: 8px;
-            color: #303030;
-        }
-  .input[type="checkbox"]:required:invalid + label {
-    color: red;
-  }
-  .input[type="checkbox"]:required:valid + label {
-    color: green;
-  }
-    </style>
-    <div id="cover-spin"></div>
-    <!-- Ini Formnya -->
-    <div class="container atur1">
-  
-
-        <form action="https://api.khfy-store.com:8443/api-xl-v7/custom_api_xl_v7?action=cek_kuota_pulsa&accesstoken=${access_token}" method="POST">
-            <div style="display:none;"> class="mb-4">
-                <label for="seller_code" class="block text-lg font-medium text-gray-700">Kode Seller (jika tidak tahu, tanyakan ke seller Anda)</label>      
-                <input type="text" id="seller_code" name="seller_code" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: BosamStoreKizaOpaOpa" value="Iyanantone25" required><br>
-            </div>
-            <marquee scrollamount="15" behavior="scroll" direction="left">
-            <i class="fa fa-bullhorn" style='margin-right: 5px;' aria-hidden="true"></i>08195812**** berhasil login otp<i style='margin-right: 40px;'></i>08193694**** berhasil login otp<i style='margin-right: 40px;'></i>08777829*** berhasil login otp<i style='margin-right: 40px;'></i>08771824**** berhasil login otp<i style='margin-right: 40px;'></i>08592631**** berhasil login otp<i style='margin-right: 40px;'></i>08783818**** berhasil login otp<i style='margin-right: 40px;'></i>08592631**** berhasil login otp<i style='margin-right: 40px;'></i>08777725**** berhasil login otp<i style='margin-right: 40px;'></i>08778811**** berhasil login otp<i style='margin-right: 40px;'></i>08199536**** berhasil login otp<i style='margin-right: 40px;'></i>08191660**** berhasil login otp<i style='margin-right: 40px;'></i>08594137**** berhasil login otp<i style='margin-right: 40px;'></i>08773199**** berhasil login otp<i style='margin-right: 40px;'></i>08193618**** berhasil login otp<i style='margin-right: 40px;'></i>08784147**** berhasil login otp
-        </marquee>
-                <div class="alert alert-success">
-        <strong><i class="fa fa-bullhorn" aria-hidden="true"></i><i style='margin-right: 8px;'></i>INFO</strong><br>
-   <p align="justify">Sekarang kamu bisa lakukan OTP mandiri ya, setelah berhasil login otp kemudian klik <strong>"<i class="fa fa-whatsapp" aria-hidden="true"></i> CHAT SELLER"</strong> isi form dan pilih jenis kuota, tanpa perlu otp lagi.</p>
-   </div>
-            <div class="mb-4">
-                <label for="msisdn" class="block text-lg font-medium text-gray-700">️<i class="fa fa-address-book" aria-hidden="true"></i> NOMOR XL</label>
-                <input type="number" id="msisdn" name="msisdn" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 628xxx/08xxx" value="" >
-                </div>
-                <div class="mb-4">
-                <label for="otp" class="block text-lg font-medium text-gray-700"><i class="fa fa-envelope" aria-hidden="true"></i> KODE OTP</label>
-                <input type="number" id="otp" name="otp" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 123456" value="" >
-              
-                </div>
-
-            <div class="mb-4">
-                  
-                  <div class="btn-group btn-group-justified">
-                <a class="btn-group"><button type="button" class="bg-blue-400 text-white p-4 hover:bg-red-500" onclick="minta_otp()"><i class="fa fa-paper-plane" aria-hidden="true"></i> SEND OTP</button></a>
-                <a class="btn-group"><button type="button" class="bg-blue-500 text-white p-4 hover:bg-red-500" onclick="login_otp()" id="verOTP"><i class="fa fa-sign-in" aria-hidden="true"></i> LOGIN OTP</button></a>
-                <a class="btn-group"><button type="button" class="bg-purple-600 text-white p-4 hover:bg-red-500 w-full" onclick="cek_quota()"><i class="fa fa-check-circle" aria-hidden="true"></i><br> CEK KUOTA </button></a>
-
-                <a class="btn-group"><button type="button" class="bg-green-500 text-white p-4 hover:bg-red-500" data-toggle="modal" data-target="#exampleModalLong"><i class="fa fa-whatsapp" aria-hidden="true"></i> CHAT SELLER</button></a>
-
-                </div>
-                </div>
-                <div class="mb-4">
-
-               <label for="otp" class="block text-lg font-medium text-gray-700"><i class="fa fa-info-circle" aria-hidden="true"></i> LOG RESPONSE</label>
-
-            <div class="alert alert-success" id="hasilnya" style="text-align: justify;"></div>
-
-            <input type="hidden" id="auth_id" name="auth_id" value="">
-            </div>
-            
-
-
-
-</form>
-  
- <!-- Modal --> 
-        <div class="modal fade" id="exampleModalLong" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> 
-        <div class="modal-dialog" role="document"> 
-            <div class="modal-content"> 
-            <div class="modal-header"> 
-            
-                <h3 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-whatsapp" aria-hidden="true"></i> <strong>FORM ORDER CHAT</strong></h3> 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
-                
-                <span aria-hidden="true">&times;</span> 
-                </button> 
-                
-            </div> 
-            <body class="bg-gray-100 text-gray-800">
-                     <div class="container-fluid">
-                     <br>
-						<div class="mb-4">
-                        <label class="block text-lg font-medium text-gray-700"><i class="fa fa-address-book" aria-hidden="true"></i> NOMOR XL</label>
-                        <input type="number" name="phone" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Contoh: 628xxx/08xxx" id="phone">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-lg font-medium text-gray-700"><i class="fa fa-bolt" aria-hidden="true"></i> KUOTA</label>
-                        
-                        
-                        <select name="product" class="mt-1 p-2 border border-gray-300 rounded-md w-full" id="product">
-                            <option value="">Select Kode Paket</option>
-                            <option value="REG35 | Rp. 20.000">BONUS LOKAL AKRAB [PROMO]</option>
-                            <option value="REG55 | Rp. 55.000">REGULER 20GB+BONUS LOKAL AKRAB</option>
-                            <option value="REG60 | Rp. 60.000">REGULER 30GB+BONUS LOKAL AKRAB</option>
-                            <option value="REG65 | Rp. 65.000">REGULER 40GB+BONUS LOKAL AKRAB</option>
-                            <option value="REG10 | Rp. 20.000">REGULER 10GB FULL 24 JAM</option>
-                            <option value="REG20 | Rp. 30.000">REGULER 20GB FULL 24 JAM</option>
-                       
-                       </select>
-                        <br>
-                        <br>
-                        <label for="otp" class="block text-lg font-medium text-gray-700"><i class="fa fa-info-circle" aria-hidden="true"></i> DESKRIPSI</label>
-                        <div class="alert alert-success">
-                        
-                        </textarea>
-                         <ol id="explanatoryText">
-                         <li></li>
-                         <li>AREA 1 : 7.5GB<br>AREA 2 : 12GB<br>AREA 3 : 25GB<br>AREA 4 : 65GB<br><strong>Rp. 35.000</strong></li>
-                         <li>AREA 1 : 27,5GB<br>AREA 2 : 32GB<br>AREA 3 : 45GB<br>AREA 4 : 85GB<br><strong>Rp. 55.000</strong></li>
-                         <li>AREA 1 : 37,5GB<br>AREA 2 : 42GB<br>AREA 3 : 55GB<br>AREA 4 : 95GB<br><strong>Rp. 60.000</strong></li>
-                         <li>AREA 1 : 47,5GB<br>AREA 2 : 52GB<br>AREA 3 : 65GB<br>AREA 4 : 105GB<br><strong>Rp. 65.000</strong></li>
-                         <li><p align="justify">REGULER 10GB FULL 24 JAM<br><strong>Rp. 20.000</strong></p></li>
-                         <li>REGULER 20GB FULL 24 JAM<br><strong>Rp. 30.000</strong></li>
-                         
-                         </ol>
-                         </div>
-                    </div>
-             <p><input id="field_terms" onchange="this.setCustomValidity(validity.valueMissing ? 'Please indicate that you accept the Terms and Conditions' : '');" type="checkbox" checked required name="terms"> I accept the <u><a data-toggle="modal" data-target="#exampleModalLongcek">Terms and Conditions</a></u></p>
-             <br>
-<button type="submit" class="btn btn-success send"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ORDER</button>
-                  <br><br>
-                        
-               </div>
-
-            </div>      
-        </div>
-    </div>   
-</body>
-        
-
-        
-        
-       
+<div class="container">
+  <h2>Form Pemesanan XL AKRAB</h2>
+  <form>
+    <div class="form-group">
+      <label for="phone"><i class="fa fa-phone"></i> Nomor HP</label>
+      <input type="number" class="form-control" id="phone" placeholder="Contoh: 628xxxxxxx">
     </div>
 
-        <!-- Modal --> 
-        <div class="modal fade" id="exampleModalLongcek" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalLongcekTitle" aria-hidden="true"> 
-        <div class="modal-dialog" role="document"> 
-            <div class="modal-content"> 
-             
-                
-                     <div class="container-fluid">
-                       <br>
-                         <div class="alert alert-success" style="text-align: justify;">
-  <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> TERMS AND CONDITIONS</strong><br><br><i class="fa fa-check-square-o" aria-hidden="true"></i> Jika terjadi pembegalan tidak ada Garansi sama sekali
-  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> Tidak ada reffund dana
-  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> Tidak ada kompensasi
-  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> DWYOR setelah kuota masuk
-  <br><i class="fa fa-check-square-o" aria-hidden="true"></i> Membeli sama dengan setuju</a>
-<div class="modal-footer">
-        <button type="button" class="btn btn-success send" data-dismiss="modal"><i class="fa fa-thumbs-up" aria-hidden="true"></i> SETUJU</button>
-      </div>   
+    <div class="form-group">
+      <label for="product"><i class="fa fa-bolt"></i> Pilih Kuota</label>
+      <select class="form-control" id="product">
+        <option value="">-- Pilih Kuota --</option>
+        <option value="RES60 | OFFICIAL AKRAB XL | Rp. 60.000">OFFICIAL AKRAB XL REWARDS [Rp 60.000]</option>
+        <option value="RES75 | OFFICIAL AKRAB XXL | Rp. 75.000">OFFICIAL AKRAB XXL REWARDS [Rp 75.000]</option>
+        <option value="RES95 | OFFICIAL AKRAB XXL | Rp. 95.000">OFFICIAL AKRAB XXL REWARDS [Rp 95.000]</option>
+        <option value="RES105 | OFFICIAL AKRAB XXL | Rp. 105.000">OFFICIAL AKRAB XXL REWARDS [Rp 105.000]</option>
+        <option value="RES115 | OFFICIAL AKRAB XXL | Rp. 115.000">OFFICIAL AKRAB XXL REWARDS [Rp 115.000]</option>
+        <option value="BP150 | Rp. 150.000">OFFICIAL BEBAS PUAS 234-270GB [ALL NASIONAL]</option>
+      </select>
+      <div id="totalBayar" class="text-info mt-2" style="margin-top: 10px;"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="description"><i class="fa fa-info-circle"></i> Detail Paket</label>
+      <textarea class="form-control" id="description" rows="6" readonly></textarea>
+    </div>
+
+    <div id="text-info"></div>
+
+    <button type="button" class="btn btn-primary" id="bayarQris"><i class="fa fa-qrcode"></i> BAYAR QRIS</button>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalLong"><i class="fa fa-search"></i> CEK AREA</button>
+  </form>
 </div>
 
-   
+<!-- Modal CEK AREA -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">DAFTAR AREA AKRAB</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Silakan cek daftar area sesuai lokasi kamu di sini...</p>
+        <ul>
+          <li>Area 1: Jawa Tengah</li>
+          <li>Area 2: Jakarta & Sekitarnya</li>
+          <li>Area 3: Sumatera</li>
+          <li>Area 4: Kalimantan, Sulawesi, Papua</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal QRIS -->
+<div class="modal fade" id="modalQris" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Pembayaran QRIS</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="https://via.placeholder.com/300x300.png?text=QRIS" alt="QRIS" class="img-responsive center-block" style="max-width: 100%; height: auto;">
+        <h4 id="qrisProduct" class="mt-3"></h4>
+        <h4 id="qrisTotal" class="text-primary"></h4>
+        <button id="konfirmasiBayarQris" class="btn btn-success mt-3">Konfirmasi via WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-$(document).ready(function(){
-    $('#reqOTP').click(function(){
-        $.ajax({
-        type:'POST',
-        crossDomain: true,
-        url: "https://nomorxlku.my.id/api/req_otp.php",
-        data:{msisdn:$('#msisdn').val(), seller_code: $('#seller_code').val()},
-        dataType:'JSON',
-        'contentType': 'application/x-www-form-urlencoded',
-        error:function(xhr, ajaxOptions, thrownError){
-        //error
-        $('#auth_id').val('');
-        $('#otp').val('');
-        $('#logResponse').html('Terjadi kesalahan, silakan coba lagi!');
-        $('#cover-spin').hide();
-        },
-        cache:false,
-        beforeSend:function(request){
-        //sebelum kirim
-        $('#logResponse').html('');
-        $('#cover-spin').show(0);
-        },
-        success:function(s){
-          //console.log(s);
+$(document).ready(function () {
+  const descriptions = [
+    "AREA 1: 33.5-36GB\nAREA 2: 36.5-40GB\nAREA 3: 47-50GB\nAREA 4: 71-74GB\n\n✅ Resmi bergaransi\n✅ Full 24 jam\n✅ Tambah masa aktif 30 hari",
+    "AREA 1: 65.5-67.5GB\nAREA 2: 70-72GB\nAREA 3: 83-85GB\nAREA 4: 123-125GB\n\n✅ Resmi bergaransi\n✅ Full 24 jam\n✅ Tambah masa aktif 30 hari",
+    "AREA 1: 85.5-87.5GB\nAREA 2: 90-92GB\nAREA 3: 103-105GB\nAREA 4: 143-145GB\n\n✅ Resmi bergaransi\n✅ Full 24 jam\n✅ Tambah masa aktif 30 hari",
+    "AREA 1: 105.5-107.5GB\nAREA 2: 110-112GB\nAREA 3: 123-125GB\nAREA 4: 163-165GB\n\n✅ Resmi bergaransi\n✅ Full 24 jam\n✅ Tambah masa aktif 30 hari",
+    "AREA 1: 125.5-127.5GB\nAREA 2: 130-132GB\nAREA 3: 153-155GB\nAREA 4: 183-185GB\n\n✅ Resmi bergaransi\n✅ Full 24 jam\n✅ Tambah masa aktif 30 hari",
+    "234GB Full Nasional + Kuota Area + Bonus.\nAMBIL BONUS DI MY XL."
+  ];
 
-          $('#cover-spin').hide();
-
-          if(s['status'] == false)
-          {
-            $('#otp').val('');
-            $('#auth_id').val('');
-            $('#logResponse').html(s['message']);
-          }
-
-          if(s['status'] == true)
-          {
-            $('#otp').val('');
-            $('#auth_id').val(s['data']['auth_id']);
-            $('#logResponse').html(s['message']);
-          }
-        }
-      });
-    });
-
-    $('#verOTP').click(function(){
-        $.ajax({
-        type:'POST',
-        crossDomain: true,
-        url: "https://nomorxlku.my.id/api/ver_otp.php",
-        data:{msisdn:$('#msisdn').val(), auth_id:$('#auth_id').val(), otp:$('#otp').val()},
-        dataType:'JSON',
-        'contentType': 'application/x-www-form-urlencoded',
-        error:function(xhr, ajaxOptions, thrownError){
-        //error
-        $('#logResponse').html('Terjadi kesalahan, silakan coba lagi!');
-        $('#cover-spin').hide();
-        },
-        cache:false,
-        beforeSend:function(request){
-        //sebelum kirim
-        $('#logResponse').html('');
-        $('#cover-spin').show(0);
-        },
-        success:function(s){
-          //console.log(s);
-
-          $('#cover-spin').hide();
-
-          if(s['status'] == false)
-          {
-            $('#logResponse').html(s['message']);
-          }
-
-          if(s['status'] == true)
-          {
-            $('#auth_id').val('');
-            $('#otp').val('');
-            $('#logResponse').html(s['message']);
-          }
-        }
-      });
-    });
-});
-jQuery(document).ready(function($){
-$(document).keydown(function(event) {
-var pressedKey = String.fromCharCode(event.keyCode).toLowerCase();
-
-if (event.ctrlKey && (pressedKey == "c" || pressedKey == "u")) {
-alert('Sorry, This Functionality Has Been Disabled!');
-//disable key press porcessing
-return false;
-}
-});
-});
-
-document.onkeypress = function (event) {
-event = (event || window.event);
-if (event.keyCode == 123) {
-return false;
-}
-}
-document.onmousedown = function (event) {
-event = (event || window.event);
-if (event.keyCode == 123) {
-return false;
-}
-}
-document.onkeydown = function (event) {
-event = (event || window.event);
-if (event.keyCode == 123) {
-return false;
-}
-}
-
-$(document).on('click','.send', function(){
-    /* Form Input */
-    var input_name          = $("#name").val(),
-        input_email         = $("#email").val(),
-        input_phone         = $("#phone").val(),
-        input_product       = $("#product").val(),
-        input_description   = $("#description").val();
- 
-    /* Whatsapp Setting */
-    var walink      = 'https://wa.me/send',
-        phone       = '6283842915722',
-        text        = 'Halo bang order dor kuota',
-        text_yes    = 'Your order was successfully sent.',
-        text_no     = 'Fill this form to order.';
- 
-    /* Smartphone Support */
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        var walink = 'whatsapp://send';
-    }
- 
-    if(input_name != "" && input_phone != "" && input_product != ""){
-        /* Whatsapp URL */
-        var checkout_whatsapp = walink + '?phone=' + phone + '&text=' + text + '%0A%0A' +
-            '*Nomor* : ' + input_phone + '%0A' +
-            '*Kode* : ' + input_product + '%0A%0A' +
-            '✅ Sudah login otp via web%0A✅ Sudah baca terms and conditions' ;
- 
-        /* Whatsapp Window Open */
-        window.open(checkout_whatsapp,'_blank');
-        document.getElementById("text-info").innerHTML = '<div class="alert alert-success">'+text_yes+'</div>';
+  $("#product").on("change", function () {
+    const index = $("#product").prop("selectedIndex") - 1;
+    const val = $(this).val();
+    const match = val.match(/Rp\.\s?([\d.]+)/);
+    if (match) {
+      const total = parseInt(match[1].replace(/\./g, ""));
+      const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(total);
+      $("#totalBayar").text("Total Bayar: " + formatted);
     } else {
-        document.getElementById("text-info").innerHTML = '<div class="alert alert-danger">'+text_no+'</div>';
-    }
-});
-
-$('#product').click(
-    function(){
-        $(this).change();
-    });
-$('#product').change(
-    function(){
-        var index = $(this).find('option:selected').index();
-        $('#explanatoryText li.descriptor').removeClass('descriptor');
-        $('#explanatoryText li').eq(index).addClass('descriptor');
-    });
-
-function myFunction() {
-  var x = document.getElementById("myCheck").required;
-  document.getElementById("rules").innerHTML = x;
-}
-
-
-  document.getElementById("field_terms").setCustomValidity("Please indicate that you accept the Terms and Conditions");
-  
-  function logout () {
-        const loginForm = document.getElementById('form');
-        const Logout = document.getElementById('logoutt');
-        const buttonNew = document.getElementById('buttonNew');
-        loginForm.style.display = 'block';
-        Logout.style.display = 'none';
-        buttonNew.style.display = 'none';
+      $("#totalBayar").text("");
     }
 
-
-    function cek_quota () {
-        const access_token = sessionStorage.getItem('access_token');
-        const coverSpin = document.getElementById('cover-spin');
-        const loginForm = document.getElementById('form');
-        const Logout = document.getElementById('logoutt');
-        const submitCekKuota = document.getElementById('submitCekKuota');
-        const msisdnInput = document.getElementById('msisdn');
-        const hasilnya = document.getElementById('hasilnya');
-
-        const msisdn = msisdnInput.value;
-            if (!msisdn) return;
-            coverSpin.style.display = 'block';
-
-            fetch(`https://api.khfy-store.com:8443/api-xl-v7/custom_api_xl_v7?action=cek_kuota_pulsa&accesstoken=${access_token}`, {
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(s => {
-                coverSpin.style.display = 'none';
-                if (s.status === false) {
-                    toastr.error(s.message);
-                    hasilnya.innerHTML = `<br><font style="color: red;"><b>${s.message}</b></font>`;
-                } else if (s.status === true) {
-                    toastr.success(s.message);
-                    hasilnya.innerText = `${s.data.detail}`;
-                    // Scroll ke atas hasilnya setelah ditampilkan
-                    hasilnya.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            })  
-    }
-
-    function minta_otp () {
-        const coverSpin = document.getElementById('cover-spin');
-        const loginForm = document.getElementById('form');
-        const Logout = document.getElementById('logoutt');
-        const submitCekKuota = document.getElementById('submitCekKuota');
-        const msisdnInput = document.getElementById('msisdn');
-        const hasilnya = document.getElementById('hasilnya');
-
-        const msisdn = msisdnInput.value;
-            if (!msisdn) return;
-            coverSpin.style.display = 'block';
-
-            fetch(`https://api.khfy-store.com:8443/api-xl-v7/login_msisdn?action=request_otp&msisdn=${msisdn}`, {
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(s => {
-                coverSpin.style.display = 'none';
-                if (s.status === false) {
-                    toastr.error(s.message);
-                    hasilnya.innerHTML = `<br><font style="color: red;"><b>${s.message}</b></font>`;
-                } else if (s.status === true) {
-                    toastr.success(s.message);
-                    hasilnya.innerText = `${s.message}`;
-                    // Scroll ke atas hasilnya setelah ditampilkan
-                    hasilnya.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            })  
-    }
-
-    function login_otp () {
-        const coverSpin = document.getElementById('cover-spin');
-        const loginForm = document.getElementById('form');
-        const Logout = document.getElementById('logoutt');
-        const buttonNew = document.getElementById('buttonNew');
-        const submitCekKuota = document.getElementById('submitCekKuota');
-        const msisdnInput = document.getElementById('msisdn');
-        const otpInput = document.getElementById('otp');
-        const hasilnya = document.getElementById('hasilnya');
-
-        const msisdn = msisdnInput.value;
-        const otp = otpInput.value;
-            if (!msisdn) return;
-            coverSpin.style.display = 'block';
-
-            fetch(`https://api.khfy-store.com:8443/api-xl-v7/login_msisdn?action=login_otp&msisdn=${msisdn}&otp=${otp}`, {
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(s => {
-                coverSpin.style.display = 'none';
-                if (s.status === false) {
-                    toastr.error(s.message);
-                    hasilnya.innerHTML = `<br><font style="color: red;"><b>${s.message}</b></font>`;
-                } else if (s.status === true) {
-                    // save accessToken
-                    sessionStorage.setItem('access_token', s.data.accessToken);
-                    toastr.success("Nomor Berhasil di Verifikasii");
-                    hasilnya.innerText = `Nomor ${msisdn} Berhasil di Verifikasii`;
-                    // Scroll ke atas hasilnya setelah ditampilkan
-                    hasilnya.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    loginForm.style.display = 'none';
-                    Logout.style.display = 'block';
-                    buttonNew.style.display = 'block';
-                }
-            })
-    }
-
-    function cek_msisdn () {
-        const coverSpin = document.getElementById('cover-spin');
-        const loginForm = document.getElementById('form');
-        const Logout = document.getElementById('logoutt');
-        const submitCekKuota = document.getElementById('submitCekKuota');
-        const msisdnInput = document.getElementById('msisdn');
-        const buttonNew = document.getElementById('buttonNew');
-        const hasilnya = document.getElementById('hasilnya');
-
-        const msisdn = msisdnInput.value;
-            if (!msisdn) return;
-            coverSpin.style.display = 'block';
-
-            fetch(`https://api.khfy-store.com:8443/api-xl-v7/custom_api_xl_v7?action=cek_msisdn&msisdn=${msisdn}`, {
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(s => {
-                coverSpin.style.display = 'none';
-                if (s.status === false) {
-                    toastr.error("Nomor Belum terverfikasi");
-                    hasilnya.innerHTML = `<br><font style="color: red;"><b>Nomor Belum terverifikasi..</b></font>`;
-                } else if (s.status === true) {
-                    // save accessToken
-                    sessionStorage.setItem('access_token', s.data.accessToken);
-                    toastr.success("Nomor berhasil di Verifikasi");
-                    hasilnya.innerText = `Nomor ${msisdn} berhasil di Verifikasi`;
-                    // Scroll ke atas hasilnya setelah ditampilkan
-                    hasilnya.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    loginForm.style.display = 'none';
-                    Logout.style.display = 'block';
-                    buttonNew.style.display = 'block';
-                }
-            })
-/*            .catch(error => {
-                coverSpin.style.display = 'none';
-                toastr.error('Terjadi kesalahan. Silakan coba lagi!');
-            }); */
-    }
-  
-</script>
-
-<script>
-
-  window.addEventListener("DOMContentLoaded", (e) => {
-
-    const checkForm = (e) => {
-      const form = e.target;
-      ...
-      if(!form.terms.checked) {
-        alert("Please indicate that you accept the Terms and Conditions");
-        form.terms.focus();
-        e.preventDefault();
-        return; /* equivalent to return false */
-      }
-    };
-
-    const myForm        = document.querySelector("#example4");
-    const myCheckbox    = myForm.querySelector("#field_terms");
-    const myCheckboxMsg = "Please indicate that you accept the Terms and Conditions";
-
-    /* attach the form submit handler */
-    myForm.addEventListener("submit", checkForm);
-
-    /* set the starting error message */
-    myCheckbox.setCustomValidity(myCheckboxMsg);
-
-    /* attach checkbox handler to toggle error message */
-    myCheckbox.addEventListener("change", (e) => {
-      let el = e.target;
-      el.setCustomValidity(el.validity.valueMissing ? myCheckboxMsg : "");
-    });
-
+    $("#description").val(index >= 0 ? descriptions[index] : "");
   });
 
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  $("#bayarQris").click(function () {
+    const phone = $("#phone").val();
+    const product = $("#product").val();
+    const match = product.match(/Rp\.\s?([\d.]+)/);
+    const harga = match ? parseInt(match[1].replace(/\./g, '')) : 0;
+    const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(harga);
 
-  gtag('config', 'UA-144237878-1');
-</script>
+    if (!phone || !product) {
+      alert("Silakan isi nomor dan pilih kuota.");
+      return;
+    }
 
-<script type="text/javascript">
-$(document).ready(function(){
-  $('#submitCekKuota').click(function(){
-    $.ajax({
-        type:'GET',
-        crossDomain: true,
-        url: "https://apigw.kmsp-store.com/sidompul/v3/cek_kuota?msisdn=" + $('#msisdn').val() + "&isJSON=true",
-        data:{},
-        dataType:'JSON',
-        'contentType': 'application/x-www-form-urlencoded',
-        error:function(xhr, ajaxOptions, thrownError){
-        //error
-        $('#cover-spin').hide();
-        toastr.error('Terjadi kesalahan. Silakan coba lagi!');
-        },
-        cache:false,
-        beforeSend:function(request){
-          request.setRequestHeader('Authorization', 'Basic c2lkb21wdWxhcGk6YXBpZ3drbXNw');
-          request.setRequestHeader('X-API-Key', '4352ff7d-f4e6-48c6-89dd-21c811621b1c');
-          request.setRequestHeader('X-App-Version', '3.0.0');
-        //sebelum kirim
-        $('#cover-spin').show(0);
-        },
-        success:function(s){
-          //console.log(s);
+    $("#qrisProduct").text(product);
+    $("#qrisTotal").text("Total: " + formatted);
+    $('#modalQris').modal('show');
+  });
 
-          $('#cover-spin').hide();
+  $("#konfirmasiBayarQris").click(function () {
+    const phone = $("#phone").val();
+    const product = $("#product").val();
+    const match = product.match(/Rp\.\s?([\d.]+)/);
+    const harga = match ? parseInt(match[1].replace(/\./g, '')) : 0;
+    const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(harga);
 
-          if(s['status'] == false)
-          {
-            toastr.error(s['message']);
-            $('#hasilnya').html('');
-            $('#hasilnya').html("<br>" + '<font style="color: red;"><b>' + s['data']['keteranganError'] + '</b></font>');
-          }
-
-          if(s['status'] == true)
-          {
-            toastr.success(s['message']);
-            $('#hasilnya').html('');
-            $('#hasilnya').html("<br>" + s['data']['hasil']);
-          }
-        }
-      });
+    const pesan = `*KONFIRMASI BAYAR QRIS*%0A%0A*Nomor:* ${phone}%0A*Paket:* ${product}%0A*Total:* ${formatted}%0A%0A*Berikut bukti bayar QRIS-nya ya bang.*`;
+    const url = `https://wa.me/6283842915722?text=${encodeURIComponent(pesan)}`;
+    window.open(url, '_blank');
   });
 });
-
-$(document).on('keypress',function(e) {
-  if(e.which == 13 && $("#msisdn").is(":focus"))
-  {
-    $.ajax({
-        type:'GET',
-        crossDomain: true,
-        url: "https://apigw.kmsp-store.com/sidompul/v3/cek_kuota?msisdn=" + $('#msisdn').val() + "&isJSON=true",
-        data:{},
-        dataType:'JSON',
-        'contentType': 'application/x-www-form-urlencoded',
-        error:function(xhr, ajaxOptions, thrownError){
-        //error
-        $('#cover-spin').hide();
-        toastr.error('Terjadi kesalahan. Silakan coba lagi!');
-        },
-        cache:false,
-        beforeSend:function(request){
-          request.setRequestHeader('Authorization', 'Basic c2lkb21wdWxhcGk6YXBpZ3drbXNw');
-          request.setRequestHeader('X-API-Key', '4352ff7d-f4e6-48c6-89dd-21c811621b1c');
-          request.setRequestHeader('X-App-Version', '3.0.0');
-        //sebelum kirim
-        $('#cover-spin').show(0);
-        },
-        success:function(s){
-          //console.log(s);
-
-          $('#cover-spin').hide();
-
-          if(s['status'] == false)
-          {
-            toastr.error(s['message']);
-            $('#hasilnya').html('');
-            $('#hasilnya').html("<br>" + '<font style="color: red;"><b>' + s['data']['keteranganError'] + '</b></font>');
-          }
-
-          if(s['status'] == true)
-          {
-            toastr.success(s['message']);
-            $('#hasilnya').html('');
-            $('#hasilnya').html("<br>" + s['data']['hasil']);
-          }
-        }
-      });
-  }
-});
 </script>
 
-<script>
-function myFunction() {
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-</script>
 </body>
 </html>
