@@ -23,14 +23,19 @@
       <label for="product"><i class="fa fa-bolt"></i> Pilih Kuota</label>
       <select class="form-control" id="product">
         <option value="">-- Pilih Kuota --</option>
-        <option value="RES60 | OFFICIAL AKRAB XL | Rp. 60.000">Rp 60.000</option>
-        <option value="RES75 | OFFICIAL AKRAB XXL | Rp. 75.000">Rp 75.000</option>
-        <option value="RES95 | OFFICIAL AKRAB XXL | Rp. 95.000">Rp 95.000</option>
-        <option value="RES105 | OFFICIAL AKRAB XXL | Rp. 105.000">Rp 105.000</option>
-        <option value="RES115 | OFFICIAL AKRAB XXL | Rp. 115.000">Rp 115.000</option>
-        <option value="BP150 | Rp. 150.000">Rp 150.000</option>
+        <option value="RES60 | OFFICIAL AKRAB XL | Rp. 60.000">OFFICIAL AKRAB XL REWARDS [Rp 60.000]</option>
+        <option value="RES75 | OFFICIAL AKRAB XXL | Rp. 75.000">OFFICIAL AKRAB XXL REWARDS [Rp 75.000]</option>
+        <option value="RES95 | OFFICIAL AKRAB XXL | Rp. 95.000">OFFICIAL AKRAB XXL REWARDS [Rp 95.000]</option>
+        <option value="RES105 | OFFICIAL AKRAB XXL | Rp. 105.000">OFFICIAL AKRAB XXL REWARDS [Rp 105.000]</option>
+        <option value="RES115 | OFFICIAL AKRAB XXL | Rp. 115.000">OFFICIAL AKRAB XXL REWARDS [Rp 115.000]</option>
+        <option value="BP150 | Rp. 150.000">OFFICIAL BEBAS PUAS 234-270GB [ALL NASIONAL]</option>
       </select>
       <div id="totalBayar" class="text-info mt-2" style="margin-top: 10px;"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="description"><i class="fa fa-info-circle"></i> Detail Paket</label>
+      <textarea class="form-control" id="description" rows="6" readonly></textarea>
     </div>
 
     <div id="text-info"></div>
@@ -82,7 +87,17 @@
 
 <script>
 $(document).ready(function () {
+  const descriptions = [
+    "AREA 1: 33.5-36GB\nAREA 2: 36.5-40GB\nAREA 3: 47-50GB\nAREA 4: 71-74GB\n\n✅ Resmi bergaransi\n✅ Full 24 jam\n✅ Tambah masa aktif 30 hari",
+    "AREA 1: 65.5-67.5GB\nAREA 2: 70-72GB\nAREA 3: 83-85GB\nAREA 4: 123-125GB\n\n✅ Resmi bergaransi\n✅ Full 24 jam\n✅ Tambah masa aktif 30 hari",
+    "AREA 1: 85.5-87.5GB\nAREA 2: 90-92GB\nAREA 3: 103-105GB\nAREA 4: 143-145GB\n\n✅ Resmi bergaransi\n✅ Full 24 jam\n✅ Tambah masa aktif 30 hari",
+    "AREA 1: 105.5-107.5GB\nAREA 2: 110-112GB\nAREA 3: 123-125GB\nAREA 4: 163-165GB\n\n✅ Resmi bergaransi\n✅ Full 24 jam\n✅ Tambah masa aktif 30 hari",
+    "AREA 1: 125.5-127.5GB\nAREA 2: 130-132GB\nAREA 3: 153-155GB\nAREA 4: 183-185GB\n\n✅ Resmi bergaransi\n✅ Full 24 jam\n✅ Tambah masa aktif 30 hari",
+    "234GB Full Nasional + Kuota Area + Bonus.\nAMBIL BONUS DI MY XL."
+  ];
+
   $("#product").on("change", function () {
+    const index = $("#product").prop("selectedIndex") - 1;
     const val = $(this).val();
     const match = val.match(/Rp\.\s?([\d.]+)/);
     if (match) {
@@ -92,6 +107,8 @@ $(document).ready(function () {
     } else {
       $("#totalBayar").text("");
     }
+
+    $("#description").val(index >= 0 ? descriptions[index] : "");
   });
 
   $(".send").click(function () {
