@@ -1013,14 +1013,7 @@ document.getElementById("cekStokBtn").addEventListener("click", function () {
   });
 });
 
-  document.getElementById("btnBayar").addEventListener("click", function () {
-    const select = document.getElementById("product");
-    const selectedOption = select.options[select.selectedIndex];
-    const kode = selectedOption.getAttribute("value"); // Misal: RES35
-    if (kode) {
-      kurangiStok(kode);
-    }
-  });
+  
 </script>
 
 </body>
@@ -2139,18 +2132,7 @@ const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 
     
     
     
-    function updateStokInfo() {
-      const selectedProduct = document.getElementById('product').value;
-      let stokMessage = "Silakan pilih kuota terlebih dahulu.";
     
-      if (selectedProduct) {
-        const kodeProduk = selectedProduct.split('|')[0].trim();
-        if (stokData.hasOwnProperty(kodeProduk)) {
-          stokMessage = `Stok untuk ${kodeProduk}: ${stokData[kodeProduk]} pcs tersedia.`;
-        } else {
-          stokMessage = "Stok untuk produk ini belum tersedia.";
-        }
-      }
     
       document.getElementById('stokInfo').textContent = stokMessage;
     }
@@ -2442,6 +2424,17 @@ $("#ewalletTotal").text("Total: " + formatted);
         const product = $('#product').val();
         const total = $('#qrisTotal').text().replace('Total: ', '');
         const description = $('#description').val();
+        document.getElementById("konfirmasiBayarQris").addEventListener("click", function () {
+  const select = document.getElementById("product");
+  const selectedOption = select.options[select.selectedIndex];
+  const kode = selectedOption.getAttribute("value");
+  if (kode) {
+    kurangiStok(kode);
+  }
+
+  // Tambahkan proses upload bukti bayar jika ada
+});
+
         
         handleUpload('#buktiBayar', '#progressWrapper', '#uploadProgressBar', function (url) {
           // Format pesan WhatsApp
@@ -2480,7 +2473,17 @@ $("#ewalletTotal").text("Total: " + formatted);
       const product = $('#product').val();
       const total = $('#bankTotal').text().replace('Total: ', '');
       const description = $('#description').val();
-      
+      document.getElementById("konfirmasiBayarBank").addEventListener("click", function () {
+  const select = document.getElementById("product");
+  const selectedOption = select.options[select.selectedIndex];
+  const kode = selectedOption.getAttribute("value");
+  if (kode) {
+    kurangiStok(kode);
+  }
+
+  // Tambahkan proses upload bukti bayar jika ada
+});
+
       handleUpload('#buktiBayarBank', '#progressWrapperBank', '#uploadProgressBarBank', function (url) {
         // Format pesan WhatsApp
         const pesan = `*KONFIRMASI PEMBAYARAN BANK*\n\n` +
@@ -2518,7 +2521,17 @@ $("#ewalletTotal").text("Total: " + formatted);
         const phone = $('#phone').val();
         const product = $('#product').val();
         const total = $('#ewalletTotal').text().replace('Total: ', '');
-        const description = $('#description').val();
+        document.getElementById("konfirmasiBayarEwallet").addEventListener("click", function () {
+  const select = document.getElementById("product");
+  const selectedOption = select.options[select.selectedIndex];
+  const kode = selectedOption.getAttribute("value");
+  if (kode) {
+    kurangiStok(kode);
+  }
+
+  // Tambahkan proses upload bukti bayar jika ada
+});
+
         
         handleUpload('#buktiBayarEwallet', '#progressWrapperEwallet', '#uploadProgressBarEwallet', function (url) {
           // Format pesan WhatsApp
@@ -2973,26 +2986,6 @@ $('#product').on('change', function () {
     });
   });
 
-  // Fungsi kurangi stok
-  function kurangiStok(kode) {
-    const stokRef = db.ref("stok/" + kode);
-    stokRef.transaction(current => {
-      if (current > 0) {
-        return current - 1;
-      } else {
-        alert("Stok habis!");
-        return; // batalkan transaksi
-      }
-    }, (error, committed, snapshot) => {
-      if (error) {
-        alert("Gagal memperbarui stok.");
-      } else if (!committed) {
-        alert("Pesanan dibatalkan karena stok kosong.");
-      } else {
-        alert("Pesanan berhasil. Sisa stok: " + snapshot.val());
-      }
-    });
-  }
 
   // Saat tombol bayar ditekan
   
@@ -3014,14 +3007,24 @@ document.getElementById("cekStokBtn").addEventListener("click", function () {
   });
 });
 
-  document.getElementById("btnBayar").addEventListener("click", function () {
-    const select = document.getElementById("product");
-    const selectedOption = select.options[select.selectedIndex];
-    const kode = selectedOption.getAttribute("value"); // Misal: RES35
-    if (kode) {
-      kurangiStok(kode);
+  function handlePaymentConfirmation() {
+  const selectedOption = $('#product').find('option:selected');
+  const kodeProduk = selectedOption.val().split('|')[0].trim();
+  
+  // Cek stok terlebih dahulu
+  db.ref("stok/" + kodeProduk).once("value").then(snapshot => {
+    const currentStock = snapshot.val();
+    
+    if (currentStock > 0) {
+      // Lanjutkan dengan pembayaran
+      kurangiStok(kodeProduk);
+      // ... proses pembayaran ...
+    } else {
+      alert("Maaf, stok produk ini sudah habis.");
+      return;
     }
   });
+}
 </script>
 
 </body>
