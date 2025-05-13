@@ -2659,15 +2659,19 @@ $(document).ready(function() {
   document.addEventListener('contextmenu', event => event.preventDefault());
 
   // Blokir shortcut DevTools
-  document.onkeydown = function (e) {
-    if (
-      e.key === "F12" ||
-      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) ||
-      (e.ctrlKey && e.key === "U")
-    ) {
-      return false;
+  document.addEventListener('keydown', function (e) {
+    // Blok Ctrl+U
+    if (e.ctrlKey && e.key.toLowerCase() === 'u') {
+        e.preventDefault();
+        alert("Akses source code dibatasi.");
     }
-  };
+
+    // Blok F12
+    if (e.key === 'F12') {
+        e.preventDefault();
+        alert("Developer tools dinonaktifkan.");
+    }
+});
 
   // Blokir drag teks
   document.addEventListener('dragstart', e => e.preventDefault());
@@ -2708,8 +2712,8 @@ document.addEventListener('mousedown', function(e) {
     }
   }
 
-  // Cek setelah 15 detik pertama
-  setTimeout(cekFormKosongDanTampilkanModal, 15000);
+  // Cek setelah 60 detik pertama
+  setTimeout(cekFormKosongDanTampilkanModal, 60000);
 
   // Cek berulang setiap 30 detik jika form belum diisi
   setInterval(cekFormKosongDanTampilkanModal, 30000);
