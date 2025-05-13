@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tambah Stok</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body>
+  <h2>Tambah Stok</h2>
+  <label>Kode Produk:</label>
+  <input type="text" id="kode" placeholder="contoh: RES35" />
+  <br><br>
+  <label>Jumlah Tambahan:</label>
+  <input type="number" id="jumlah" />
+  <br><br>
+  <button onclick="tambahStok()">Tambah</button>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAm9pbEAyp7iEwlAStQnJPzVwIV23xOsMg",
+      authDomain: "toko-kuota-stok.firebaseapp.com",
+      databaseURL: "https://toko-kuota-stok-default-rtdb.firebaseio.com",
+      projectId: "toko-kuota-stok",
+      storageBucket: "toko-kuota-stok.firebasestorage.app",
+      messagingSenderId: "321145437639",
+      appId: "1:321145437639:web:21c425d46679158e376de2",
+      measurementId: "G-PD9BGY36G1"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function tambahStok() {
+      const kode = document.getElementById("kode").value.trim();
+      const jumlah = parseInt(document.getElementById("jumlah").value);
+
+      if (!kode || isNaN(jumlah)) {
+        alert("Isi kode dan jumlah dengan benar!");
+        return;
+      }
+
+      const stokRef = db.ref("stok/" + kode);
+      stokRef.transaction(current => {
+        return (current || 0) + jumlah;
+      }, (error, committed, snapshot) => {
+        if (error) {
+          alert("Gagal menambah stok.");
+        } else {
+          alert("Stok " + kode + " sekarang: " + snapshot.val());
+        }
+      });
+    }
+  </script>
+</body>
+</html>
