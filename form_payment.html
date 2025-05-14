@@ -1947,68 +1947,122 @@ const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 
     
     });
     </script>
-    <script>
-    // Simulasi data stok per produk
-    // Data stok yang disederhanakan
-    const stokData = {
-      "RES60": 20,
-      "RES75": 15,
-      "RES95": 10,
-      "RES105": 5,
-      "RES115": 8,
-      "BP150": 30
-    };
     
-    // Simulasi harga modal per produk
-    const hargaModalData = {
-      "RES60": 55000,
-      "RES75": 70000,
-      "RES95": 88000,
-      "RES105": 98000,
-      "RES115": 108000,
-      "BP150": 140000
-    };
-    
-    // URL Web Apps Google Sheets kamu (ganti nanti setelah deploy)
-    const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxyz123abc456/exec";
-    
-    // Ambil elemen
-    const cekStokBtn = document.getElementById('cekStokBtn');
-    const stokModal = document.getElementById('stokModal');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const closeStockModalBtn = document.getElementById('closeStockModalBtn');
-    const stokInfo = document.getElementById('stokInfo');
-    const productSelect = document.getElementById('product');
-    const bayarQrisBtn = document.getElementById('bayarQris');
-    const konfirmasiBayarQrisBtn = document.getElementById('konfirmasiBayarQris');
-    const modalQris = document.getElementById('modalQris');
-    
-    
-    
-    function updateStokInfo() {
-      const selectedProduct = document.getElementById('product').value;
-      let stokMessage = "Silakan pilih kuota terlebih dahulu.";
-    
-      if (selectedProduct) {
-        const kodeProduk = selectedProduct.split('|')[0].trim();
-        if (stokData.hasOwnProperty(kodeProduk)) {
-          stokMessage = `Stok untuk ${kodeProduk}: ${stokData[kodeProduk]} pcs tersedia.`;
+    <!-- Add this right before the closing 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
+    // Inisialisasi Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAm9pbEAyp7iEwlAStQnJPzVwIV23xOsMg",
+  authDomain: "toko-kuota-stok.firebaseapp.com",
+  databaseURL: "https://toko-kuota-stok-default-rtdb.firebaseio.com",
+  projectId: "toko-kuota-stok",
+  storageBucket: "toko-kuota-stok.firebasestorage.app",
+  messagingSenderId: "321145437639",
+  appId: "1:321145437639:web:21c425d46679158e376de2",
+  measurementId: "G-PD9BGY36G1"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// Ambil kode produk dari select
+function getKodeProduk() {
+  const select = document.getElementById("product");
+  const selectedOption = select.options[select.selectedIndex];
+  return selectedOption ? selectedOption.value.split(" ")[0].trim() : null;
+}
+
+// Kurangi stok jika tersedia
+function kurangiStok(kode) {
+  const stokRef = db.ref("stok/" + kode);
+  stokRef.transaction(current => {
+    if (current > 0) {
+      return current - 1;
+    } else {
+      alert("Stok habis!");
+      return;
+    }
+  }, (error, committed, snapshot) => {
+    if (error) {
+      alert("Gagal memperbarui stok.");
+    } else if (!committed) {
+      alert("Pesanan dibatalkan karena stok kosong.");
+    } else {
+      alert("Pesanan berhasil. Sisa stok: " + snapshot.val());
+    }
+  });
+}
+
+// Handler upload dan pengurangan stok
+function handleUploadClick(buttonId, inputId) {
+  const btn = document.getElementById(buttonId);
+  const fileInput = document.getElementById(inputId);
+
+  if (btn && fileInput) {
+    btn.addEventListener("click", () => {
+      if (!fileInput.files.length) {
+        alert("Silakan unggah bukti pembayaran terlebih dahulu.");
+        return;
+      }
+
+      const kode = getKodeProduk();
+      if (kode) kurangiStok(kode);
+    });
+  }
+}
+
+// Jalankan saat dokumen siap
+document.addEventListener("DOMContentLoaded", () => {
+  // Cek stok dan disable opsi jika habis
+  const select = document.getElementById("product");
+  db.ref("stok").once("value").then(snapshot => {
+    const stokData = snapshot.val();
+    for (let option of select.options) {
+      const kode = option.value.split(" ")[0];
+      if (stokData && stokData[kode] !== undefined) {
+        const jumlah = stokData[kode];
+        if (jumlah <= 0) {
+          option.disabled = true;
+          option.text += " (HABIS)";
         } else {
-          stokMessage = "Stok untuk produk ini belum tersedia.";
+          option.text += ` (Stok: ${jumlah})`;
         }
       }
-    
-      document.getElementById('stokInfo').textContent = stokMessage;
     }
-    
-    // Event listener untuk tombol Cek Stok
-    document.getElementById('cekStokBtn').addEventListener('click', function() {
-      updateStokInfo();
-      $('#stokModal').modal('show'); // Menggunakan Bootstrap modal
+  });
+
+  // Tombol cek stok manual
+  document.getElementById("cekStokBtn").addEventListener("click", () => {
+    db.ref("stok").once("value").then(snapshot => {
+      const stokData = snapshot.val();
+      if (!stokData) {
+        alert("Stok tidak ditemukan.");
+        return;
+      }
+
+      let message = "Stok Tersedia:\n";
+      for (const [kode, jumlah] of Object.entries(stokData)) {
+        message += `${kode}: ${jumlah}\n`;
+      }
+      alert(message);
+    }).catch(error => {
+      console.error("Gagal mengambil data stok:", error);
+      alert("Gagal mengambil data stok.");
     });
+  });
+
+  // Hubungkan tombol dengan fungsi pengurangan stok
+  handleUploadClick("konfirmasiBayarQris", "buktiBayar");
+  handleUploadClick("konfirmasiBayarBank", "buktiBayarBank");
+  handleUploadClick("konfirmasiBayarEwallet", "buktiBayarEwallet");
+});
+
+  </script>
     
-    // Update info stok saat produk berubah
-    document.getElementById('product').addEventListener('change', updateStokInfo);
+       <script>
     
     
     // Deklarasikan variabel countdown di scope global
@@ -2100,66 +2154,39 @@ const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 
       });
     });
     
-    // Saat klik KONFIRMASI BAYAR, batalkan timer
-    konfirmasiBayarQrisBtn.addEventListener('click', () => {
-      clearTimeout(qrisTimer);
-      clearInterval(countdownInterval);
-    
-      const phone = document.getElementById('phone').value;
-      const selectedProduct = productSelect.value;
-    
-      if (selectedProduct && phone) {
-        const kodeProduk = selectedProduct.split('|')[0].trim();
-        const namaProduk = selectedProduct.split('|')[1]?.trim() || "-";
-        const hargaJualMatch = selectedProduct.match(/Rp\.\s?([\d.]+)/);
-        const hargaJual = hargaJualMatch ? parseInt(hargaJualMatch[1].replace(/\./g, "")) : 0;
-        const hargaModal = hargaModalData[kodeProduk] || 0;
-        const laba = hargaJual - hargaModal;
-    
-        if (stokData.hasOwnProperty(kodeProduk)) {
-          if (stokData[kodeProduk] > 0) {
-            stokData[kodeProduk]--;
-            updateStokInfo();
-    
-            // Kirim ke Google Sheets
-            fetch(GOOGLE_SHEETS_URL, {
-              method: "POST",
-              mode: "no-cors",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                phone: phone,
-                produk: namaProduk,
-                harga_modal: hargaModal,
-                harga_jual: hargaJual,
-                laba: laba,
-                waktu: new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })
-              })
-            });
-          } else {
-            alert("Stok produk ini sudah habis, tidak bisa melakukan pembelian.");
-          }
-        }
-      }
-    });
-    
-    // Tambahkan proteksi tambahan saat klik tombol Bayar QRIS
-    bayarQrisBtn.addEventListener('click', () => {
-      const selectedProduct = productSelect.value;
-      if (selectedProduct) {
-        const kodeProduk = selectedProduct.split('|')[0].trim();
-        if (stokData.hasOwnProperty(kodeProduk)) {
-          if (stokData[kodeProduk] <= 0) {
-            alert("Stok produk ini sudah habis, silakan pilih produk lain.");
-            return;
-          }
-        }
-      }
-    });
+   
     
     // Inisialisasi tombol Bayar QRIS
     updateStokInfo();
+    </script>
+    <script>
+        // Fungsi untuk mengurangi stok di Firebase
+    function kurangiStok(kodeProduk) {
+      const stokRef = db.ref(`stok/${kodeProduk}`);
+      
+      stokRef.transaction((currentStok) => {
+        if (currentStok === null || currentStok === undefined) return currentStok;
+        if (currentStok <= 0) {
+          alert("Stok produk ini sudah habis!");
+          return currentStok;
+        }
+        return currentStok - 1;
+      }).then(() => {
+        console.log(`Stok ${kodeProduk} berhasil dikurangi`);
+      }).catch((error) => {
+        console.error("Gagal mengurangi stok:", error);
+      });
+    }
+    
+    // Fungsi untuk mendapatkan kode produk dari select
+    function getKodeProduk() {
+      const select = document.getElementById("product");
+      const selectedOption = select.options[select.selectedIndex];
+      if (selectedOption) {
+        return selectedOption.value.split("|")[0].trim();
+      }
+      return null;
+    }
     </script>
     <script>
     $(document).ready(function () {
@@ -2293,7 +2320,7 @@ $("#ewalletTotal").text("Total: " + formatted);
           // Format pesan WhatsApp
           const pesan = `*KONFIRMASI PEMBAYARAN QRIS*\n\n` +
                        `📱 *Nomor HP:* ${phone}\n\n` +
-                       `📦 *Paket Yang Dibeli:* ${product}\n` +
+                       `📦 *Paket Yang Dibeli:* ${product}\n\n` +
                        `📝 *Detail Paket:*\n${description.replace(/\n/g, '\n')}\n\n` +
                        `💳 *Total Pembayaran:* ${total}\n` +
                        `📎 *Bukti Pembayaran:* ${url}\n\n` +
@@ -2370,7 +2397,7 @@ $("#ewalletTotal").text("Total: " + formatted);
           // Format pesan WhatsApp
           const pesan = `*KONFIRMASI PEMBAYARAN E-WALLET*\n\n` +
                        `📱 *Nomor HP:* ${phone}\n\n` +
-                       `📦 *Paket Yang Dibeli:* ${product}\n` +
+                       `📦 *Paket Yang Dibeli:* ${product}\n\n` +
                        `📝 *Detail Paket:*\n${description.replace(/\n/g, '\n')}\n\n` +
                        `💳 *Total Pembayaran:* ${total}\n` +
                        `📎 *Bukti Pembayaran:* ${url}\n\n` +
@@ -2724,42 +2751,84 @@ $(document).ready(function() {
 </script>
 
 <script>
-  $('#applyPromo').on('click', function () {
-  const enteredCode = $('#promoCode').val().trim().toUpperCase();
-  const originalText = $('#totalBayar').text();
-  const match = originalText.match(/Rp[\s\.]*([\d.]+)/);
-  if (!match) {
-    $('#promoMessage').text("Pilih paket terlebih dahulu.").removeClass().addClass("text-warning");
-    return;
+
+// fungsi promokode
+  function isPromoValid(promo, now) {
+    const dayNames = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+    const hariIni = dayNames[now.getDay()];
+    const jam = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+    return promo.hari.includes(hariIni) &&
+      jam >= promo.jam_mulai && jam <= promo.jam_selesai;
   }
 
-  const originalPrice = parseInt(match[1].replace(/\./g, ''));
-  const promoCodes = {
-    "PROMO10": 0.10,
-    "PROMO20": 0.20,
-    "SENIN1205": 0.05
-  };
+  $("#applyPromo").click(function () {
+    const kode = $("#promoCode").val().trim().toUpperCase();
+    const val = $("#product").val();
+    if (!kode || !val) {
+      $("#promoMessage").text("Masukkan kode promo dan pilih kuota").addClass("text-warning").removeClass("text-danger text-success");
+      return;
+    }
 
-  if (promoCodes[enteredCode]) {
-    const discount = promoCodes[enteredCode];
-    const discountedPrice = Math.round(originalPrice - (originalPrice * discount));
-    hargaSetelahDiskon = discountedPrice; // simpan global
+    db.ref("promo/" + kode).once("value", snapshot => {
+      const promo = snapshot.val();
+      if (!promo) {
+        $("#promoMessage").text("Kode promo tidak ditemukan.").addClass("text-danger").removeClass("text-warning text-success");
+        return;
+      }
 
-    const formattedOriginal = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(originalPrice);
-    const formattedDiscount = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(discountedPrice);
+      const now = new Date();
+      if (!isPromoValid(promo, now)) {
+        $("#promoMessage").text("Promo tidak berlaku saat ini.").addClass("text-danger").removeClass("text-warning text-success");
+        return;
+      }
 
-    $('#totalBayar').html(`<del>${formattedOriginal}</del> ${formattedDiscount} <span class="badge bg-success">Diskon ${discount * 100}%</span>`);
-    $('#promoMessage').text("Kode promo berhasil diterapkan!").removeClass().addClass("text-success");
-  } else {
-    hargaSetelahDiskon = null;
-    $('#promoMessage').text("Kode promo tidak valid.").removeClass().addClass("text-danger");
-  }
-});
-$('#product').on('change', function () {
-  hargaSetelahDiskon = null;
-  $('#promoMessage').text("").removeClass();
-});
+      const match = val.match(/Rp\.\s?([\d.]+)/);
+      if (!match) return;
+      const harga = parseInt(match[1].replace(/\./g, ""));
+      let total = harga;
 
+      if (promo.tipe === "diskon_persen") {
+        total -= Math.round(harga * (promo.nilai / 100));
+      } else if (promo.tipe === "diskon_nominal") {
+        total -= promo.nilai;
+      }
+
+      hargaSetelahDiskon = total;
+      const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(total);
+      $("#promoMessage").text("Promo berhasil diterapkan!").addClass("text-success").removeClass("text-danger text-warning");
+      $("#totalBayar").html(`<del>${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(harga)}</del> ${formatted} <span class="badge bg-success">${kode}</span>`);
+      $("#totalBayarContainer").removeClass("d-none");
+    });
+  });
+</script>
+
+<script>
+  document.getElementById("btnBayar").addEventListener("click", function () {
+    const phone = document.getElementById("phone").value.trim();
+    const product = document.getElementById("product").value;
+    const metode = document.getElementById("metodePembayaran").value;
+
+    if (!phone || !product || !metode) {
+      $('#isiFormModal').modal('show');
+      return;
+    }
+
+    // Arahkan ke modal pembayaran sesuai metode
+    if (metode === "qris") {
+      $("#qrisProduct").text(product);
+      $("#qrisTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $('#modalQris').modal('show');
+    } else if (metode === "bank") {
+      $("#bankProduct").text(product);
+      $("#bankTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $('#modalBank').modal('show');
+    } else if (metode === "ewallet") {
+      $("#ewalletProduct").text(product);
+      $("#ewalletTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $('#modalEwallet').modal('show');
+    }
+  });
 </script>
 
 </body>
