@@ -589,6 +589,7 @@ textarea.form-control {
   padding: 8px 0;
 }
 
+
 .nav-item {
   display: flex;
   flex-direction: column;
@@ -732,6 +733,21 @@ del { color: #6c757d; opacity: 0.8; }
     padding: 10px;
   }
 }
+
+@media (max-width: 576px) {
+  .bottom-nav {
+    padding: 6px 0;
+  }
+
+  .nav-item {
+    font-size: 10px;
+  }
+
+  .nav-item i {
+    font-size: 16px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2831,5 +2847,37 @@ $(document).ready(function() {
   });
 </script>
 
+<script>
+    jQuery(document).ready(function($){
+$(document).keydown(function(event) {
+var pressedKey = String.fromCharCode(event.keyCode).toLowerCase();
+
+if (event.ctrlKey && (pressedKey == "c" || pressedKey == "u")) {
+alert('Sorry, This Functionality Has Been Disabled!');
+//disable key press porcessing
+return false;
+}
+});
+});
+
+document.onkeypress = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+document.onmousedown = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+document.onkeydown = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+</script>
 </body>
 </html>
