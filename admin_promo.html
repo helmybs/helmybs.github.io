@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Promo Firebase</title>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    input, select, button { margin: 6px 0; padding: 8px; width: 100%; }
+    table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+    th, td { padding: 8px; border: 1px solid #ddd; text-align: center; }
+    th { background: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <h2>Manajemen Promo</h2>
+  <form id="promoForm">
+    <input type="text" id="kode" placeholder="Kode Promo (unik)" required />
+    <select id="tipe" required>
+      <option value="">-- Pilih Tipe --</option>
+      <option value="diskon_persen">Diskon Persen</option>
+      <option value="diskon_nominal">Diskon Nominal</option>
+    </select>
+    <input type="number" id="nilai" placeholder="Nilai Diskon" required />
+    <input type="time" id="jam_mulai" required />
+    <input type="time" id="jam_selesai" required />
+    <label>Hari Berlaku:</label>
+    <div id="hariContainer">
+      <label><input type="checkbox" value="Senin"> Senin</label>
+      <label><input type="checkbox" value="Selasa"> Selasa</label>
+      <label><input type="checkbox" value="Rabu"> Rabu</label>
+      <label><input type="checkbox" value="Kamis"> Kamis</label>
+      <label><input type="checkbox" value="Jumat"> Jumat</label>
+      <label><input type="checkbox" value="Sabtu"> Sabtu</label>
+      <label><input type="checkbox" value="Minggu"> Minggu</label>
+    </div>
+    <button type="submit">Simpan</button>
+  </form>
+
+  <h3>Daftar Promo</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Kode</th>
+        <th>Tipe</th>
+        <th>Nilai</th>
+        <th>Jam</th>
+        <th>Hari</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody id="promoTableBody"></tbody>
+  </table>
+
+  <script>
+    // Ganti dengan config Firebase milikmu
+    const firebaseConfig = {
+      apiKey: "AIzaSyAm9pbEAyp7iEwlAStQnJPzVwIV23xOsMg",
+      authDomain: "toko-kuota-stok.firebaseapp.com",
+      databaseURL: "https://toko-kuota-stok-default-rtdb.firebaseio.com",
+      projectId: "toko-kuota-stok",
+      storageBucket: "toko-kuota-stok.firebasestorage.app",
+      messagingSenderId: "321145437639",
+      appId: "1:321145437639:web:21c425d46679158e376de2",
+      measurementId: "G-PD9BGY36G1"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const promoRef = db.collection("promo");
+
+    const form = document.getElementById("promoForm");
+    const tableBody = document.getElementById("promoTableBody");
+
+    function renderTable() {
+      promoRef.onSnapshot(snapshot => {
+        tableBody.innerHTML = '';
+        snapshot.forEach(doc => {
+          const p = doc.data();
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${doc.id}</td>
+            <td>${p.tipe}</td>
+            <td>${p.nilai}</td>
+            <td>${p.jam_mulai} - ${p.jam_selesai}</td>
+            <td>${p.hari.join(', ')}</td>
+            <td>
+              <button onclick="editPromo('${doc.id}')">Edit</button>
+              <button onclick="deletePromo('${doc.id}')">Hapus</button>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      });
+    }
+
+    form.onsubmit = async function(e) {
+      e.preventDefault();
+      const kode = document.getElementById("kode").value.trim().toUpperCase();
+      const tipe = document.getElementById("tipe").value;
+      const nilai = parseInt(document.getElementById("nilai").value);
+      const jam_mulai = document.getElementById("jam_mulai").value;
+      const jam_selesai = document.getElementById("jam_selesai").value;
+      const hari = Array.from(document.querySelectorAll('#hariContainer input:checked')).map(cb => cb.value);
+
+      try {
+        await promoRef.doc(kode).set({ tipe, nilai, jam_mulai, jam_selesai, hari });
+        form.reset();
+      } catch (err) {
+        console.error("Gagal simpan:", err);
+        alert("Gagal menyimpan promo!");
+      }
+    };
+
+    window.editPromo = async function(kode) {
+      const doc = await promoRef.doc(kode).get();
+      if (doc.exists) {
+        const p = doc.data();
+        document.getElementById("kode").value = kode;
+        document.getElementById("tipe").value = p.tipe;
+        document.getElementById("nilai").value = p.nilai;
+        document.getElementById("jam_mulai").value = p.jam_mulai;
+        document.getElementById("jam_selesai").value = p.jam_selesai;
+        document.querySelectorAll('#hariContainer input').forEach(cb => cb.checked = p.hari.includes(cb.value));
+      }
+    };
+
+    window.deletePromo = async function(kode) {
+      if (confirm("Yakin hapus promo " + kode + "?")) {
+        await promoRef.doc(kode).delete();
+      }
+    };
+
+    renderTable();
+  </script>
+</body>
+</html>

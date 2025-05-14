@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kelola Stok</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body>
+  <h2>Kelola Stok</h2>
+
+  <label>Kode Produk:</label>
+  <input type="text" id="kode" placeholder="contoh: RES35" />
+  <br><br>
+
+  <label>Jumlah:</label>
+  <input type="number" id="jumlah" />
+  <br><br>
+
+  <label>Aksi:</label>
+  <input type="radio" name="aksi" value="tambah" checked /> Tambah
+  <input type="radio" name="aksi" value="kurangi" /> Kurangi
+  <input type="radio" name="aksi" value="hapus" /> Hapus Stok Produk
+  <input type="radio" name="aksi" value="hapus-semua" /> Hapus Semua Varian
+  <br><br>
+
+  <button onclick="prosesStok()">Proses</button>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAm9pbEAyp7iEwlAStQnJPzVwIV23xOsMg",
+      authDomain: "toko-kuota-stok.firebaseapp.com",
+      databaseURL: "https://toko-kuota-stok-default-rtdb.firebaseio.com",
+      projectId: "toko-kuota-stok",
+      storageBucket: "toko-kuota-stok.firebasestorage.app",
+      messagingSenderId: "321145437639",
+      appId: "1:321145437639:web:21c425d46679158e376de2",
+      measurementId: "G-PD9BGY36G1"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function prosesStok() {
+  const kode = document.getElementById("kode").value.trim();
+  const jumlah = parseInt(document.getElementById("jumlah").value);
+  const aksi = document.querySelector('input[name="aksi"]:checked').value;
+
+  const stokRef = kode ? db.ref("stok/" + kode) : null;
+  const semuaRef = db.ref("stok");
+
+  if (aksi === "hapus-semua") {
+    if (confirm("Yakin ingin menghapus semua varian stok?")) {
+      semuaRef.remove()
+        .then(() => alert("Semua varian stok dihapus."))
+        .catch(() => alert("Gagal menghapus semua stok."));
+    }
+    return;
+  }
+
+  if (!kode && aksi !== "hapus-semua") {
+    alert("Kode produk wajib diisi.");
+    return;
+  }
+
+  if (aksi === "hapus") {
+    stokRef.remove()
+      .then(() => alert("Stok " + kode + " dihapus."))
+      .catch(() => alert("Gagal menghapus stok."));
+    return;
+  }
+
+  if (isNaN(jumlah)) {
+    alert("Jumlah harus diisi untuk tambah/kurangi.");
+    return;
+  }
+
+  if (aksi === "kurangi") {
+    stokRef.once("value").then(snapshot => {
+      const current = snapshot.val() || 0;
+      if (current < jumlah) {
+        alert("Stok tidak cukup untuk dikurangi!");
+        return;
+      }
+
+      stokRef.transaction(val => val - jumlah, (error, committed, snap) => {
+        if (error) {
+          alert("Gagal mengurangi stok.");
+        } else if (committed) {
+          alert("Stok " + kode + " berhasil dikurangi. Sisa: " + snap.val());
+        } else {
+          alert("Transaksi dibatalkan.");
+        }
+      });
+    });
+    return;
+  }
+
+  // Tambah stok
+  stokRef.transaction(current => (current || 0) + jumlah, (error, committed, snapshot) => {
+    if (error) {
+      alert("Gagal menambah stok.");
+    } else if (!committed) {
+      alert("Penambahan stok dibatalkan.");
+    } else {
+      alert("Stok " + kode + " sekarang: " + snapshot.val());
+    }
+  });
+}
+
+  </script>
+</body>
+</html>

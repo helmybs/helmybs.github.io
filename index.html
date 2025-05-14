@@ -463,15 +463,15 @@ html, body { max-width: 100%; overflow-x: hidden; }
             align-items: center;
             text-decoration: none;
             color: #666;
-            font-size: 11px;
+            font-size: 12px;
             padding: 5px 0;
             flex: 1;
             transition: all 0.3s;
         }
 
         .nav-item i {
-            font-size: 18px;
-            margin-bottom: 3px;
+            font-size: 20px;
+            margin-bottom: 4px;
         }
 
         .nav-item.active {
@@ -1114,43 +1114,58 @@ html, body { max-width: 100%; overflow-x: hidden; }
             z-index: 5;
         }
         /* Bottom Navigation Styles */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-around;
-            background: white;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-            padding: 8px 0;
-        }
+       .bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background: white;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  padding: 8px 0;
+}
 
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #666;
-            font-size: 12px;
-            padding: 5px 0;
-            flex: 1;
-            transition: all 0.3s;
-        }
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #666;
+  font-size: 12px;
+  padding: 5px 0;
+  flex: 1;
+  transition: all 0.3s;
+}
 
-        .nav-item i {
-            font-size: 20px;
-            margin-bottom: 4px;
-        }
+.nav-item i {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
 
-        .nav-item.active {
-            color: #4e73df;
-        }
+.nav-item.active {
+  color: #4e73df;
+}
 
-        .nav-item:hover {
-            color: #224abe;
-        }
+.nav-item:hover {
+  color: #224abe;
+}
+
+@media (max-width: 576px) {
+  .bottom-nav {
+    padding: 6px 0;
+  }
+
+  .nav-item {
+    font-size: 10px;
+  }
+
+  .nav-item i {
+    font-size: 16px;
+  }
+}
+
 
         /* Adjust content padding to avoid overlap */
         body {
@@ -1436,24 +1451,29 @@ html, body { max-width: 100%; overflow-x: hidden; }
     </footer>
 
     <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="https://helmybs.github.io/index" class="nav-item">
-            <i class="fa fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="https://helmybs.github.io/form_payment" class="nav-item active">
-            <i class="fa fa-shopping-cart"></i>
-            <span>Beli Kuota</span>
-        </a>
-        <a data-target="#exampleModalLong" data-toggle="modal" type="button" class="nav-item">
-            <i class="fa fa-map-marker"></i>
-            <span>Cek Area</span>
-        </a>
-        <a href="https://wa.me/6283842915722" class="nav-item">
-            <i class="fa fa-phone"></i>
-            <span>Kontak</span>
-        </a>
-    </nav>
+
+<nav class="bottom-nav">
+  <a href="https://helmybs.github.io/" class="nav-item active">
+    <i class="fa fa-home"></i>
+    <span>Home</span>
+  </a>
+  <a href="#" class="nav-item">
+    <i class="fa fa-shopping-cart"></i>
+    <span>Beli Kuota</span>
+  </a>
+  <a data-target="#exampleModalLong" data-toggle="modal" type="button" class="nav-item">
+    <i class="fa fa-map-marker"></i>
+    <span>Cek Area</span>
+  </a>
+    <a data-target="https://helmybs.github.io/cek_kuota" data-toggle="modal" type="button" class="nav-item">
+    <i class="fa fa-desktop"></i>
+    <span>Cek Kuota</span>
+  </a>
+  <a href="https://wa.me/6283842915722" class="nav-item">
+    <i class="fa fa-whatsapp"></i>
+    <span>Kontak</span>
+  </a>
+</nav>
 
     <!-- Area Check Modal -->
     <div class="modal fade" id="exampleModalLong" role="dialog" tabindex="-1">
