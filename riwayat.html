@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Riwayat Pembelian</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <style>
+    :root {
+      --primary-blue: #4e73df;
+      --dark-blue: #224abe;
+      --light-blue: #e6f0ff;
+      --primary-purple: #8a2be2;
+      --dark-purple: #6a1b9a;
+      --light-purple: #f3e5ff;
+      --gradient-blue: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+      --gradient-purple: linear-gradient(135deg, var(--primary-purple) 0%, var(--dark-purple) 100%);
+      --gradient-mix: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-purple) 100%);
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+      padding-bottom: 70px;
+    }
+    
+    .order-header {
+      background: var(--gradient-mix);
+      color: white;
+      padding: 30px 0 15px;
+      margin-bottom: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .order-title {
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin: 0;
+      text-align: center;
+    }
+    
+    .order-subtitle {
+      font-weight: 400;
+      font-size: 0.9rem;
+      opacity: 0.9;
+      text-align: center;
+      margin: 5px 0 0;
+    }
+    
+    .order-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 15px;
+      border: none;
+    }
+    
+    .order-card-header {
+      background: var(--gradient-blue);
+      color: white;
+      padding: 20px;
+      border-radius: 12px 12px 0 0 !important;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    
+    .order-card-body {
+      padding: 20px;
+    }
+    
+    .form-control {
+      height: 45px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      padding: 10px 15px;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+    }
+    
+    .btn {
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-weight: 500;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+      border: none;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #3b5cb8 0%, #1a3a9a 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(78, 115, 223, 0.3);
+    }
+    
+    .table {
+      width: 100%;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    
+    .table th {
+      background-color: #f8f9fc;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+    
+    .table-hover tbody tr:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-around;
+      background: white;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 8px 0;
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #666;
+      font-size: 12px;
+      padding: 5px 0;
+      flex: 1;
+      transition: all 0.3s;
+    }
+    
+    .nav-item i {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    
+    .nav-item.active {
+      color: #4e73df;
+    }
+    
+    .nav-item:hover {
+      color: #224abe;
+    }
+    
+    /* Filter Row */
+    .filter-row {
+      margin-bottom: 15px;
+    }
+    
+    .filter-row .col-xs-4 {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    
+    @media (max-width: 576px) {
+      .order-title {
+        font-size: 1.5rem;
+      }
+      
+      .form-control {
+        font-size: 13px;
+      }
+      
+      .bottom-nav {
+        padding: 6px 0;
+      }
+      
+      .nav-item {
+        font-size: 10px;
+      }
+      
+      .nav-item i {
+        font-size: 16px;
+      }
+      
+      .table {
+        font-size: 12px;
+      }
+      
+      .filter-row .col-xs-4 {
+        padding-left: 2px;
+        padding-right: 2px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="order-header">
+    <div class="container-fluid px-3 px-md-5">
+      <h1 class="order-title">
+        <i class="fa fa-history me-2"></i> Riwayat Pembelian
+      </h1>
+      <p class="order-subtitle">
+        Daftar riwayat pembelian kuota XL AKRAB
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container-fluid px-3 px-md-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="order-card">
+          <div class="order-card-header">
+            <i class="fa fa-list-alt me-2"></i> Daftar Transaksi
+          </div>
+          <div class="order-card-body">
+            <div class="filter-row row">
+              <div class="col-xs-4">
+                <input type="date" id="filterTanggal" class="form-control" placeholder="Tanggal" />
+              </div>
+              <div class="col-xs-4">
+                <input type="text" id="filterNomor" class="form-control" placeholder="Filter nomor..." />
+              </div>
+              <div class="col-xs-4">
+                <input type="text" id="filterProduk" class="form-control" placeholder="Filter produk..." />
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>Tanggal</th>
+                    <th>Nomor HP</th>
+                    <th>Produk</th>
+                    <th>Pembayaran</th>
+                  </tr>
+                </thead>
+                <tbody id="riwayatTbody">
+                  <tr><td colspan="4">Memuat data...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="https://helmybs.github.io/" class="nav-item">
+      <i class="fa fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="https://helmybs.github.io/form_payment" class="nav-item">
+      <i class="fa fa-shopping-cart"></i>
+      <span>Beli Kuota</span>
+    </a>
+    <a data-target="#exampleModalLong" data-toggle="modal" type="button" class="nav-item">
+      <i class="fa fa-map-marker"></i>
+      <span>Cek Area</span>
+    </a>
+    <a href="https://helmybs.github.io/cek_kuota" class="nav-item">
+      <i class="fa fa-desktop"></i>
+      <span>Cek Kuota</span>
+    </a>
+        <a href="https://helmybs.github.io/riwayat" class="nav-item" id="riwayatNav">
+  <i class="fa fa-history"></i>
+  <span>Riwayat</span>
+</a>
+    <a href="https://wa.me/6283842915722" class="nav-item">
+      <i class="fa fa-whatsapp"></i>
+      <span>Kontak</span>
+    </a>
+  </nav>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAm9pbEAyp7iEwlAStQnJPzVwIV23xOsMg",
+      authDomain: "toko-kuota-stok.firebaseapp.com",
+      databaseURL: "https://toko-kuota-stok-default-rtdb.firebaseio.com",
+      projectId: "toko-kuota-stok",
+      storageBucket: "toko-kuota-stok.firebasestorage.app",
+      messagingSenderId: "321145437639",
+      appId: "1:321145437639:web:21c425d46679158e376de2"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    let allData = [];
+
+    function tampilkanData(filterTanggal = "", filterNomor = "", filterProduk = "") {
+      const tbody = document.getElementById("riwayatTbody");
+      tbody.innerHTML = "";
+      const entries = allData.filter(item => {
+        const tglStr = new Date(item.timestamp).toISOString().split("T")[0];
+        const nomorCocok = item.phone ? item.phone.includes(filterNomor) : false;
+        const produkCocok = item.product.toLowerCase().includes(filterProduk.toLowerCase());
+        const tanggalCocok = !filterTanggal || tglStr === filterTanggal;
+        return nomorCocok && produkCocok && tanggalCocok;
+      });
+
+      if (entries.length === 0) {
+        tbody.innerHTML = "<tr><td colspan='4'>Tidak ada data ditemukan.</td></tr>";
+        return;
+      }
+
+      for (const item of entries) {
+        const tanggal = new Date(item.timestamp).toLocaleString('id-ID');
+        const hp = item.phone ? item.phone.slice(0, 4) + "****" + item.phone.slice(-3) : "-";
+        const produk = item.product;
+        const metode = item.metode;
+
+        tbody.innerHTML += `
+          <tr>
+            <td>${tanggal}</td>
+            <td>${hp}</td>
+            <td>${produk}</td>
+            <td>${metode}</td>
+          </tr>`;
+      }
+    }
+
+    function ambilData() {
+      db.ref("riwayat").orderByChild("timestamp").limitToLast(200).once("value", (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          allData = Object.values(data).sort((a, b) => b.timestamp - a.timestamp);
+        } else {
+          allData = [];
+        }
+        tampilkanData();
+      });
+    }
+
+    document.getElementById("filterTanggal").addEventListener("change", () => {
+      tampilkanData(
+        document.getElementById("filterTanggal").value,
+        document.getElementById("filterNomor").value,
+        document.getElementById("filterProduk").value
+      );
+    });
+
+    document.getElementById("filterNomor").addEventListener("input", () => {
+      tampilkanData(
+        document.getElementById("filterTanggal").value,
+        document.getElementById("filterNomor").value,
+        document.getElementById("filterProduk").value
+      );
+    });
+
+    document.getElementById("filterProduk").addEventListener("input", () => {
+      tampilkanData(
+        document.getElementById("filterTanggal").value,
+        document.getElementById("filterNomor").value,
+        document.getElementById("filterProduk").value
+      );
+    });
+
+    // Auto-focus on phone filter when page loads
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("filterNomor").focus();
+      ambilData();
+    });
+  </script>
+  <script>
+    jQuery(document).ready(function($){
+$(document).keydown(function(event) {
+var pressedKey = String.fromCharCode(event.keyCode).toLowerCase();
+
+if (event.ctrlKey && (pressedKey == "c" || pressedKey == "u")) {
+alert('Sorry, This Functionality Has Been Disabled!');
+//disable key press porcessing
+return false;
+}
+});
+});
+
+document.onkeypress = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+document.onmousedown = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+document.onkeydown = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+</script>
+</body>
+</html>

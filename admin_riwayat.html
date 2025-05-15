@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Riwayat Pembelian</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    body {
+      padding: 20px;
+      background-color: #f4f6f9;
+      font-family: 'Helvetica', sans-serif;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    table {
+      background: white;
+    }
+    .btn-danger, .btn-success {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+    .filter-bar {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <h2><i class="fa fa-database"></i> Admin - Riwayat Pembelian</h2>
+
+    <div class="row filter-bar">
+      <div class="col-sm-3">
+        <input type="text" id="filterNomor" class="form-control" placeholder="Filter Nomor HP">
+      </div>
+      <div class="col-sm-5">
+        <input type="text" id="filterProduk" class="form-control" placeholder="Filter Produk">
+      </div>
+      <div class="col-sm-4 text-right">
+        <button class="btn btn-success" onclick="exportToExcel()"><i class="fa fa-file-excel-o"></i> Export Excel</button>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped" id="riwayatTable">
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Nomor HP</th>
+            <th>Produk</th>
+            <th>Harga</th>
+            <th>Pembayaran</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="adminRiwayatTbody">
+          <tr><td colspan="6">Memuat data...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAm9pbEAyp7iEwlAStQnJPzVwIV23xOsMg",
+      authDomain: "toko-kuota-stok.firebaseapp.com",
+      databaseURL: "https://toko-kuota-stok-default-rtdb.firebaseio.com",
+      projectId: "toko-kuota-stok",
+      storageBucket: "toko-kuota-stok-default-rtdb.appspot.com",
+      messagingSenderId: "321145437639",
+      appId: "1:321145437639:web:21c425d46679158e376de2"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    let allData = {};
+
+    const tbody = document.getElementById("adminRiwayatTbody");
+
+    function loadRiwayat() {
+      db.ref("riwayat").orderByChild("timestamp").once("value", (snapshot) => {
+        allData = snapshot.val() || {};
+        tampilkanData();
+      });
+    }
+
+    function tampilkanData() {
+      const nomorFilter = document.getElementById("filterNomor").value.toLowerCase();
+      const produkFilter = document.getElementById("filterProduk").value.toLowerCase();
+      tbody.innerHTML = "";
+      const keys = Object.keys(allData).sort((a, b) => allData[b].timestamp - allData[a].timestamp);
+      let count = 0;
+      keys.forEach(key => {
+        const item = allData[key];
+        if (
+          (!nomorFilter || item.phone.toLowerCase().includes(nomorFilter)) &&
+          (!produkFilter || item.product.toLowerCase().includes(produkFilter))
+        ) {
+          const row = `
+            <tr>
+              <td>${new Date(item.timestamp).toLocaleString('id-ID')}</td>
+              <td>${item.phone}</td>
+              <td>${item.product}</td>
+              <td>Rp ${item.harga?.toLocaleString('id-ID') ?? '0'}</td>
+              <td>${item.metode}</td>
+              <td><button class="btn btn-danger btn-sm" onclick="hapusRiwayat('${key}')"><i class="fa fa-trash"></i> Hapus</button></td>
+            </tr>`;
+          tbody.innerHTML += row;
+          count++;
+        }
+      });
+      if (count === 0) {
+        tbody.innerHTML = "<tr><td colspan='6'>Tidak ada data cocok.</td></tr>";
+      }
+    }
+
+    function hapusRiwayat(key) {
+      if (confirm("Yakin ingin menghapus data ini?")) {
+        db.ref("riwayat/" + key).remove().then(loadRiwayat);
+      }
+    }
+
+    function exportToExcel() {
+      const wb = XLSX.utils.book_new();
+      const ws_data = [["Tanggal", "Nomor HP", "Produk", "Harga", "Pembayaran"]];
+      const nomorFilter = document.getElementById("filterNomor").value.toLowerCase();
+      const produkFilter = document.getElementById("filterProduk").value.toLowerCase();
+
+      Object.values(allData).forEach(item => {
+        if (
+          (!nomorFilter || item.phone.toLowerCase().includes(nomorFilter)) &&
+          (!produkFilter || item.product.toLowerCase().includes(produkFilter))
+        ) {
+          ws_data.push([
+            new Date(item.timestamp).toLocaleString('id-ID'),
+            item.phone,
+            item.product,
+            item.harga ?? 0,
+            item.metode
+          ]);
+        }
+      });
+
+      const ws = XLSX.utils.aoa_to_sheet(ws_data);
+      XLSX.utils.book_append_sheet(wb, ws, "Riwayat");
+      XLSX.writeFile(wb, "riwayat_pembelian.xlsx");
+    }
+
+    document.getElementById("filterNomor").addEventListener("input", tampilkanData);
+    document.getElementById("filterProduk").addEventListener("input", tampilkanData);
+
+    loadRiwayat();
+  </script>
+</body>
+</html>

@@ -965,10 +965,15 @@ AREA 4: 183-185GB
     <i class="fa fa-desktop"></i>
     <span>Cek Kuota</span>
   </a>
+  <a href="https://helmybs.github.io/riwayat" class="nav-item" id="riwayatNav">
+  <i class="fa fa-history"></i>
+  <span>Riwayat</span>
+</a>
   <a href="https://wa.me/6283842915722" class="nav-item">
     <i class="fa fa-whatsapp"></i>
     <span>Kontak</span>
   </a>
+
 </nav>
 
 <!-- QRIS Modal -->
@@ -1789,6 +1794,37 @@ AREA 4: 183-185GB
                         Area 1
                     </td>
 </tr>
+
+<!-- Riwayat Modal -->
+<div class="modal fade" id="riwayatModal" tabindex="-1" role="dialog" aria-labelledby="riwayatModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="riwayatModalLabel"><i class="fa fa-history"></i> Riwayat Pembelian</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="overflow-x:auto;">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Nomor HP</th>
+              <th>Produk</th>
+              <th>Harga</th>
+              <th>Pembayaran</th>
+            </tr>
+          </thead>
+          <tbody id="riwayatTbody">
+            <!-- Data dari Firebase -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </table>
 
@@ -2029,7 +2065,23 @@ function handleUploadClick(buttonId, inputId) {
       }
 
       const kode = getKodeProduk();
+      
       if (kode) kurangiStok(kode);
+
+      // Simpan riwayat ke Firebase
+      const phone = document.getElementById("phone").value;
+      const product = document.getElementById("product").value;
+      const metode = document.getElementById("metodePembayaran").value;
+      const harga = $("#qrisTotal").data("hargaTotal") || 0;
+
+      db.ref("riwayat").push({
+        phone,
+        product,
+        metode,
+        harga,
+        timestamp: Date.now()
+      });
+
     });
   }
 }
@@ -2883,5 +2935,36 @@ return false;
 }
 }
 </script>
+
+<!-- Riwayat Modal -->
+<div class="modal fade" id="riwayatModal" tabindex="-1" role="dialog" aria-labelledby="riwayatModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="riwayatModalLabel"><i class="fa fa-history"></i> Riwayat Pembelian</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="overflow-x:auto;">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Nomor HP</th>
+              <th>Produk</th>
+              <th>Harga</th>
+              <th>Pembayaran</th>
+            </tr>
+          </thead>
+          <tbody id="riwayatTbody">
+            <!-- Data dari Firebase -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
