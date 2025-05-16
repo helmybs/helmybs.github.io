@@ -219,7 +219,10 @@
               <td>${item.product}</td>
               <td>Rp ${item.harga?.toLocaleString('id-ID') ?? '0'}</td>
               <td>${item.metode}</td>
-              <td><button class="btn btn-danger btn-sm" onclick="hapusRiwayat('${key}')">Hapus</button></td>
+              <td>
+                <button class="btn btn-success btn-sm" onclick="updateStatus('${key}')">Sukses</button>
+                <button class="btn btn-danger btn-sm" onclick="hapusRiwayat('${key}')">Hapus</button>
+              </td>
             </tr>`;
           count++;
         }
@@ -298,6 +301,16 @@
         });
       }
     }
-  </script>
+  
+    function updateStatus(key) {
+      if (confirm("Yakin ingin mengubah status menjadi 'success'?")) {
+        db.ref("riwayat/" + key).update({ status: "success" }).then(() => {
+          alert("Status berhasil diupdate.");
+          loadRiwayat();
+        });
+      }
+    }
+
+</script>
 </body>
 </html>

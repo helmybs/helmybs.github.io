@@ -2075,7 +2075,8 @@ function handleUploadClick(buttonId, inputId) {
       const harga = $("#qrisTotal").data("hargaTotal") || 0;
 
       db.ref("riwayat").push({
-        phone,
+        status: "on proses",
+  phone,
         product,
         metode,
         harga,
