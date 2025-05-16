@@ -622,14 +622,15 @@ body {
 
 /* Responsive adjustments */
 @media (min-width: 768px) {
-  .bottom-nav {
-    max-width: 450px;
-    margin: 0 auto;
-    border-radius: 20px 20px 0 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+    .bottom-nav {
+        max-width: none;
+        margin: 0;
+        border-radius: 0;
+        left: 0;
+        transform: none;
+    }
 }
+
   .popup-warning {
     margin-top: auto;
     margin-bottom: auto;
@@ -748,6 +749,70 @@ del { color: #6c757d; opacity: 0.8; }
   }
 }
 
+/* staper */
+.modern-stepper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  position: relative;
+  padding: 10px 0;
+}
+
+.modern-stepper::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #e0e0e0;
+  z-index: 0;
+}
+
+.step {
+  position: relative;
+  text-align: center;
+  flex: 1;
+  z-index: 1;
+}
+
+.step .circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  margin: 0 auto 8px;
+  line-height: 40px;
+  color: #fff;
+  font-size: 26px;
+  transition: background-color 0.3s ease;
+}
+
+.step.active .circle,
+.step.completed .circle {
+  background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+}
+
+.step .label {
+  font-size: 12px;
+  color: #666;
+}
+
+.step.active .label,
+.step.completed .label {
+  color: #4e73df;
+}
+
+.step.completed .circle::after {
+  content: "\f00c";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
 </style>
 </head>
 <body>
@@ -757,16 +822,35 @@ del { color: #6c757d; opacity: 0.8; }
 <header class="order-header" style="padding: 30px 0 15px; position: relative;">
     <div class="container-fluid px-3 px-md-5">
         
-        
         <h1 style="margin: 0; font-weight: 700; font-size: 1.8rem; text-align: center;">
             <i class="fa fa-shopping-cart me-2"></i> Form Pemesanan
         </h1>
         <p style="margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; text-align: center;">
             Isi data berikut untuk memesan kuota XL AKRAB
         </p>
-    </div>
+
 </header>
 
+        
+<div class="modern-stepper mb-4">
+  <div class="step active" data-step="1">
+    <div class="circle"><i class="fa fa-pencil"></i></div>
+    <div class="label">Isi Form</div>
+  </div>
+  <div class="step" data-step="2">
+    <div class="circle"><i class="fa fa-credit-card"></i></div>
+    <div class="label">Pembayaran</div>
+  </div>
+  <div class="step" data-step="3">
+    <div class="circle"><i class="fa fa-upload"></i></div>
+    <div class="label">Upload Bukti</div>
+  </div>
+  <div class="step" data-step="4">
+    <div class="circle"><i class="fa fa-check"></i></div>
+    <div class="label">Selesai</div>
+  </div>
+</div>
+    </div>
 
 <!-- Order Form Section -->
 <section class="order-section">
@@ -2778,11 +2862,11 @@ $(document).ready(function() {
     }
   }
 
-  // Cek setelah 15 detik pertama
-  setTimeout(cekFormKosongDanTampilkanModal, 15000);
+  // Cek setelah 20 detik pertama
+  setTimeout(cekFormKosongDanTampilkanModal, 20000);
 
-  // Cek berulang setiap 30 detik jika form belum diisi
-  setInterval(cekFormKosongDanTampilkanModal, 30000);
+  // Cek berulang setiap 40 detik jika form belum diisi
+  setInterval(cekFormKosongDanTampilkanModal, 40000);
 </script>
 <script>
   const phoneInput = document.getElementById('phone');
@@ -2967,5 +3051,52 @@ return false;
   </div>
 </div>
 
+<script>
+    function updateStepper(currentStep) {
+  $(".modern-stepper .step").each(function () {
+    const stepNum = parseInt($(this).data("step"));
+    $(this).removeClass("active completed");
+    if (stepNum < currentStep) {
+      $(this).addClass("completed");
+    } else if (stepNum === currentStep) {
+      $(this).addClass("active");
+    }
+  });
+}
+
+// Contoh penggunaan:
+$("#btnBayar").click(() => updateStepper(2));
+$("#konfirmasiBayarQris, #konfirmasiBayarBank, #konfirmasiBayarEwallet").click(() => updateStepper(3));
+$("#successModal").on("shown.bs.modal", () => updateStepper(4));
+
+</script>
+
+<!-- best-seller -->
+<script>
+    $(document).ready(function () {
+  $('#product option').each(function () {
+    if ($(this).data('best-seller') === true || $(this).data('best-seller') === "true") {
+      const text = $(this).text();
+      if (!text.includes("★")) {
+        $(this).text(text + ' ★ Best Seller');
+      }
+    }
+  });
+});
+
+$(document).ready(function () {
+  const bestSellerOptions = [];
+
+  $('#product option').each(function () {
+    if ($(this).data('best-seller') === "true" || $(this).data('best-seller') === true) {
+      bestSellerOptions.push($(this).clone());
+      $(this).remove();
+    }
+  });
+
+  $('#product').prepend(bestSellerOptions);
+});
+
+</script>
 </body>
 </html>
