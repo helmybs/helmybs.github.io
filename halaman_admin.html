@@ -114,6 +114,21 @@
       <input type="radio" name="aksi" value="hapus-semua" /> Hapus Semua Varian
       <br><br>
       <button onclick="prosesStok()">Proses</button>
+<hr>
+<h4>Daftar Stok Produk</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Kode Produk</th>
+      <th>Jumlah</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody id="stokTableBody">
+    <tr><td colspan="3">Memuat data...</td></tr>
+  </tbody>
+</table>
+
     </div>
   </div>
 
@@ -258,6 +273,49 @@
     loadRiwayat();
 
     // Stok
+
+function loadStokList() {
+  const tbody = document.getElementById("stokTableBody");
+  db.ref("stok").on("value", snapshot => {
+    tbody.innerHTML = "";
+    if (!snapshot.exists()) {
+      tbody.innerHTML = "<tr><td colspan='3'>Tidak ada data stok.</td></tr>";
+      return;
+    }
+    snapshot.forEach(child => {
+      const kode = child.key;
+      const jumlah = child.val();
+      const row = `
+        <tr>
+          <td>${kode}</td>
+          <td>${jumlah}</td>
+          <td>
+            <button onclick="isiFormEditStok('${kode}', ${jumlah})">Edit</button>
+            <button onclick="hapusStokLangsung('${kode}')">Hapus</button>
+          </td>
+        </tr>`;
+      tbody.innerHTML += row;
+    });
+  });
+}
+
+function isiFormEditStok(kode, jumlah) {
+  document.getElementById("kodeStok").value = kode;
+  document.getElementById("jumlahStok").value = jumlah;
+  document.querySelector('input[name="aksi"][value="tambah"]').checked = true;
+  window.scrollTo(0, document.getElementById("stokTab").offsetTop);
+}
+
+function hapusStokLangsung(kode) {
+  if (confirm("Yakin ingin menghapus stok produk ini?")) {
+    db.ref("stok/" + kode).remove().then(() => {
+      alert("Stok dihapus.");
+    });
+  }
+}
+
+loadStokList();
+
     function prosesStok() {
       const kode = document.getElementById("kodeStok").value.trim();
       const jumlah = parseInt(document.getElementById("jumlahStok").value);
