@@ -1,0 +1,3113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Form XL AKRAB</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Tambahkan setelah Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- Tambahkan sebelum script lainnya -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<style>
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+/* Add this if not using Bootstrap's d-none class */
+.hidden-section {
+  display: none !important;
+}
+
+/* Then change d-none to hidden-section in your HTML */
+
+ :root {
+            --primary-blue: #4e73df;
+            --dark-blue: #224abe;
+            --light-blue: #e6f0ff;
+            --primary-purple: #8a2be2;
+            --dark-purple: #6a1b9a;
+            --light-purple: #f3e5ff;
+            --gradient-blue: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            --gradient-purple: linear-gradient(135deg, var(--primary-purple) 0%, var(--dark-purple) 100%);
+            --gradient-mix: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-purple) 100%);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .order-header {
+            background: var(--gradient-mix);
+            color: white;
+            padding: 60px 0 30px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .order-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-mix);
+            opacity: 0.1;
+        }
+        
+        .order-title {
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .order-subtitle {
+            font-weight: 400;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+
+        
+        .order-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+            border: none;
+        }
+        
+        .order-card-header {
+            background: var(--gradient-blue);
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0 !important;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .order-card-body {
+            padding: 20px;
+        }
+        
+       
+        
+   
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+label {
+  font-weight: 500;
+  color: var(--dark);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-control {
+  height: 45px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 120px;
+}
+
+.btn {
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #3b5cb8 0%, #1a3a9a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(78, 115, 223, 0.3);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #f6c23e 0%, #dda20a 100%);
+  color: #fff;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(135deg, #e4b53a 0%, #c59209 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(246, 194, 62, 0.3);
+}
+
+.btn-info {
+  background: linear-gradient(135deg, #36b9cc 0%, #258391 100%);
+}
+
+.btn-info:hover {
+  background: linear-gradient(135deg, #2fa7b8 0%, #1d6d7a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(54, 185, 204, 0.3);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #1cc88a 0%, #13855c 100%);
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #19b47d 0%, #0f6d4a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 200, 138, 0.3);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.total-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary);
+  padding: 15px;
+  background-color: #f8f9fc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-content {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+  color: white;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  padding: 20px;
+}
+
+.modal-title {
+  font-weight: 600;
+}
+
+.modal-body {
+  padding: 25px;
+}
+
+.close {
+  color: white;
+  opacity: 1;
+  text-shadow: none;
+  font-size: 28px;
+}
+
+.close:hover {
+  color: white;
+  opacity: 0.8;
+}
+
+.progress {
+  height: 20px;
+  border-radius: 10px;
+  background-color: #f0f3f7;
+}
+
+.progress-bar {
+  background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+  border-radius: 10px;
+  line-height: 20px;
+  font-size: 12px;
+}
+
+.qr-code-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 300px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.qr-code-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.payment-instruction {
+  background-color: #f8f9fc;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.payment-instruction ul {
+  padding-left: 20px;
+  margin-bottom: 0;
+}
+
+.payment-method-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.payment-method-tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--secondary);
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s;
+}
+
+.payment-method-tab.active {
+  color: var(--primary);
+  border-bottom: 3px solid var(--primary);
+}
+
+#searchInput {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.table th {
+  background-color: #f8f9fc;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 20px;
+  }
+  
+  .btn {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  
+  .modal-body {
+    padding: 15px;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.form-container {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+#dynamicSections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Adjust spacing as needed */
+}
+
+/* For non-Bootstrap users */
+.hidden-section {
+  display: none !important;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#detailPaketContainer,
+#totalBayarContainer {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.d-none {
+  opacity: 0;
+  height: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.total-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2e59d9;
+  padding: 0.75rem;
+  background-color: #f8f9fc;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.back-button:hover {
+    opacity: 0.8;
+    transform: translateX(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Success Modal Styles */
+#successModal .modal-content {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#successModal .modal-header {
+  border-bottom: none;
+  padding: 20px;
+}
+
+#successModal .modal-body {
+  padding: 30px;
+}
+
+#successModal .fa-check-circle {
+  animation: bounceIn 0.6s;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.1); opacity: 0; }
+  60% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+#successModal .alert-info {
+  background-color: #e6f7ff;
+  border-color: #b3e0ff;
+  color: #0066cc;
+}
+
+.countdown-notification {
+  color: #6c757d;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+/* Hapus bagian ini */
+.countdown-notification {
+  color: #6c757d;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Style untuk Select2 */
+.select2-container .select2-selection--single {
+  height: 45px;
+  border-radius: 8px !important;
+  border: 1px solid #ddd !important;
+  padding: 10px 15px;
+}
+
+.select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered {
+  line-height: 23px;
+}
+
+.select2-container--bootstrap-5 .select2-selection--single .select2-selection__arrow {
+  height: 43px;
+}
+
+.select2-container--bootstrap-5 .select2-dropdown {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.select2-container--bootstrap-5 .select2-results__option--highlighted {
+  background-color: #4e73df;
+}
+
+<!-- Tambahkan style untuk input paste indicator -->
+
+  .paste-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 12px;
+    pointer-events: none;
+  }
+  .form-group {
+    position: relative;
+  }
+  /* Gaya khusus untuk modal cek area */
+  #exampleModalLong {
+    padding-right: 0 !important;
+  }
+  
+  #exampleModalLong .modal-dialog {
+    margin: 10px auto;
+    max-width: 95%;
+    height: 90vh;
+  }
+  
+  #exampleModalLong .modal-content {
+    height: 92%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #exampleModalLong .modal-body {
+    padding: 15px;
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .area-modal-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  #searchInput {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+  
+  .area-table-wrapper {
+    flex: 1;
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+  }
+  
+  #areaTable {
+    margin-bottom: 0;
+    width: 100%;
+  }
+  
+  #areaTable thead th {
+    position: sticky;
+    top: 0;
+    background: #f8f9fa;
+    z-index: 10;
+  }
+  
+  #areaTable th, #areaTable td {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  #areaTable tr td:first-child {
+    font-weight: 500;
+  }
+  
+  /* Header wilayah */
+  .region-header {
+    background: #e9ecef;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px;
+    position: sticky;
+    top: 40px; /* Sesuaikan dengan tinggi header */
+    z-index: 5;
+  }
+  /* Bottom Navigation Styles */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background: white;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  padding: 8px 0;
+}
+
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #666;
+  font-size: 12px;
+  padding: 5px 0;
+  flex: 1;
+  transition: all 0.3s;
+}
+
+.nav-item i {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.nav-item.active {
+  color: #4e73df;
+}
+
+.nav-item:hover {
+  color: #224abe;
+}
+
+/* Adjust content padding to avoid overlap */
+body {
+  padding-bottom: 70px;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .bottom-nav {
+        max-width: none;
+        margin: 0;
+        border-radius: 0;
+        left: 0;
+        transform: none;
+    }
+}
+
+  .popup-warning {
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 50%;
+    transform: translateY(50%);
+  }
+
+  @media (min-width: 576px) {
+    .modal-dialog-centered {
+      display: flex;
+      align-items: center;
+      min-height: calc(100% - 1rem);
+    }
+  }
+
+  .position-relative {
+    position: relative;
+  }
+
+  .clear-input {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #aaa;
+    z-index: 2;
+  }
+
+  .clear-input:hover {
+    color: #e74c3c;
+  }
+
+/* Promo Message Styling */
+#promoMessage.text-success { color: #28a745 !important; }
+#promoMessage.text-danger { color: #dc3545 !important; }
+#promoMessage.text-warning { color: #ffc107 !important; }
+
+/* Strike Price */
+del { color: #6c757d; opacity: 0.8; }
+
+/* Promo Badge */
+.badge.bg-success { font-size: 0.75em; vertical-align: middle; }
+
+#totalBayar del {
+    opacity: 0.7;
+    margin-right: 8px;
+}
+
+#totalBayar .badge {
+    font-size: 0.75em;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.d-flex {
+    display: flex;
+    width: 100%;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+@media (max-width: 576px) {
+  .form-group.d-flex.flex-wrap button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .order-title {
+    font-size: 1.5rem;
+  }
+
+  .form-control {
+    font-size: 13px;
+  }
+
+  .bottom-nav {
+    padding: 4px 0;
+  }
+
+  .modal-body {
+    padding: 10px;
+  }
+
+  .qr-code-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .btn {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .bottom-nav {
+    padding: 6px 0;
+  }
+
+  .nav-item {
+    font-size: 10px;
+  }
+
+  .nav-item i {
+    font-size: 16px;
+  }
+}
+
+/* staper */
+.modern-stepper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  position: relative;
+  padding: 10px 0;
+}
+
+.modern-stepper::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #e0e0e0;
+  z-index: 0;
+}
+
+.step {
+  position: relative;
+  text-align: center;
+  flex: 1;
+  z-index: 1;
+}
+
+.step .circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  margin: 0 auto 8px;
+  line-height: 40px;
+  color: #fff;
+  font-size: 26px;
+  transition: background-color 0.3s ease;
+}
+
+.step.active .circle,
+.step.completed .circle {
+  background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+}
+
+.step .label {
+  font-size: 12px;
+  color: #666;
+}
+
+.step.active .label,
+.step.completed .label {
+  color: #4e73df;
+}
+
+.step.completed .circle::after {
+  content: "\f00c";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+    
+   <!-- Header Section -->
+<header class="order-header" style="padding: 30px 0 15px; position: relative;">
+    <div class="container-fluid px-3 px-md-5">
+        
+        <h1 style="margin: 0; font-weight: 700; font-size: 1.8rem; text-align: center;">
+            <i class="fa fa-shopping-cart me-2"></i> Form Pemesanan
+        </h1>
+        <p style="margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; text-align: center;">
+            Isi data berikut untuk memesan kuota XL AKRAB
+        </p>
+
+</header>
+
+        
+<div class="modern-stepper mb-4">
+  <div class="step active" data-step="1">
+    <div class="circle"><i class="fa fa-pencil"></i></div>
+    <div class="label">Isi Form</div>
+  </div>
+  <div class="step" data-step="2">
+    <div class="circle"><i class="fa fa-credit-card"></i></div>
+    <div class="label">Pembayaran</div>
+  </div>
+  <div class="step" data-step="3">
+    <div class="circle"><i class="fa fa-upload"></i></div>
+    <div class="label">Upload Bukti</div>
+  </div>
+  <div class="step" data-step="4">
+    <div class="circle"><i class="fa fa-check"></i></div>
+    <div class="label">Selesai</div>
+  </div>
+</div>
+    </div>
+
+<!-- Order Form Section -->
+<section class="order-section">
+    <div class="container-fluid px-3 px-md-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="order-card">
+                    <div class="order-card-header" style="background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%); color: white;">
+                        <i class="fa fa-user-circle me-2"></i> Data Pelanggan
+                    </div>
+                    <div class="order-card-body">
+                        <form>
+                            <!-- Phone Number Input -->
+                            <div class="form-group">
+                                <label for="phone"><i class="fa fa-mobile"></i> Nomor HP</label>
+                                <div class="position-relative">
+                                    <input class="form-control" id="phone" placeholder="Contoh: 08xxxxxxx" type="tel" minlength="9" maxlength="13" required />
+                                    <i class="fa fa-times-circle clear-input" id="clearPhone" style="display:none;"></i>
+                                </div>
+                            </div> 
+
+   <!-- Package Selection -->
+                            <div class="form-container">
+                                <div class="form-group">
+                                    <label for="product"><i class="fa fa-bolt"></i> Pilih Kuota</label>
+                                    <select class="form-control select2" id="product" data-placeholder="-- Pilih Kuota --" style="width: 100%"><option></option>
+</select>
+                                </div>
+                            </div>
+                            <!-- Package Details (Initially Hidden) -->
+                            <div class="form-group d-none" id="detailPaketContainer">
+                                <label for="description"><i class="fa fa-info-circle"></i> Detail Paket</label>
+                                <textarea class="form-control" id="description" readonly rows="8"></textarea>
+                            </div>
+
+                            <!-- Total Price (Initially Hidden) -->
+                            <div class="total-price d-none" id="totalBayarContainer">
+                                <div id="totalBayar"></div>
+                            </div>
+
+                            <!-- Payment Method -->
+                            <div class="form-group">
+                                <label for="metodePembayaran"><i class="fa fa-credit-card"></i> Pilih Metode Pembayaran</label>
+                                <select class="form-control select2" id="metodePembayaran" data-placeholder="-- Pilih Metode Pembayaran --">
+                                    <option></option>
+                                    <option value="qris">QRIS</option>
+                                    <option value="bank">Transfer Bank</option>
+                                    <option value="ewallet">E-Wallet</option>
+                                </select>
+                            </div>
+<div class="form-group">
+  <label for="promoCode"><i class="fa fa-tag"></i> Kode Promo (Opsional)</label>
+  <div class="input-group">
+    <input type="text" class="form-control" id="promoCode" placeholder="Masukkan kode promo">
+    <span class="input-group-btn">
+      <button class="btn btn-success" type="button" id="applyPromo">
+        <i class="fa fa-check"></i> Promo
+      </button>
+    </span>
+  </div>
+  <div id="promoMessage" class="small mt-2"></div>
+</div>
+
+
+
+                            <!-- Action Buttons -->
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-block" id="btnBayar" type="button">
+                                    <i class="fa fa-money"></i> LANJUTKAN PEMBAYARAN
+                                </button>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 10px;">
+                                <button class="btn btn-warning btn-block" id="cekStokBtn" type="button">
+                                    <i class="fa fa-check-square-o"></i> CEK STOK
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Bottom Navigation -->
+<nav class="bottom-nav">
+  <a href="https://helmybs.github.io/" class="nav-item">
+    <i class="fa fa-home"></i>
+    <span>Home</span>
+  </a>
+  <a href="https://helmybs.github.io/form_payment" class="nav-item active">
+    <i class="fa fa-shopping-cart"></i>
+    <span>Beli Kuota</span>
+  </a>
+  <a data-target="#exampleModalLong" data-toggle="modal" type="button" class="nav-item">
+    <i class="fa fa-map-marker"></i>
+    <span>Cek Area</span>
+  </a>
+    <a href="https://helmybs.github.io/cek_kuota" class="nav-item">
+    <i class="fa fa-desktop"></i>
+    <span>Cek Kuota</span>
+  </a>
+  <a href="https://helmybs.github.io/riwayat" class="nav-item" id="riwayatNav">
+  <i class="fa fa-history"></i>
+  <span>Riwayat</span>
+</a>
+  <a href="https://wa.me/6283842915722" class="nav-item">
+    <i class="fa fa-whatsapp"></i>
+    <span>Kontak</span>
+  </a>
+
+</nav>
+
+<!-- QRIS Modal -->
+<div class="modal fade" id="modalQris" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><i class="fa fa-qrcode"></i> Pembayaran QRIS</h4>
+        <button class="close" data-dismiss="modal" type="button">×</button>
+      </div>
+      <div class="modal-body text-center">
+        <div class="payment-instruction">
+          <h4 id="qrisProduct" style="margin-top: 0;"></h4>
+          <p>Silakan scan QR Code berikut untuk melakukan pembayaran</p>
+        </div>
+        
+        <div class="qr-code-container">
+          <img alt="QR Code" class="img-responsive center-block" src="https://i.ibb.co.com/TxwKZNyc/1746870205605.jpg"/>
+        </div>
+        
+        <h4 class="text-primary" id="qrisTotal"></h4>
+        <h5 class="text-muted">Setelah melakukan pembayaran, upload bukti pembayaran di bawah ini</h5>
+        
+        <div class="form-group" style="margin-top: 20px;">
+          <label for="buktiBayar"><i class="fa fa-file-image-o"></i> Bukti Pembayaran</label>
+          <input accept="image/*" class="form-control" id="buktiBayar" style="margin-top: 10px;" type="file"/>
+          <div class="progress" id="progressWrapper" style="display: none; margin-top: 15px;">
+            <div class="progress-bar progress-bar-striped active" id="uploadProgressBar" style="width: 0%;">0%</div>
+          </div>
+        </div>
+        
+        <h5 class="text-danger mt-3" id="countdownTimer">Sisa Waktu Pembayaran: 05:00</h5>
+        <button class="btn btn-success mt-3" id="konfirmasiBayarQris">
+          <i class="fa fa-upload"></i> UPLOAD
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bank Transfer Modal -->
+<div class="modal fade" id="modalBank" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><i class="fa fa-university"></i> Pembayaran via Bank</h4>
+        <button class="close" data-dismiss="modal" type="button">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="payment-instruction">
+          <h4 id="bankProduct" style="margin-top: 0;"></h4>
+          <p>Silakan transfer ke salah satu rekening berikut:</p>
+          <ul>
+            <li><strong>BCA</strong>: 7960490066 a.n. HELMY BAGUS S</li>
+            </ul>
+        </div>
+        
+        <h4 class="text-primary" id="bankTotal"></h4>
+        
+        <div class="form-group">
+          <label for="buktiBayarBank"><i class="fa fa-file-image-o"></i> Bukti Transfer</label>
+          <input accept="image/*" class="form-control" id="buktiBayarBank" style="margin-top: 10px;" type="file"/>
+          <div class="progress" id="progressWrapperBank" style="display: none; margin-top: 15px;">
+            <div class="progress-bar progress-bar-striped active" id="uploadProgressBarBank" style="width: 0%;">0%</div>
+          </div>
+        </div>
+        
+        <h5 class="text-danger mt-3" id="countdownBank">Sisa Waktu Pembayaran: 05:00</h5>
+        <button class="btn btn-success mt-3" id="konfirmasiBayarBank">
+          <i class="fa fa-upload"></i> UPLOAD
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- E-Wallet Modal -->
+<div class="modal fade" id="modalEwallet" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><i class="fa fa-mobile"></i> Pembayaran via E-Wallet</h4>
+        <button class="close" data-dismiss="modal" type="button">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="payment-instruction">
+          <h4 id="ewalletProduct" style="margin-top: 0;"></h4>
+          <p>Silakan transfer ke salah satu eWallet berikut:</p>
+          <ul>
+            <li><strong>SHOPEEPAY</strong>: 083842915722</li>
+            <li><strong>DANA</strong>: 083842915722</li>
+            <li><strong>GOPAY</strong>: 083842915722</li>
+            <li>a.n.<strong>HELMY BAGUS S</strong></li>
+          </ul>
+        </div>
+        
+        <h4 class="text-primary" id="ewalletTotal"></h4>
+        
+        <div class="form-group">
+          <label for="buktiBayarEwallet"><i class="fa fa-file-image-o"></i> Bukti Transfer</label>
+          <input accept="image/*" class="form-control" id="buktiBayarEwallet" style="margin-top: 10px;" type="file"/>
+          <div class="progress" id="progressWrapperEwallet" style="display: none; margin-top: 15px;">
+            <div class="progress-bar progress-bar-striped active" id="uploadProgressBarEwallet" style="width: 0%;">0%</div>
+          </div>
+        </div>
+        
+        <h5 class="text-danger mt-3" id="countdownEwallet">Sisa Waktu Pembayaran: 05:00</h5>
+        <button class="btn btn-success mt-3" id="konfirmasiBayarEwallet">
+          <i class="fa fa-upload"></i> UPLOAD
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Success Notification Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%); color: white;">
+        <h5 class="modal-title"><i class="fa fa-check-circle"></i> Pembayaran Berhasil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <i class="fa fa-check-circle fa-5x text-success mb-3"></i>
+        <h4>Pembayaran Anda Berhasil!</h4>
+        <p id="successMessage">Terima kasih telah melakukan pembayaran. Pesanan Anda sedang diproses.</p>
+        <div class="alert alert-warning mt-3">
+    <i class="fa fa-info-circle"></i> Silakan klik tombol <strong>"Hubungi CS"</strong> di bawah untuk mengirim konfirmasi via WhatsApp.
+  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <button type="button" class="btn btn-success" id="whatsappCSBtn">
+          <i class="fa fa-whatsapp"></i> Hubungi CS
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Area Check Modal -->
+<div class="modal fade" id="exampleModalLong" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><i class="fa fa-map"></i> DAFTAR AREA AKRAB</h4>
+        <button class="close" data-dismiss="modal" type="button">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Silakan cari kota/kabupaten Anda untuk mengetahui area AKRAB yang berlaku:</p>
+        <input id="searchInput" placeholder="Cari Kota/Kabupaten..." type="text"/>
+        <div style="max-height: 500px; overflow-y: auto;">
+          <table class="table table-striped table-hover" id="areaTable">
+            <thead class="thead-dark">
+              <tr>
+                <th>Provinsi</th>
+<th>Kota/Kabupaten</th>
+<th style="width: 75px;">Area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="3" style="text-align: center;font-weight: bold;">Pulau Jawa</td>
+</tr>
+<tr>
+<td>Banten</td>
+<td>
+                        Kota Tangerang Selatan, Kota Tangerang, Kab. Tangerang, Kab. Pandeglang, Kab. Lebak, Kab. Serang, Kota Serang, Kota Cilegon
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        DI Yogyakarta
+                    </td>
+<td>
+                        Kab. Kulon Progo, Kota Yogyakarta, Kab. Sleman, Kab. Bantul, Kab. Gunungkidul
+                    </td>
+<td>
+                        Area 1
+                    </td>
+</tr>
+<tr>
+<td rowspan="2">DKI Jakarta</td>
+<td>Kota Jakarta Pusat, Kota Jakarta Selatan, Kota Jakarta Barat, Kota Jakarta Timur, Kota Jakarta Utara</td>
+<td>Area 2</td>
+</tr>
+<tr>
+<td>
+                        Kab. Kepulauan Seribu
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td rowspan="4">
+                        Jawa Barat
+                    </td>
+<td>
+                        Kab. Bandung, Kab. Kuningan, Kab. Purwakarta, Kota Bandung
+                    </td>
+<td>
+                        Area 1
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Bandung Barat, Kota Cimahi, Kab. Cirebon, Kota Cirebon, Kab. Indramayu, Kab. Subang
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Bogor, Kota Bogor, Kota Depok, Kota Bekasi, Kota Banjar, Kab. Ciamis, Kota Tasikmalaya, Kab. Majalengka, Kab. Sumedang, Kab. Bekasi, Kab. Tasikmalaya, Kab. Garut
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Cianjur, Kab. Pangandaran, Kab. Karawang, Kota Sukabumi, Kab. Sukabumi
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="3">
+                        Jawa Tengah
+                    </td>
+<td>
+                        Kab. Tegal, Kota Surakarta, Kota Tegal, Kab. Brebes, Kab. Kebumen, Kab. Pemalang, Kota Semarang
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Boyolali, Kota Salatiga, Kab. Semarang, Kab. Cilacap, Kab. Grobogan, Kab. Kendal, Kab. Rembang
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kota Pekalongan, Kab. Pekalongan, Kab. Batang, Kab. Purbalingga, Kab. Kudus, Kab. Sukoharjo, Kab. Klaten, Kota Magelang, Kab. Banyumas, Kab. Banyumas, Kab. Magelang, Kab. Temanggung, Kab. Sragen, Kab. Banjarnegara, Kab. Karanganyar, Kab. Wonosobo, Kab. Jepara, Kab. Demak, Kab. Purworejo, Kab. Blora, Kab. Wonogiri, Kab. Pati
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="3">
+                        Jawa Timur
+                    </td>
+<td>
+                        Kota Probolinggo, Kab. Bangkalan, Kab. Sidoarjo, Kab. Banyuwangi, Kota Surabaya, Kab. Sampang, Kab. Pamekasan, Kab. Sumenep, Kab. Pacitan
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Lumajang, Kab. Probolinggo
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Jombang, Kota Blitar, Kab. Blitar, Kota Kediri, Kab. Lamongan, Kab. Kediri, Kab. Ngawi, Kab. Mojokerto, Kota Mojokerto, Kab. Magetan, Kab. Gresik, Kab. Tulungagung, Kab. Nganjuk, Kab. Pasuruan, Kota Pasuruan, Kab. Bojonegoro, Kab. Madiun, Kab. Bondowoso, Kab. Tuban, Kota Madiun, Kab. Situbondo, Kab. Jember, Kota Malang, Kab. Malang, Kab. Ponorogo, Kota Batu, Kab. Trenggalek
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;font-weight: bold;">Pulau Sumatera</td>
+</tr>
+<tr>
+<td rowspan="2">
+                        Bengkulu
+                    </td>
+<td>
+                        Kab. Seluma
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Bengkulu Selatan, Kab. Kaur, Kab. Lebong, Kab. Rejang Lebong, Kab. Bengkulu Tengah, Kota Bengkulu, Kab. Bengkulu Utara, Kab. Kepahiang, Kab. Muko Muko
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="2">
+                        Jambi
+                    </td>
+<td>
+                        Kab. Batanghari, Kota Jambi, Kab. Tanjung Jabung Barat, Kab. Muaro Jambi, Kab. Sarolangun
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Tanjung Jabung Timur, Kab. Kerinci, Kab. Bungo, Kab. Tebo, Kab. Merangin, Kota Sungai Penuh
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="2">
+                        Kepulauan Bangka Belitung
+                    </td>
+<td>
+                        Kab. Bangka Selatan, Kota Pangkal Pinang, Kab. Belitung, Kab. Belitung Timur
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Bangka, Kab. Bangka Tengah, Kab. Bangka Barat
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td rowspan="3">
+                        Kepulauan Riau
+                    </td>
+<td>
+                        Kota Batam
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Karimun, Kab. Bintan, Kota Tanjung Pinang
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Lingga, Kab. Kepulauan Anambas, Kab. Natuna
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="2">
+                        Lampung
+                    </td>
+<td>
+                        Kab. Lampung Tengah, Kab. Pringsewu, Kota Metro, Kab. Pesawaran, Kab. Lampung Selatan, Kota Bandar Lampung
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Lampung Barat, Kab. Lampung Timur, Kab. Tulang Bawang Barat, Kab. Way Kanan, Kab. Tulang Bawang, Kab. Tanggamus, Kab. Pesisir Barat, Kab. Lampung Utara, Kab. Mesuji
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="3">
+                        Nanggroe Aceh Darussalam
+                    </td>
+<td>
+                        Kab. Aceh Barat Daya, Kab. Aceh Besar, Kota Sabang, Kab. Gayo Lues
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Aceh Jaya, Kab. Aceh Selatan, Kab. Aceh Tenggara, Kab. Nagan Raya, Kota Banda Aceh
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Aceh Barat, Kab. Aceh Singkil, Kab. Aceh Tamiang, Kab. Aceh Tengah, Kota Subulussalam, Kab. Bener Meriah, Kab. Aceh Utara, Kota Lhokseumawe, Kab. Pidie, Kab. Aceh Timur, Kab. Simeulue, Kota Langsa, Kab. Bireuen, Kab. Pidie Jaya
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="3">
+                        Riau
+                    </td>
+<td>
+                        Kota Pekanbaru
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Kuantan Singingi, Kab. Pelalawan, Kab. Kampar, Kab. Siak, Kota Dumai, Kab. Rokan Hilir, Kab. Indragiri Hulu, Kab. Kepulauan Meranti, Kab. Bengkalis
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Rokan Hulu, Kab. Indragiri Hilir
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="3">
+                        Sumatera Barat
+                    </td>
+<td>
+                        Kab. Kepulauan Mentawai
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kota Payakumbuh, Kota Padang Panjang, Kab. Sijunjung, Kab. Padang Pariaman, Kota Padang, Kab. Solok Selatan
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Pasaman Barat, Kab. Pasaman, Kab. Lima Puluh Kota, Kab. Tanah Datar, Kab. Dharmasraya, Kota Solok, Kab. Agam, Kab. Solok, Kota Bukittinggi, Kota Pariaman, Kota Sawahlunto, Kab. Pesisir Selatan
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="2">
+                        Sumatera Selatan
+                    </td>
+<td>
+                        Kab. Ogan Komering Ilir, Kab. Penukal Abab Lematang Ilir, Kab. Banyuasin, Kota Palembang, Kab. Ogan Ilir
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Ogan Komering Ulu Timur, Kab. Ogan Komering Ulu Selatan, Kab. Ogan Komering Ulu, Kab. Musi Rawas, Kab. Musi Rawas Utara, Kab. Empat Lawang, Kota Pagar Alam, Kota Lubuk Linggau, Kab. Musi Banyuasin, Kab. Muara Enim, Kab. Lahat, Kota Prabumulih
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="3">
+                        Sumatera Utara
+                    </td>
+<td>
+                        Kab. Karo, Kota Medan, Kab. Dairi
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kota Binjai, Kota Tebing Tinggi, Kab. Serdang Bedagai, Kab. Langkat, Kab. Deli Serdang, Kab. Batu Bara, Kota Tanjung Balai, Kab. Asahan, Kota Gunungsitoli, Kab. Nias Barat, Kab. Nias Selatan, Kab. Nias Utara
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Pakpak Bharat, Kab. Mandailing Natal, Kab. Padang Lawas, Kab. Labuhanbatu Utara, Kota Padangsidimpuan, Kab. Tapanuli Selatan, Kab. Labuhanbatu Selatan, Kab. Labuhanbatu, Kab. Tapanuli Utara, Kab. Padang Lawas Utara, Kab. Humbang Hasundutan, Kab. Simalungun, Kab. Toba Samosir, Kota Pematangsiantar, Kab. Tapanuli Tengah, Kab. Samosir, Kota Sibolga, Kab. Nias
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;font-weight: bold;">Pulau Kalimantan</td>
+</tr>
+<tr>
+<td>
+                        Kalimantan Barat
+                    </td>
+<td>
+                        Kab. Sekadau, Kab. Kapuas Hulu, Kab. Sintang, Kab. Bengkayang, Kab. Melawi, Kab. Sambas, Kab. Sanggau, Kab. Kubu Raya, Kota Pontianak, Kab. Kayong Utara, Kab. Landak, Kab. Mempawah, Kota Singkawang, Kab. Ketapang
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="2">
+                        Kalimantan Selatan
+                    </td>
+<td>
+                        Kab. Hulu Sungai Tengah, Kab. Tapin, Kab. Hulu Sungai Utara, Kab. Tabalong, Kota Banjarmasin, Kab. Banjar, Kab. Tanah Bumbu, Kota Banjarbaru, Kab. Hulu Sungai Selatan
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Balangan, Kab. Barito Kuala, Kab. Tanah Laut, Kab. Kotabaru
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td rowspan="2">
+                        Kalimantan Tengah
+                    </td>
+<td>
+                        Kab. Kapuas, Kab. Pulang Pisau, Kota Palangkaraya
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Seruyan, Kab. Kotawaringin Barat, Kab. Katingan, Kab. Kotawaringin Timur, Kab. Sukamara, Kab. Lamandau, Kab. Murung Raya, Kab. Barito Timur, Kab. Barito Utara, Kab. Barito Selatan, Kab. Gunung Mas
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kalimantan Timur
+                    </td>
+<td>
+                        Kab. Penajam Paser Utara, Kota Balikpapan, Kab. Paser, Kab. Kutai Kartanegara, Kota Samarinda, Kota Bontang, Kab. Berau, Kab. Kutai Timur, Kab. Kutai Barat, Kab. Mahakam Ulu
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kalimantan Utara
+                    </td>
+<td>
+                        Kab. Tana Tidung, Kab. Malinau, Kab. Bulungan, Kota Tarakan, Kab. Nunukan
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;font-weight: bold;">Pulau Sulawesi</td>
+</tr>
+<tr>
+<td>
+                        Gorontalo
+                    </td>
+<td>
+                        Kab. Pahuwato, Kab. Boalemo, Kab. Gorontalo, Kota Gorontalo, Kab. Gorontalo Utara, Kab. Bone Bolango
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="3">
+                        Sulawesi Barat
+                    </td>
+<td>
+                        Kab. Mamuju Tengah
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Majene, Kab. Polewali Mandar, Kab. Mamuju Utara
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Mamuju, Kab. Mamasa
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="3">
+                        Sulawesi Selatan
+                    </td>
+<td>
+                        Kab. Barru, Kota Pare Pare, Kab. Pinrang
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Sinjai, Kab. Enrekang, Kab. Sidenreng Rappang, Kab. Luwu Timur, Kab. Soppeng, Kab. Tana Toraja
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Kepulauan Selayar, Kab. Takalar, Kab. Jeneponto, Kab. Bulukumba, Kab. Pangkajene Kepulauan, Kota Makassar, Kab. Gowa, Kab. Maros, Kab. Bone, Kab. Wajo, Kab. Luwu, Kab. Luwu Utara, Kota Palopo, Kab. Toraja Utara
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="2">
+                        Sulawesi Tengah
+                    </td>
+<td>
+                        Kab. Banggai Kepulauan, Kab. Banggai Laut, Kota Palu, Kab. Toli Toli, Kab. Tojo Una Una, Kab. Morowali, Kab. Morowali Utara
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Banggai, Kab. Parigi Moutong, Kab. Donggala, Kab. Sigi, Kab. Poso, Kab. Buol
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td rowspan="3">
+                        Sulawesi Tenggara
+                    </td>
+<td>
+                        Kab. Konawe Kepulauan, Kab. Konawe Utara, Kab. Buton Utara, Kab. Wakatobi
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kota Bau Bau, Kab. Muna, Kab. Buton Selatan, Kab. Buton Tengah, Kab. Muna Barat
+                    </td>
+<td>
+                        Area 3
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Kolaka, Kab. Kolaka Utara, Kab. Konawe, Kab. Konawe Selatan, Kota Kendari, Kab. Kolaka Timur, Kab. Buton, Kab. Bombana
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td>
+                        Sulawesi Utara
+                    </td>
+<td>
+                        Kab. Bolaang Mongondow, Kab. Bolaang Mongondow Selatan, Kota Kotamobagu, Kab. Minahasa Selatan, Kab. Bolaang Mongondow Timur, Kab. Minahasa Tenggara, Kab. Bolaang Mongondow Utara, Kota Tomohon, Kab. Minahasa, Kota Manado, Kab. Minahasa Utara, Kota Bitung, Kab. Kepulauan Sangihe, Kab. Kepulauan Talaud, Kab. Siau Tagulandang Biaro
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;font-weight: bold;">Bali dan Kep. Nusa Tenggara</td>
+</tr>
+<tr>
+<td rowspan="2">
+                        Bali
+                    </td>
+<td>
+                        Kab. Jembrana, Kab. Buleleng
+                    </td>
+<td>
+                        Area 1
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Badung, Kab. Karangasem, Kab. Tabanan, Kab. Bangli, Kab. Gianyar, Kab. Klungkung, Kota Denpasar
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td rowspan="2">
+                        Nusa Tenggara Barat
+                    </td>
+<td>
+                        Kab. Lombok Barat, Kab. Lombok Timur, Kota Mataram, Kab. Lombok Tengah, Kab. Lombok Utara, Kab. Sumbawa Barat, Kab. Sumbawa, Kota Bima, Kab. Dompu
+                    </td>
+<td>
+                        Area 2
+                    </td>
+</tr>
+<tr>
+<td>
+                        Kab. Bima
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td>
+                        Nusa Tenggara Timur
+                    </td>
+<td>
+                        Kab. Alor, Kota Kupang, Kab. Kupang, Kab. Malaka, Kab. Manggarai Barat, Kab. Timor Tengah Selatan, Kab. Belu, Kab. Sikka, Kab. Timor Tengah Utara, Kab. Lembata, Kab. Manggarai Timur, Kab. Ende, Kab. Sumba Barat Daya, Kab. Rote Ndao, Kab. Nagekeo, Kab. Flores Timur, Kab. Ngada, Kab. Sumba Tengah, Kab. Manggarai, Kab. Sumba Barat, Kab. Sumba Timur, Kab. Sabu Raijua
+                    </td>
+<td>
+                        Area 4
+                    </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;font-weight: bold;">Papua dan Maluku</td>
+</tr>
+<tr>
+<td>
+                        Maluku
+                    </td>
+<td>
+                        Kab. Maluku Tenggara Barat, Kab. Kepulauan Aru, Kota Tual, Kab. Seram Bagian Barat, Kab. Maluku Tengah, Kab. Seram Bagian Timur, Kota Ambon, Kab. Maluku Tenggara, Kab. Maluku Barat Daya, Kab. Buru Selatan, Kab. Buru
+                    </td>
+<td>
+                        Area 1
+                    </td>
+</tr>
+<tr>
+<td>
+                        Maluku Utara
+                    </td>
+<td>
+                        Kab. Halmahera Barat, Kab. Halmahera Utara, Kab. Kepulauan Sula, Kab. Halmahera Timur, Kab. Pulau Taliabu, Kab. Halmahera Selatan, Kota Tidore Kepulauan, Kota Ternate, Kab. Halmahera Tengah, Kab. Pulau Morotai
+                    </td>
+<td>
+                        Area 1
+                    </td>
+</tr>
+<tr>
+<td>
+                        Papua
+                    </td>
+<td>
+                        Kab. Asmat, Kab. Jayapura, Kab. Mimika, Kab. Keerom, Kab. Biak Numfor, Kota Jayapura, Kab. Kepulauan Yapen, Kab. Boven Digoel, Kab. Merauke, Kab. Deiyai, Kab. Dogiyai, Kab. Intan Jaya, Kab. Jayawijaya, Kab. Lanny Jaya, Kab. Mamberamo Raya, Kab. Mamberamo Tengah, Kab. Mappi, Kab. Nabire, Kab. Nduga, Kab. Paniai, Kab. Pegunungan Bintang, Kab. Puncak, Kab. Puncak Jaya, Kab. Sarmi, Kab. Supiori, Kab. Tolikara, Kab. Waropen, Kab. Yahukimo, Kab. Yalimo
+                    </td>
+<td>
+                        Area 1
+                    </td>
+</tr>
+<tr>
+<td>
+                        Papua Barat
+                    </td>
+<td>
+                        Kab. Teluk Bintuni, Kab. Sorong Selatan, Kab. Sorong, Kab. Teluk Wondama, Kota Sorong, Kab. Manokwari, Kab. Fak Fak, Kab. Kaimana, Kab. Manokwari Selatan, Kab. Maybrat, Kab. Pegunungan Arfak, Kab. Raja Ampat, Kab. Tambrauw
+                    </td>
+<td>
+                        Area 1
+                    </td>
+</tr>
+
+<!-- Riwayat Modal -->
+<div class="modal fade" id="riwayatModal" tabindex="-1" role="dialog" aria-labelledby="riwayatModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="riwayatModalLabel"><i class="fa fa-history"></i> Riwayat Pembelian</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="overflow-x:auto;">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Nomor HP</th>
+              <th>Produk</th>
+              <th>Harga</th>
+              <th>Pembayaran</th>
+            </tr>
+          </thead>
+          <tbody id="riwayatTbody">
+            <!-- Data dari Firebase -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</table>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stock Modal -->
+<div class="modal fade" id="stokModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fa fa-cubes"></i> Stok Produk</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="stokInfo">Pilih kuota terlebih dahulu.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Peringatan Isi Form (centered) -->
+<div class="modal fade" id="isiFormModal" tabindex="-1" role="dialog" aria-labelledby="isiFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content text-center popup-warning">
+      <div class="modal-header" style="background: #f6c23e;">
+        <h5 class="modal-title w-100 text-dark" id="isiFormModalLabel">
+          <i class="fa fa-exclamation-triangle"></i> Peringatan
+        </h5>
+      </div>
+      <div class="modal-body">
+        <p>Silakan isi nomor HP dan pilih kuota untuk melanjutkan.</p>
+        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- All your existing JavaScript remains the same -->
+    <script>
+            document.getElementById('searchInput').addEventListener('input', function() {
+                let filter = this.value.toLowerCase();
+                let table = document.getElementById('areaTable');
+                let tr = table.getElementsByTagName('tr');
+    
+                for (let i = 1; i < tr.length; i++) {
+                    let tdProvince = tr[i].getElementsByTagName('td')[0];
+                    let tdCity = tr[i].getElementsByTagName('td')[1];
+                    let tdArea = tr[i].getElementsByTagName('td')[2];
+    
+                    if (tdProvince || tdCity || tdArea) {
+                        let textValueProvince = tdProvince ? tdProvince.textContent || tdProvince.innerText : '';
+                        let textValueCity = tdCity ? tdCity.textContent || tdCity.innerText : '';
+                        let textValueArea = tdArea ? tdArea.textContent || tdArea.innerText : '';
+    
+                        if (textValueProvince.toLowerCase().indexOf(filter) > -1 || textValueCity.toLowerCase().indexOf(filter) > -1 || textValueArea.toLowerCase().indexOf(filter) > -1) {
+                            tr[i].style.display = '';
+                        } else {
+                            tr[i].style.display = 'none';
+                        }
+                    }
+                }
+            });
+        </script>
+    <script>
+    let hargaSetelahDiskon = null;
+
+    $(document).ready(function () {
+      const imgbbAPIKey = "a6c2f0d684f4cf1a8df418676c29eac3";
+    
+    $(document).ready(function() {
+
+    // Catatan: Beberapa paket duplikat telah dihapus untuk efisiensi
+    // Jika diperlukan, bisa ditambahkan kembali dengan format yang sama
+});
+    
+      $("#product").on("change", function() {
+        const index = $(this).prop("selectedIndex") - 1;
+        
+        if (index < 0) {
+          // Jika tidak ada yang dipilih, sembunyikan
+          $("#detailPaketContainer, #totalBayarContainer").addClass('d-none');
+          $("#description").val(""); // Kosongkan textarea
+        } else {
+          // Tampilkan detail paket
+          $("#detailPaketContainer").removeClass('d-none');
+          $("#description").val(descriptions[index]);
+          
+          // Tampilkan total bayar
+          const val = $(this).val();
+          const match = val.match(/Rp\.\s?([\d.]+)/);
+          if (match) {
+            const total = parseInt(match[1].replace(/\./g, ""));
+            const formatted = new Intl.NumberFormat('id-ID', { 
+              style: 'currency', 
+              currency: 'IDR' 
+            }).format(total);
+            $("#totalBayar").text("Total Bayar: " + formatted);
+            $("#totalBayarContainer").removeClass('d-none');
+          }
+        }
+      });
+    });
+    
+      $("#bayarQris").click(function () {
+        const phone = $("#phone").val();
+        const product = $("#product").val();
+        const match = product.match(/Rp\.\s?([\d.]+)/);
+        let harga = hargaSetelahDiskon ?? (match ? parseInt(match[1].replace(/\./g, '')) : 0);
+
+
+    
+        if (!phone || !product) {
+          alert("Silakan isi nomor dan pilih kuota.");
+          return;
+        }
+    
+        const kodeUnik = Math.floor(400 + Math.random() * 900);
+        const hargaTotal = harga + kodeUnik;
+        const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(hargaTotal);
+    
+        $("#qrisProduct").text(product);
+        $("#qrisTotal").text("Total: " + formatted);
+        let harga = hargaSetelahDiskon ?? (match ? parseInt(match[1].replace(/\./g, '')) : 0);
+const kodeUnik = Math.floor(400 + Math.random() * 900);
+const hargaTotal = harga + kodeUnik;
+const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(hargaTotal);
+
+        $("#qrisTotal").data("hargaTotal", hargaTotal);
+    
+        $('#modalQris').modal('show');
+      });
+    
+      function uploadImageToImgbb(file, onSuccess, onError) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+          const base64Image = reader.result.split(',')[1];
+          $.ajax({
+            url: `https://api.imgbb.com/1/upload?key=${imgbbAPIKey}`,
+            method: "POST",
+            data: { image: base64Image },
+            xhr: function() {
+              const xhr = new window.XMLHttpRequest();
+              xhr.upload.addEventListener("progress", function(evt) {
+                if (evt.lengthComputable) {
+                  const percentComplete = Math.round((evt.loaded / evt.total) * 100);
+                  $("#progressWrapper").show();
+                  $("#uploadProgressBar").css("width", percentComplete + "%").text(percentComplete + "%");
+                }
+              }, false);
+              return xhr;
+            },
+            success: function(response) {
+              $("#progressWrapper").hide();
+              onSuccess(response.data.url);
+            },
+            error: function(error) {
+              $("#progressWrapper").hide();
+              onError(error);
+            }
+          });
+        };
+      }
+    
+    });
+    </script>
+    
+    <!-- Add this right before the closing 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
+    // Inisialisasi Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAm9pbEAyp7iEwlAStQnJPzVwIV23xOsMg",
+  authDomain: "toko-kuota-stok.firebaseapp.com",
+  databaseURL: "https://toko-kuota-stok-default-rtdb.firebaseio.com",
+  projectId: "toko-kuota-stok",
+  storageBucket: "toko-kuota-stok.firebasestorage.app",
+  messagingSenderId: "321145437639",
+  appId: "1:321145437639:web:21c425d46679158e376de2",
+  measurementId: "G-PD9BGY36G1"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// Ambil kode produk dari select
+function getKodeProduk() {
+  const select = document.getElementById("product");
+  const selectedOption = select.options[select.selectedIndex];
+  return selectedOption ? selectedOption.value.split(" ")[0].trim() : null;
+}
+
+// Kurangi stok jika tersedia
+function kurangiStok(kode) {
+  const stokRef = db.ref("stok/" + kode);
+  stokRef.transaction(current => {
+    if (current > 0) {
+      return current - 1;
+    } else {
+      alert("Stok habis!");
+      return;
+    }
+  }, (error, committed, snapshot) => {
+    if (error) {
+      alert("Gagal memperbarui stok.");
+    } else if (!committed) {
+      alert("Pesanan dibatalkan karena stok kosong.");
+    } else {
+      alert("Pesanan berhasil. Sisa stok: " + snapshot.val());
+    }
+  });
+}
+
+// Handler upload dan pengurangan stok
+function handleUploadClick(buttonId, inputId) {
+  const btn = document.getElementById(buttonId);
+  const fileInput = document.getElementById(inputId);
+
+  if (btn && fileInput) {
+    btn.addEventListener("click", () => {
+      if (!fileInput.files.length) {
+        alert("Silakan unggah bukti pembayaran terlebih dahulu.");
+        return;
+      }
+
+      const kode = getKodeProduk();
+      
+      if (kode) kurangiStok(kode);
+
+      // Simpan riwayat ke Firebase
+      const phone = document.getElementById("phone").value;
+      const product = document.getElementById("product").value;
+      const metode = document.getElementById("metodePembayaran").value;
+      const harga = $("#qrisTotal").data("hargaTotal") || 0;
+
+      db.ref("riwayat").push({
+        status: "on proses",
+  phone,
+        product,
+        metode,
+        harga,
+        timestamp: Date.now()
+      });
+
+    });
+  }
+}
+
+// Jalankan saat dokumen siap
+document.addEventListener("DOMContentLoaded", () => {
+  // Cek stok dan disable opsi jika habis
+  const select = document.getElementById("product");
+  db.ref("stok").once("value").then(snapshot => {
+    const stokData = snapshot.val();
+    for (let option of select.options) {
+      const kode = option.value.split(" ")[0];
+      if (stokData && stokData[kode] !== undefined) {
+        const jumlah = stokData[kode];
+        if (jumlah <= 0) {
+          option.disabled = true;
+          option.text += " (HABIS)";
+        } else {
+          option.text += ` (Stok: ${jumlah})`;
+        }
+      }
+    }
+  });
+
+  // Tombol cek stok manual
+  document.getElementById("cekStokBtn").addEventListener("click", () => {
+    db.ref("stok").once("value").then(snapshot => {
+      const stokData = snapshot.val();
+      if (!stokData) {
+        alert("Stok tidak ditemukan.");
+        return;
+      }
+
+      let message = "Stok Tersedia:\n";
+      for (const [kode, jumlah] of Object.entries(stokData)) {
+        message += `${kode}: ${jumlah}\n`;
+      }
+      alert(message);
+    }).catch(error => {
+      console.error("Gagal mengambil data stok:", error);
+      alert("Gagal mengambil data stok.");
+    });
+  });
+
+  // Hubungkan tombol dengan fungsi pengurangan stok
+  handleUploadClick("konfirmasiBayarQris", "buktiBayar");
+  handleUploadClick("konfirmasiBayarBank", "buktiBayarBank");
+  handleUploadClick("konfirmasiBayarEwallet", "buktiBayarEwallet");
+});
+
+  </script>
+    
+       <script>
+    
+    
+    // Deklarasikan variabel countdown di scope global
+    let qrisTimer;
+    let countdownInterval;
+    let countdownDisplay;
+    
+    $(document).ready(function() {
+      // Inisialisasi elemen countdown
+      countdownDisplay = document.getElementById('countdownTimer');
+      
+      // Fungsi startCountdown khusus untuk QRIS
+      function startQrisCountdown(minutes) {
+        let time = minutes * 60;
+        clearInterval(countdownInterval);
+        countdownInterval = setInterval(() => {
+          const mins = Math.floor(time / 60);
+          const secs = time % 60;
+          if(countdownDisplay) {
+            countdownDisplay.textContent = `Sisa Waktu Pembayaran: ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+          }
+          if (time > 0) {
+            time--;
+          } else {
+            clearInterval(countdownInterval);
+            $('#modalQris').modal('hide');
+            alert("Waktu pembayaran habis, silakan ulangi pemesanan.");
+          }
+        }, 1000);
+      }
+    
+      // Saat tombol Bayar QRIS diklik
+      $('#bayarQris').click(function() {
+        clearTimeout(qrisTimer);
+        clearInterval(countdownInterval);
+        startQrisCountdown(5); // 5 menit countdown
+        qrisTimer = setTimeout(() => {
+          $('#modalQris').modal('hide');
+          alert("Waktu pembayaran habis, silakan ulangi pemesanan.");
+        }, 5 * 60 * 1000);
+      });
+    
+      // Saat modal QRIS ditutup
+      $('#modalQris').on('hidden.bs.modal', function() {
+        clearTimeout(qrisTimer);
+        clearInterval(countdownInterval);
+      });
+    });
+    
+    $(document).ready(function() {
+      // Inisialisasi elemen countdown
+      countdownDisplay = document.getElementById('countdownBank');
+      
+      // Fungsi startCountdown khusus untuk QRIS
+      function startQrisCountdown(minutes) {
+        let time = minutes * 60;
+        clearInterval(countdownInterval);
+        countdownInterval = setInterval(() => {
+          const mins = Math.floor(time / 60);
+          const secs = time % 60;
+          if(countdownDisplay) {
+            countdownDisplay.textContent = `Sisa Waktu Pembayaran: ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+          }
+          if (time > 0) {
+            time--;
+          } else {
+            clearInterval(countdownInterval);
+            $('#modalBank').modal('hide');
+            alert("Waktu pembayaran habis, silakan ulangi pemesanan.");
+          }
+        }, 1000);
+      }
+    
+      // Saat tombol Bayar QRIS diklik
+      $('#bayarQris').click(function() {
+        clearTimeout(qrisTimer);
+        clearInterval(countdownInterval);
+        startQrisCountdown(5); // 5 menit countdown
+        qrisTimer = setTimeout(() => {
+          $('#modalBank').modal('hide');
+          alert("Waktu pembayaran habis, silakan ulangi pemesanan.");
+        }, 5 * 60 * 1000);
+      });
+    
+      // Saat modal QRIS ditutup
+      $('#modalQris').on('hidden.bs.modal', function() {
+        clearTimeout(qrisTimer);
+        clearInterval(countdownInterval);
+      });
+    });
+    
+   
+    
+    // Inisialisasi tombol Bayar QRIS
+    updateStokInfo();
+    </script>
+    <script>
+        // Fungsi untuk mengurangi stok di Firebase
+    function kurangiStok(kodeProduk) {
+      const stokRef = db.ref(`stok/${kodeProduk}`);
+      
+      stokRef.transaction((currentStok) => {
+        if (currentStok === null || currentStok === undefined) return currentStok;
+        if (currentStok <= 0) {
+          alert("Stok produk ini sudah habis!");
+          return currentStok;
+        }
+        return currentStok - 1;
+      }).then(() => {
+        console.log(`Stok ${kodeProduk} berhasil dikurangi`);
+      }).catch((error) => {
+        console.error("Gagal mengurangi stok:", error);
+      });
+    }
+    
+    // Fungsi untuk mendapatkan kode produk dari select
+    function getKodeProduk() {
+      const select = document.getElementById("product");
+      const selectedOption = select.options[select.selectedIndex];
+      if (selectedOption) {
+        return selectedOption.value.split("|")[0].trim();
+      }
+      return null;
+    }
+    </script>
+    
+    <script>
+  document.getElementById("btnBayar").addEventListener("click", function () {
+    const phone = document.getElementById("phone").value.trim();
+    const product = document.getElementById("product").value;
+    const metode = document.getElementById("metodePembayaran").value;
+
+    if (!phone || !product || !metode) {
+      $('#isiFormModal').modal('show');
+      return;
+    }
+
+    // Arahkan ke modal pembayaran sesuai metode
+    if (metode === "qris") {
+      $("#qrisProduct").text(product);
+      $("#qrisTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $('#modalQris').modal('show');
+    } else if (metode === "bank") {
+      $("#bankProduct").text(product);
+      $("#bankTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $('#modalBank').modal('show');
+    } else if (metode === "ewallet") {
+      $("#ewalletProduct").text(product);
+      $("#ewalletTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $('#modalEwallet').modal('show');
+    }
+  });
+</script>
+    <script>
+    $(document).ready(function () {
+    $('#btnBayar').click(function () {
+      const metode = $('#metodePembayaran').val();
+      const phone = $('#phone').val();
+      const product = $('#product').val();
+      const match = product.match(/Rp\.\s?([\d.]+)/);
+      const harga = match ? parseInt(match[1].replace(/\./g, '')) : 0;
+    
+      if (!phone || !product || !metode) {
+        alert("Silakan isi nomor HP, pilih kuota, dan metode pembayaran.");
+        return;
+      }
+    
+      const kodeUnik = Math.floor(400 + Math.random() * 900);
+      const hargaTotal = harga + kodeUnik;
+      const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(hargaTotal);
+    
+      if (metode === "qris") {
+          let harga = hargaSetelahDiskon ?? (match ? parseInt(match[1].replace(/\./g, '')) : 0);
+const kodeUnik = Math.floor(400 + Math.random() * 900);
+const hargaTotal = harga + kodeUnik;
+const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(hargaTotal);
+        $('#qrisProduct').text(product);
+        $('#qrisTotal').text("Total: " + formatted);
+        $('#qrisTotal').data("hargaTotal", hargaTotal);
+        $('#modalQris').modal('show');
+    
+        
+      } else if (metode === "bank") {
+  let harga = hargaSetelahDiskon ?? (match ? parseInt(match[1].replace(/\./g, '')) : 0);
+  const kodeUnik = Math.floor(0 + Math.random() * 0);
+  const hargaTotal = harga + kodeUnik;
+  const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(hargaTotal);
+  
+  $("#bankProduct").text(product);
+  $("#modalBank .text-primary").text("Total: " + formatted);
+  $("#modalBank .text-primary").data("hargaTotal", hargaTotal); // Simpan nilai untuk WhatsApp
+  
+
+        $('#modalBank').modal('show');
+      } else if (metode === "ewallet") {
+let harga = hargaSetelahDiskon ?? (match ? parseInt(match[1].replace(/\./g, '')) : 0);
+  const kodeUnik = Math.floor(0 + Math.random() * 0);
+const hargaTotal = harga + kodeUnik;
+const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(hargaTotal);
+$("#ewalletProduct").text(product);
+$("#ewalletTotal").text("Total: " + formatted);
+
+        $('#modalEwallet').modal('show');
+      }
+    });
+    
+    });
+    </script>
+    
+    <script>
+    function startCountdown(targetId, modalId) {
+      let duration = 300;
+      const display = document.getElementById(targetId);
+      const interval = setInterval(() => {
+        const minutes = Math.floor(duration / 60);
+        const seconds = duration % 60;
+        display.textContent = `Sisa Waktu Pembayaran: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        if (--duration < 0) {
+          clearInterval(interval);
+          $(modalId).modal('hide');
+          alert("Waktu pembayaran habis. Silakan ulangi.");
+        }
+      }, 1000);
+    }
+    
+    function handleUpload(fileInput, progressWrapper, progressBar, callback) {
+      const file = $(fileInput)[0].files[0];
+      if (!file) {
+        alert("Silakan upload bukti pembayaran.");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function () {
+        const base64Image = reader.result.split(',')[1];
+        $.ajax({
+          url: 'https://api.imgbb.com/1/upload?key=a6c2f0d684f4cf1a8df418676c29eac3',
+          method: 'POST',
+          data: { image: base64Image },
+          xhr: function () {
+            const xhr = new window.XMLHttpRequest();
+            xhr.upload.addEventListener('progress', function (e) {
+              if (e.lengthComputable) {
+                const percent = Math.round((e.loaded / e.total) * 100);
+                $(progressWrapper).show();
+                $(progressBar).css('width', percent + '%').text(percent + '%');
+              }
+            });
+            return xhr;
+          },
+          success: function (res) {
+            $(progressWrapper).hide();
+            callback(res.data.url);
+          },
+          error: function () {
+            $(progressWrapper).hide();
+            alert("Gagal upload gambar.");
+          }
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+    
+    </script>
+    <script>
+    
+    $(document).ready(function () {
+        
+      $('#modalBank').on('shown.bs.modal', () => startCountdown('countdownBank', '#modalBank'));
+      $('#modalEwallet').on('shown.bs.modal', () => startCountdown('countdownEwallet', '#modalEwallet'));
+      $('#modalQris').on('shown.bs.modal', () => startCountdown('countdownTimer', '#modalQris'));
+     
+      // Untuk QRIS
+      $('#konfirmasiBayarQris').click(function () {
+        const phone = $('#phone').val();
+        const product = $('#product').val();
+        const total = $('#qrisTotal').text().replace('Total: ', '');
+        const description = $('#description').val();
+        
+        handleUpload('#buktiBayar', '#progressWrapper', '#uploadProgressBar', function (url) {
+          // Format pesan WhatsApp
+          const pesan = `*KONFIRMASI PEMBAYARAN QRIS*\n\n` +
+                       `📱 *Nomor HP:* ${phone}\n\n` +
+                       `📦 *Paket Yang Dibeli:* ${product}\n\n` +
+                       `📝 *Detail Paket:*\n${description.replace(/\n/g, '\n')}\n\n` +
+                       `💳 *Total Pembayaran:* ${total}\n` +
+                       `📎 *Bukti Pembayaran:* ${url}\n\n` +
+                       `Mohon konfirmasi penerimaan dan proses pesanan ini. Terima kasih.`;
+          
+          // Tampilkan modal sukses
+          $('#successMessage').html(`
+            <p>Pembayaran Anda telah berhasil dikonfirmasi dengan rincian:</p>
+            <div class="alert alert-light text-left">
+              <strong>Nomor HP:</strong> ${phone}<br>
+              <strong>Paket:</strong> ${product}<br>
+              <strong>Total:</strong> ${total}
+            </div>
+          
+          `);
+          
+          // Update tombol WhatsApp
+          $('#whatsappCSBtn').off('click').on('click', function() {
+            window.open(`https://wa.me/6283842915722?text=${encodeURIComponent(pesan)}`, '_blank');
+          });
+          
+          $('#modalQris').modal('hide');
+          $('#successModal').modal('show');
+        });
+      });
+    
+      // Untuk Bank Transfer
+      $('#konfirmasiBayarBank').click(function () {
+      const phone = $('#phone').val();
+      const product = $('#product').val();
+      const total = $('#bankTotal').text().replace('Total: ', '');
+      const description = $('#description').val();
+      
+      handleUpload('#buktiBayarBank', '#progressWrapperBank', '#uploadProgressBarBank', function (url) {
+        // Format pesan WhatsApp
+        const pesan = `*KONFIRMASI PEMBAYARAN BANK*\n\n` +
+             `📱 *Nomor HP:* ${phone}\n` +
+             `📦 *Paket Yang Dibeli:* ${product}\n\n` +
+             `📝 *Detail Paket:*\n${description.replace(/\n/g, '\n')}\n\n` +
+             `💳 *Total Pembayaran:* ${total}\n` +  // Tambahkan total
+             `📎 *Bukti Pembayaran:* ${url}\n\n` +
+             `Mohon konfirmasi penerimaan dan proses pesanan ini. Terima kasih.`;
+        
+          
+          // Tampilkan modal sukses
+          $('#successMessage').html(`
+            <p>Pembayaran Anda telah berhasil dikonfirmasi dengan rincian:</p>
+            <div class="alert alert-light text-left">
+              <strong>Nomor HP:</strong> ${phone}<br>
+              <strong>Paket:</strong> ${product}<br>
+              <strong>Total:</strong> ${total}
+            </div>
+            
+          `);
+          
+          // Update tombol WhatsApp
+          $('#whatsappCSBtn').off('click').on('click', function() {
+            window.open(`https://wa.me/6283842915722?text=${encodeURIComponent(pesan)}`, '_blank');
+          });
+          
+          $('#modalBank').modal('hide');
+          $('#successModal').modal('show');
+        });
+      });
+    
+      // Untuk E-Wallet
+      $('#konfirmasiBayarEwallet').click(function () {
+        const phone = $('#phone').val();
+        const product = $('#product').val();
+        const total = $('#ewalletTotal').text().replace('Total: ', '');
+        const description = $('#description').val();
+        
+        handleUpload('#buktiBayarEwallet', '#progressWrapperEwallet', '#uploadProgressBarEwallet', function (url) {
+          // Format pesan WhatsApp
+          const pesan = `*KONFIRMASI PEMBAYARAN E-WALLET*\n\n` +
+                       `📱 *Nomor HP:* ${phone}\n\n` +
+                       `📦 *Paket Yang Dibeli:* ${product}\n\n` +
+                       `📝 *Detail Paket:*\n${description.replace(/\n/g, '\n')}\n\n` +
+                       `💳 *Total Pembayaran:* ${total}\n` +
+                       `📎 *Bukti Pembayaran:* ${url}\n\n` +
+                       `Mohon konfirmasi penerimaan dan proses pesanan ini. Terima kasih.`;
+          
+          // Tampilkan modal sukses
+          $('#successMessage').html(`
+            <p>Pembayaran Anda telah berhasil dikonfirmasi dengan rincian:</p>
+            <div class="alert alert-light text-left">
+              <strong>Nomor HP:</strong> ${phone}<br>
+              <strong>Paket:</strong> ${product}<br>
+              <strong>Total:</strong> ${total}
+            </div>
+           
+          `);
+          
+          // Update tombol WhatsApp
+          $('#whatsappCSBtn').off('click').on('click', function() {
+            window.open(`https://wa.me/6283842915722?text=${encodeURIComponent(pesan)}`, '_blank');
+          });
+          
+          $('#modalEwallet').modal('hide');
+          $('#successModal').modal('show');
+        });
+      });
+    });
+    $('#konfirmasiBayarBank').click(function () {
+      const phone = $('#phone').val();
+      const product = $('#product').val();
+      const total = $('#bankTotal').text().replace('Total: ', '');
+      const description = $('#description').val();
+      
+      handleUpload('#buktiBayarBank', '#progressWrapperBank', '#uploadProgressBarBank', function (url) {
+        // Format pesan WhatsApp
+        const pesan = `*KONFIRMASI PEMBAYARAN BANK*\n\n` +
+                     `📱 *Nomor HP:* ${phone}\n` +
+                     `📦 *Paket Yang Dibeli:* ${product}\n\n` +
+                     `📝 *Detail Paket:*\n${description.replace(/\n/g, '\n')}\n\n` +
+                     `💳 *Total Pembayaran:* ${total}\n` +
+                     `📎 *Bukti Pembayaran:* ${url}\n\n` +
+                     `Mohon konfirmasi penerimaan dan proses pesanan ini. Terima kasih.`;
+        
+        // Tampilkan modal sukses
+        $('#successMessage').html(`
+          <p>Pembayaran Anda telah berhasil dikonfirmasi dengan rincian:</p>
+          <div class="alert alert-light text-left">
+            <strong>Nomor HP:</strong> ${phone}<br>
+            <strong>Paket:</strong> ${product}<br>
+            <strong>Total:</strong> ${total}
+          </div>
+          
+        `);
+        
+        // Update tombol WhatsApp
+        $('#whatsappCSBtn').off('click').on('click', function() {
+          window.open(`https://wa.me/6283842915722?text=${encodeURIComponent(pesan)}`, '_blank');
+        });
+        
+        $('#modalBank').modal('hide');
+        $('#successModal').modal('show');
+        
+        // Hapus semua kode terkait countdown dan auto-open WhatsApp
+      });
+    });
+    
+    $(document).ready(function() {
+      // Inisialisasi Select2
+      $('.select2').select2({
+        theme: 'bootstrap-5',
+        width: '100%',
+        placeholder: function() {
+          return $(this).data('placeholder');
+        },
+        allowClear: true
+      });
+    
+      // Update handler untuk select product
+      $("#product").on("change", function() {
+        const selectedOption = $(this).find('option:selected');
+        const description = selectedOption.data('description') || '';
+        
+        if (!selectedOption.val()) {
+          $("#detailPaketContainer, #totalBayarContainer").addClass('d-none');
+          $("#description").val("");
+        } else {
+          $("#detailPaketContainer").removeClass('d-none');
+          $("#description").val(description.replace(/\|/g, '\n'));
+          
+          const val = selectedOption.val();
+          const match = val.match(/Rp\.\s?([\d.]+)/);
+          if (match) {
+            const total = parseInt(match[1].replace(/\./g, ""));
+            const formatted = new Intl.NumberFormat('id-ID', { 
+              style: 'currency', 
+              currency: 'IDR' 
+            }).format(total);
+            $("#totalBayar").text("Total Bayar: " + formatted);
+            $("#totalBayarContainer").removeClass('d-none');
+          }
+        }
+      });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+      // Format nomor HP otomatis
+      $('#phone').on('input', function() {
+        let value = $(this).val();
+        
+        // Hapus semua karakter non-digit
+        value = value.replace(/\D/g, '');
+        
+        // Jika dimulai dengan 62, ganti dengan 0
+        if (value.startsWith('62')) {
+          value = '0' + value.substring(2);
+        }
+        // Jika dimulai dengan +62, ganti dengan 0
+        else if (value.startsWith('+62')) {
+          value = '0' + value.substring(3);
+        }
+        // Pastikan dimulai dengan 08
+        else if (!value.startsWith('08') && value.length > 0) {
+          value = '08' + value.substring(value.startsWith('0') ? 1 : 0);
+        }
+        
+        // Batasi panjang maksimal 13 digit (08xxxxxxxxx)
+        if (value.length > 13) {
+          value = value.substring(0, 13);
+        }
+        
+        $(this).val(value);
+      });
+    
+      // Tampilkan indikator paste saat fokus
+      $('#phone').on('focus', function() {
+        $(this).next('.paste-indicator').show();
+      });
+      
+      // Sembunyikan indikator paste saat tidak fokus
+      $('#phone').on('blur', function() {
+        $(this).next('.paste-indicator').hide();
+      });
+      
+      // Sembunyikan indikator paste awalnya
+      $('.paste-indicator').hide();
+    });
+    </script>
+    <script>
+    // Add active class to current page
+    $(document).ready(function() {
+      const currentPage = window.location.pathname.split('/').pop();
+      $('.nav-item').removeClass('active');
+      
+      if(currentPage === 'index.html' || currentPage === '') {
+        $('.nav-item:nth-child(1)').addClass('active');
+      } else if(currentPage === 'payment.html') {
+        $('.nav-item:nth-child(2)').addClass('active');
+      } else if(currentPage === 'history.html') {
+        $('.nav-item:nth-child(3)').addClass('active');
+      } else if(currentPage === 'profile.html') {
+        $('.nav-item:nth-child(4)').addClass('active');
+      }
+    });
+    </script>
+
+<script>
+$(document).ready(function() {
+  // Fungsi untuk smooth scroll ke element
+  function scrollToElement(selector, offset = 20) {
+    $('html, body').animate({
+      scrollTop: $(selector).offset().top - offset
+    }, 500);
+  }
+
+  // Auto-scroll saat fokus ke nomor HP
+  $('#phone').on('focus', function() {
+    scrollToElement('#phone');
+  });
+
+  // Auto-scroll saat memilih kuota
+  $('#product').on('select2:select', function() {
+    scrollToElement('#metodePembayaran');
+    
+    // Tampilkan detail paket jika dipilih
+    setTimeout(() => {
+      $('#detailPaketContainer, #totalBayarContainer').removeClass('d-none');
+      scrollToElement('#detailPaketContainer');
+    }, 100);
+  });
+
+  // Auto-scroll saat memilih metode pembayaran
+  $('#metodePembayaran').on('select2:select', function() {
+    scrollToElement('#btnBayar');
+  });
+
+  // Pertahankan semua fungsi sebelumnya
+  let csContacted = false;
+  
+  function showSuccessModal() {
+    csContacted = false;
+    $('#successModal').modal({
+      backdrop: 'static',
+      keyboard: false
+    });
+    $('#successModal .close').hide();
+    $('#successModal .btn-secondary')
+      .prop('disabled', true)
+      .html('<i class="fa fa-lock"></i> Harap Hubungi CS');
+  }
+
+  $('#whatsappCSBtn').off('click').on('click', function() {
+    csContacted = true;
+    const phone = $('#phone').val();
+    const product = $('#product').val();
+    const total = $('#totalBayar').text();
+    const message = `*KONFIRMASI PEMBELIAN*\n\nNomor: ${phone}\nPaket: ${product}\nTotal: ${total}`;
+    window.open(`https://wa.me/6283842915722?text=${encodeURIComponent(message)}`, '_blank');
+    $('#successModal').modal('hide');
+    setTimeout(() => location.reload(), 500);
+    return false;
+  });
+
+  $('#testPaymentSuccess').click(showSuccessModal);
+});
+</script>
+
+<style>
+/* Tambahkan animasi smooth untuk semua scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Highlight elemen yang sedang aktif */
+.form-control:focus, .select2-selection--single:focus {
+  box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+  border-color: #4e73df;
+  transition: all 0.3s ease;
+}
+</style>
+<script>
+$(document).ready(function() {
+  // Refresh halaman saat modal pembayaran ditutup
+  $('#modalQris, #modalBank, #modalEwallet, #successModal').on('hidden.bs.modal', function() {
+    setTimeout(function() {
+      location.reload();
+    }, 100000); // Delay 100 detik sebelum refresh
+  });
+
+  // Pertahankan fungsi countdown dan lainnya
+  function startCountdown(targetId, modalId) {
+    let duration = 300;
+    const display = document.getElementById(targetId);
+    const interval = setInterval(() => {
+      const minutes = Math.floor(duration / 60);
+      const seconds = duration % 60;
+      display.textContent = `Sisa Waktu Pembayaran: ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      if (--duration < 0) {
+        clearInterval(interval);
+        $(modalId).modal('hide');
+        alert("Waktu pembayaran habis. Silakan ulangi.");
+      }
+    }, 1000);
+  }
+
+  // Fungsi lainnya tetap sama
+  // ...
+});
+</script>
+<!-- Anti View Source + Izinkan Paste Hanya di Nomor HP -->
+<script>
+  // Blokir klik kanan
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Blokir shortcut DevTools
+  document.onkeydown = function (e) {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) ||
+      (e.ctrlKey && e.key === "U")
+    ) {
+      return false;
+    }
+  };
+
+  // Blokir drag teks
+  document.addEventListener('dragstart', e => e.preventDefault());
+
+  // Hanya izinkan paste pada input dengan ID "phone"
+  document.addEventListener('paste', function (e) {
+    const activeElement = document.activeElement;
+    if (activeElement.id !== 'phone') {
+      e.preventDefault();
+    }
+  });
+</script>
+
+<script>
+  function cekFormKosongDanTampilkanModal() {
+    const phone = document.getElementById('phone').value.trim();
+    const product = document.getElementById('product').value;
+    
+    // Jika belum diisi dua-duanya
+    if (!phone && !product && !$('#isiFormModal').hasClass('show')) {
+      $('#isiFormModal').modal('show');
+    }
+  }
+
+  // Cek setelah 30 detik pertama
+  setTimeout(cekFormKosongDanTampilkanModal, 30000);
+
+  // Cek berulang setiap 60 detik jika form belum diisi
+  setInterval(cekFormKosongDanTampilkanModal, 60000);
+</script>
+<script>
+  const phoneInput = document.getElementById('phone');
+  const clearBtn = document.getElementById('clearPhone');
+
+  // Tampilkan atau sembunyikan tombol clear
+  phoneInput.addEventListener('input', () => {
+    clearBtn.style.display = phoneInput.value ? 'block' : 'none';
+  });
+
+  // Bersihkan input saat diklik
+  clearBtn.addEventListener('click', () => {
+    phoneInput.value = '';
+    clearBtn.style.display = 'none';
+    phoneInput.focus();
+  });
+</script>
+<script>
+  const phoneInput = document.getElementById('phone');
+
+  // Hanya izinkan angka
+  phoneInput.addEventListener('input', function () {
+    this.value = this.value.replace(/[^0-9]/g, ''); // hanya angka
+  });
+
+  // Validasi saat tombol pembayaran diklik
+  document.getElementById('btnBayar').addEventListener('click', function () {
+    const phone = phoneInput.value.trim();
+
+    if (phone.length < 9 || phone.length > 13) {
+      alert("Nomor HP harus 9–13 digit dan hanya angka.");
+      phoneInput.focus();
+      return;
+    }
+
+    // Jika valid, lanjut proses
+    // ... lanjut ke proses pembayaran
+  });
+</script>
+
+<script>
+
+// fungsi promokode
+  function isPromoValid(promo, now) {
+    const dayNames = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+    const hariIni = dayNames[now.getDay()];
+    const jam = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+    return promo.hari.includes(hariIni) &&
+      jam >= promo.jam_mulai && jam <= promo.jam_selesai;
+  }
+
+  $("#applyPromo").click(function () {
+    const kode = $("#promoCode").val().trim().toUpperCase();
+    const val = $("#product").val();
+    if (!kode || !val) {
+      $("#promoMessage").text("Masukkan kode promo dan pilih kuota").addClass("text-warning").removeClass("text-danger text-success");
+      return;
+    }
+
+    db.ref("promo/" + kode).once("value", snapshot => {
+      const promo = snapshot.val();
+      if (!promo) {
+        $("#promoMessage").text("Kode promo tidak ditemukan.").addClass("text-danger").removeClass("text-warning text-success");
+        return;
+      }
+
+      const now = new Date();
+      if (!isPromoValid(promo, now)) {
+        $("#promoMessage").text("Promo tidak berlaku saat ini.").addClass("text-danger").removeClass("text-warning text-success");
+        return;
+      }
+
+      const match = val.match(/Rp\.\s?([\d.]+)/);
+      if (!match) return;
+      const harga = parseInt(match[1].replace(/\./g, ""));
+      let total = harga;
+
+      if (promo.tipe === "diskon_persen") {
+        total -= Math.round(harga * (promo.nilai / 100));
+      } else if (promo.tipe === "diskon_nominal") {
+        total -= promo.nilai;
+      }
+
+      hargaSetelahDiskon = total;
+      const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(total);
+      $("#promoMessage").text("Promo berhasil diterapkan!").addClass("text-success").removeClass("text-danger text-warning");
+      $("#totalBayar").html(`<del>${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(harga)}</del> ${formatted} <span class="badge bg-success">${kode}</span>`);
+      $("#totalBayarContainer").removeClass("d-none");
+    });
+  });
+</script>
+
+
+
+<script>
+    jQuery(document).ready(function($){
+$(document).keydown(function(event) {
+var pressedKey = String.fromCharCode(event.keyCode).toLowerCase();
+
+if (event.ctrlKey && (pressedKey == "c" || pressedKey == "u")) {
+alert('Sorry, This Functionality Has Been Disabled!');
+//disable key press porcessing
+return false;
+}
+});
+});
+
+document.onkeypress = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+document.onmousedown = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+document.onkeydown = function (event) {
+event = (event || window.event);
+if (event.keyCode == 123) {
+return false;
+}
+}
+</script>
+
+
+<script>
+    function updateStepper(currentStep) {
+  $(".modern-stepper .step").each(function () {
+    const stepNum = parseInt($(this).data("step"));
+    $(this).removeClass("active completed");
+    if (stepNum < currentStep) {
+      $(this).addClass("completed");
+    } else if (stepNum === currentStep) {
+      $(this).addClass("active");
+    }
+  });
+}
+
+// Contoh penggunaan:
+$("#btnBayar").click(() => updateStepper(2));
+$("#konfirmasiBayarQris, #konfirmasiBayarBank, #konfirmasiBayarEwallet").click(() => updateStepper(3));
+$("#successModal").on("shown.bs.modal", () => updateStepper(4));
+
+</script>
+
+<!-- best-seller -->
+<script>
+    $(document).ready(function () {
+  $('#product option').each(function () {
+    if ($(this).data('best-seller') === true || $(this).data('best-seller') === "true") {
+      const text = $(this).text();
+      if (!text.includes("★")) {
+        $(this).text(text + ' ★ Best Seller');
+      }
+    }
+  });
+});
+
+$(document).ready(function () {
+  const bestSellerOptions = [];
+
+  $('#product option').each(function () {
+    if ($(this).data('best-seller') === "true" || $(this).data('best-seller') === true) {
+      bestSellerOptions.push($(this).clone());
+      $(this).remove();
+    }
+  });
+
+  $('#product').prepend(bestSellerOptions);
+});
+
+</script>
+
+
+<script>
+  // Wajib hubungi cs
+  let sudahKlikCS = false;
+
+  document.getElementById("whatsappCSBtn").addEventListener("click", function () {
+    sudahKlikCS = true;
+    window.open(`https://wa.me/6283842915722?text=${encodeURIComponent(pesan)}`, '_blank');
+          });
+
+  // Cegah refresh, tutup tab, atau back
+  window.addEventListener("beforeunload", function (e) {
+    if (!sudahKlikCS) {
+      e.preventDefault();
+      e.returnValue = "Silakan klik 'Hubungi CS' terlebih dahulu untuk melanjutkan.";
+    }
+  });
+
+  // Cegah tombol close pada modal
+  $('#successModal').on('hide.bs.modal', function (e) {
+    if (!sudahKlikCS) {
+      e.preventDefault();
+      alert("Silakan klik 'Hubungi CS' terlebih dahulu sebelum menutup.");
+      return false;
+    }
+  });
+</script>
+
+
+
+<script>
+  
+  const paketSelect = $('#product');
+  const descriptionBox = $('#description');
+  const detailContainer = $('#detailPaketContainer');
+  const totalBayarContainer = $('#totalBayarContainer');
+  const totalBayarEl = $('#totalBayar');
+  const promoInput = $('#promoCode');
+  const promoBtn = $('#applyPromo');
+  const promoMsg = $('#promoMessage');
+
+  let paketData = {};
+  let stokData = {};
+  let promoData = {};
+  let selectedHarga = 0;
+
+  $(document).ready(function () {
+    Promise.all([
+      db.ref('paketKuota').once('value'),
+      db.ref('stok').once('value'),
+      db.ref('promo').once('value')
+    ]).then(([paketSnap, stokSnap, promoSnap]) => {
+      paketData = paketSnap.val() || {};
+      stokData = stokSnap.val() || {};
+      promoData = promoSnap.val() || {};
+
+      const tersedia = [];
+      const habis = [];
+
+      for (const kode in paketData) {
+        const item = paketData[kode];
+        const stok = stokData[kode] ?? item.stok ?? 0;
+
+        if (item.aktif === false) continue;
+
+        const label = `${kode} - ${item.nama || 'Tanpa Nama'} (Stok: ${stok})`;
+        const option = `<option value="${kode}">${label}</option>`;
+        const optionDisabled = `<option value="${kode}" disabled>${kode} - ${item.nama || 'Tanpa Nama'} (Habis)</option>`;
+
+        if (stok > 0) {
+          tersedia.push(option);
+        } else {
+          habis.push(optionDisabled);
+        }
+      }
+
+      // Gabungkan dan masukkan ke dropdown
+      paketSelect.append([...tersedia, ...habis].join(''));
+    });
+
+    paketSelect.on('change', function () {
+      const kode = $(this).val();
+      const paket = paketData[kode];
+      if (paket) {
+        descriptionBox.val(paket.deskripsi || 'Tidak ada deskripsi');
+        selectedHarga = paket.harga || 0;
+
+        detailContainer.removeClass('d-none');
+        totalBayarEl.html(`Rp ${selectedHarga.toLocaleString('id-ID')}`);
+        totalBayarContainer.removeClass('d-none');
+        promoMsg.text('');
+        promoInput.val('');
+      }
+    });
+
+    promoBtn.on('click', function () {
+      const kodePromo = promoInput.val().trim().toUpperCase();
+      const promo = promoData[kodePromo];
+      if (!promo) {
+        promoMsg.text('Kode promo tidak ditemukan.').addClass('text-danger').removeClass('text-success text-warning');
+        return;
+      }
+
+      const now = new Date();
+      const hariIni = now.toLocaleString('id-ID', { weekday: 'long' });
+      const jam = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+      const isHariAktif = promo.hari.includes(hariIni);
+      const isJamAktif = jam >= promo.jam_mulai && jam <= promo.jam_selesai;
+
+      if (!isHariAktif || !isJamAktif) {
+        promoMsg.text('Promo tidak aktif saat ini.').addClass('text-warning').removeClass('text-success text-danger');
+        return;
+      }
+
+      let hargaSetelahPromo = selectedHarga;
+      if (promo.tipe === 'diskon_persen') {
+        hargaSetelahPromo -= (selectedHarga * promo.nilai / 100);
+      } else if (promo.tipe === 'diskon_nominal') {
+        hargaSetelahPromo -= promo.nilai;
+      }
+
+      if (hargaSetelahPromo < 0) hargaSetelahPromo = 0;
+
+      totalBayarEl.html(`
+        <del>Rp ${selectedHarga.toLocaleString('id-ID')}</del>
+        Rp ${Math.ceil(hargaSetelahPromo).toLocaleString('id-ID')}
+        <span class="badge bg-success">${kodePromo}</span>
+      `);
+      promoMsg.text('Promo berhasil diterapkan.').addClass('text-success').removeClass('text-danger text-warning');
+    });
+  });
+</script>
+
+
+
+</body>
+</html>
