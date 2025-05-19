@@ -872,119 +872,14 @@ del { color: #6c757d; opacity: 0.8; }
                                 </div>
                             </div> 
 
-                            <!-- Package Selection -->
+   <!-- Package Selection -->
                             <div class="form-container">
                                 <div class="form-group">
                                     <label for="product"><i class="fa fa-bolt"></i> Pilih Kuota</label>
-                                    <select class="form-control select2" id="product" data-placeholder="-- Pilih Kuota --" style="width: 100%">
-                                        <option></option>
-                                        <option value="RES35 | OFFICIAL AKRAB | Rp. 35.000" data-description="AREA 1: 13 - 15GB
-AREA 2: 15 - 17GB
-AREA 3: 20 - 22GB
-AREA 4: 30 - 32GB
-
-✓ Resmi bergaransi
-✓ Full 24 jam
-✓ Tambah masa aktif 30 hari">
-                                            OFFICIAL AKRAB KODE RES35 [Rp 35.000]
-                                                           </option>
-                                        <option value="RES60A | OFFICIAL AKRAB | Rp. 60.000" data-description="AREA 1: 38-40GB
-AREA 2: 40-42GB
-AREA 3: 45-47GB
-AREA 4: 55-57GB
-
-✓ Resmi bergaransi
-✓ Full 24 jam
-✓ Tambah masa aktif 30 hari">
-                                            OFFICIAL AKRAB KODE RES60A [Rp 60.000]
-                                        </option>
-                                        </option>
-                                        <option value="RES60B | OFFICIAL AKRAB | Rp. 60.000" data-description="AREA 1: 33.5-36GB
-AREA 2: 36.5-40GB
-AREA 3: 47-50GB
-AREA 4: 71-74GB
-
-✓ Resmi bergaransi
-✓ Full 24 jam
-✓ Tambah masa aktif 30 hari">
-                                            OFFICIAL AKRAB KODE RES60B [Rp 60.000]
-                                        </option>
-                                        <option value="RES65 | OFFICIAL AKRAB | Rp. 65.000" data-description="AREA 1: 46–48GB
-AREA 2: 50–52GB
-AREA 3: 60–62GB
-AREA 4: 80–82GB
-
-✓ Resmi bergaransi
-✓ Full 24 jam
-✓ Tambah masa aktif 30 hari">
-                                            OFFICIAL AKRAB KODE65 [Rp 65.000]
-                                        </option>
-                                        <option value="RES70A | OFFICIAL AKRAB | Rp. 70.000" data-description="AREA 1: 53,5-56,5GB
-AREA 2: 56,5-59,5GB
-AREA 3: 67-70GB
-AREA 4: 91-94GB
-
-✓ Resmi bergaransi
-✓ Full 24 jam
-✓ Tambah masa aktif 30 hari">
-                                            OFFICIAL AKRAB KODE RES70A [Rp 70.000]
-                                        </option>
-                                        <option value="RES70B | OFFICIAL AKRAB | Rp. 70.000" data-description="AREA 1: 45,5-47,5GB
-AREA 2: 50-52GB
-AREA 3: 63-65GB
-AREA 4: 103-105GB
-
-✓ Resmi bergaransi
-✓ Full 24 jam
-✓ Tambah masa aktif 30 hari">
-                                            OFFICIAL AKRAB KODE RES70B [Rp 70.000]
-                                        </option>
-                                        
-                                        <option value="RES75 | OFFICIAL AKRAB | Rp. 75.000" data-description="AREA 1: 65.5-67.5GB
-AREA 2: 70-72GB
-AREA 3: 83-85GB
-AREA 4: 123-125GB
-
-✓ Resmi bergaransi
-✓ Full 24 jam
-✓ Tambah masa aktif 30 hari">
-                                            OFFICIAL AKRAB KODE RES75 [Rp 75.000]
-                                        </option>
-                                        <option value="RES95 | OFFICIAL AKRAB | Rp. 95.000" data-description="AREA 1: 85.5-87.5GB
-AREA 2: 90-92GB
-AREA 3: 103-105GB
-AREA 4: 143-145GB
-
-✓ Resmi bergaransi
-✓ Full 24 jam
-✓ Tambah masa aktif 30 hari">
-                                            OFFICIAL AKRAB KODE RES95 [Rp 95.000]
-                                        </option>
-                                        <option value="RES105 | OFFICIAL AKRAB | Rp. 105.000" data-description="AREA 1: 105.5-107.5GB
-AREA 2: 110-112GB
-AREA 3: 123-125GB
-AREA 4: 163-165GB
-
-✓ Resmi bergaransi
-✓ Full 24 jam
-✓ Tambah masa aktif 30 hari">
-                                            OFFICIAL AKRAB KODE RES105 [Rp 105.000]
-                                        </option>
-                                        <option value="RES115 | OFFICIAL AKRAB | Rp. 115.000" data-description="AREA 1: 125.5-127.5GB
-AREA 2: 130-132GB
-AREA 3: 153-155GB
-AREA 4: 183-185GB
-
-✓ Resmi bergaransi
-✓ Full 24 jam
-✓ Tambah masa aktif 30 hari">
-                                            OFFICIAL AKRAB KODE RES115 [Rp 115.000]
-                                        </option>
-
-                                    </select>
+                                    <select class="form-control select2" id="product" data-placeholder="-- Pilih Kuota --" style="width: 100%"><option></option>
+</select>
                                 </div>
                             </div>
-
                             <!-- Package Details (Initially Hidden) -->
                             <div class="form-group d-none" id="detailPaketContainer">
                                 <label for="description"><i class="fa fa-info-circle"></i> Detail Paket</label>
@@ -2370,15 +2265,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Arahkan ke modal pembayaran sesuai metode
     if (metode === "qris") {
       $("#qrisProduct").text(product);
-      $("#qrisTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $("#qrisTotal").text("" + $("#totalBayar").text().replace("Total Bayar: ", ""));
       $('#modalQris').modal('show');
     } else if (metode === "bank") {
       $("#bankProduct").text(product);
-      $("#bankTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $("#bankTotal").text("" + $("#totalBayar").text().replace("Total Bayar: ", ""));
       $('#modalBank').modal('show');
     } else if (metode === "ewallet") {
       $("#ewalletProduct").text(product);
-      $("#ewalletTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $("#ewalletTotal").text("" + $("#totalBayar").text().replace("Total Bayar: ", ""));
       $('#modalEwallet').modal('show');
     }
   });
@@ -3106,6 +3001,128 @@ $(document).ready(function () {
     }
   });
 </script>
+
+
+
+<script>
+  const paketSelect = $('#product');
+  const descriptionBox = $('#description');
+  const detailContainer = $('#detailPaketContainer');
+  const totalBayarContainer = $('#totalBayarContainer');
+  const totalBayarEl = $('#totalBayar');
+  const promoInput = $('#promoCode');
+  const promoBtn = $('#applyPromo');
+  const promoMsg = $('#promoMessage');
+
+  let paketData = {};
+  let stokData = {};
+  let promoData = {};
+  let selectedHarga = 0;
+  let hargaFinal = 0;
+  let selectedKodePromo = '';
+
+  $(document).ready(function () {
+    Promise.all([
+      db.ref('paketKuota').once('value'),
+      db.ref('stok').once('value'),
+      db.ref('promo').once('value')
+    ]).then(([paketSnap, stokSnap, promoSnap]) => {
+      paketData = paketSnap.val() || {};
+      stokData = stokSnap.val() || {};
+      promoData = promoSnap.val() || {};
+
+      const tersedia = [];
+      const habis = [];
+
+      for (const kode in paketData) {
+        const item = paketData[kode];
+        const stok = stokData[kode] ?? item.stok ?? 0;
+
+        if (item.aktif === false) continue;
+
+        const label = `${kode} - ${item.nama || 'Tanpa Nama'} (Stok: ${stok})`;
+        const option = `<option value="${kode}">${label}</option>`;
+        const optionDisabled = `<option value="${kode}" disabled>${kode} - ${item.nama || 'Tanpa Nama'} (Habis)</option>`;
+
+        if (stok > 0) {
+          tersedia.push(option);
+        } else {
+          habis.push(optionDisabled);
+        }
+      }
+
+      paketSelect.append([...tersedia, ...habis].join(''));
+    });
+
+    paketSelect.on('change', function () {
+      const kode = $(this).val();
+      const paket = paketData[kode];
+      if (paket) {
+        descriptionBox.val(paket.deskripsi || 'Tidak ada deskripsi');
+        selectedHarga = paket.harga || 0;
+        hargaFinal = selectedHarga;
+        selectedKodePromo = '';
+
+        detailContainer.removeClass('d-none');
+        totalBayarEl.html(`Rp ${selectedHarga.toLocaleString('id-ID')}`);
+        totalBayarContainer.removeClass('d-none');
+        promoMsg.text('');
+        promoInput.val('');
+      }
+    });
+
+    promoBtn.on('click', function () {
+      const kodePromo = promoInput.val().trim().toUpperCase();
+      const promo = promoData[kodePromo];
+      selectedKodePromo = '';
+      if (!promo) {
+        promoMsg.text('Kode promo tidak ditemukan.').addClass('text-danger').removeClass('text-success text-warning');
+        return;
+      }
+
+      const now = new Date();
+      const hariIni = now.toLocaleString('id-ID', { weekday: 'long' });
+      const jam = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+      const isHariAktif = promo.hari.includes(hariIni);
+      const isJamAktif = jam >= promo.jam_mulai && jam <= promo.jam_selesai;
+
+      if (!isHariAktif || !isJamAktif) {
+        promoMsg.text('Promo tidak aktif saat ini.').addClass('text-warning').removeClass('text-success text-danger');
+        return;
+      }
+
+      // Hitung harga setelah promo
+      let hargaSetelahPromo = selectedHarga;
+      if (promo.tipe === 'diskon_persen') {
+        hargaSetelahPromo -= (selectedHarga * promo.nilai / 100);
+      } else if (promo.tipe === 'diskon_nominal') {
+        hargaSetelahPromo -= promo.nilai;
+      }
+
+      hargaFinal = Math.ceil(Math.max(0, hargaSetelahPromo));
+      selectedKodePromo = kodePromo;
+
+      totalBayarEl.html(`
+        <div>Rp ${hargaFinal}</div>
+      `);
+      promoMsg.text('Promo berhasil diterapkan.').addClass('text-success').removeClass('text-danger text-warning');
+    });
+
+    // Saat klik tombol pembayaran
+    $('#btnBayar').on('click', function () {
+      const finalHarga = hargaFinal || selectedHarga;
+      const promoTeks = (hargaFinal !== selectedHarga && selectedKodePromo)
+        ? `<br><small class="text-muted">Promo ${selectedKodePromo}: <del>Rp ${selectedHarga.toLocaleString('id-ID')}</del></small>`
+        : '';
+
+      const hargaHTML = `<strong>Total Bayar:</strong> Rp ${finalHarga.toLocaleString('id-ID')}${promoTeks}`;
+
+      $('#qrisTotal, #bankTotal, #ewalletTotal').html(hargaHTML);
+    });
+  });
+</script>
+
 
 
 
