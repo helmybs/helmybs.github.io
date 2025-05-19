@@ -2265,15 +2265,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Arahkan ke modal pembayaran sesuai metode
     if (metode === "qris") {
       $("#qrisProduct").text(product);
-      $("#qrisTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $("#qrisTotal").text("" + $("#totalBayar").text().replace("Total Bayar: ", ""));
       $('#modalQris').modal('show');
     } else if (metode === "bank") {
       $("#bankProduct").text(product);
-      $("#bankTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $("#bankTotal").text("" + $("#totalBayar").text().replace("Total Bayar: ", ""));
       $('#modalBank').modal('show');
     } else if (metode === "ewallet") {
       $("#ewalletProduct").text(product);
-      $("#ewalletTotal").text("Total: " + $("#totalBayar").text().replace("Total Bayar: ", ""));
+      $("#ewalletTotal").text("" + $("#totalBayar").text().replace("Total Bayar: ", ""));
       $('#modalEwallet').modal('show');
     }
   });
@@ -3006,6 +3006,8 @@ $(document).ready(function () {
 
 <script>
   
+ 
+
   const paketSelect = $('#product');
   const descriptionBox = $('#description');
   const detailContainer = $('#detailPaketContainer');
@@ -3019,6 +3021,8 @@ $(document).ready(function () {
   let stokData = {};
   let promoData = {};
   let selectedHarga = 0;
+  let hargaFinal = 0;
+  let selectedKodePromo = '';
 
   $(document).ready(function () {
     Promise.all([
@@ -3050,7 +3054,6 @@ $(document).ready(function () {
         }
       }
 
-      // Gabungkan dan masukkan ke dropdown
       paketSelect.append([...tersedia, ...habis].join(''));
     });
 
@@ -3060,9 +3063,11 @@ $(document).ready(function () {
       if (paket) {
         descriptionBox.val(paket.deskripsi || 'Tidak ada deskripsi');
         selectedHarga = paket.harga || 0;
+        hargaFinal = selectedHarga;
+        selectedKodePromo = '';
 
         detailContainer.removeClass('d-none');
-        totalBayarEl.html(`Rp ${selectedHarga.toLocaleString('id-ID')}`);
+        totalBayarEl.html(`Total Bayar : Rp ${selectedHarga.toLocaleString('id-ID')}`);
         totalBayarContainer.removeClass('d-none');
         promoMsg.text('');
         promoInput.val('');
@@ -3072,6 +3077,7 @@ $(document).ready(function () {
     promoBtn.on('click', function () {
       const kodePromo = promoInput.val().trim().toUpperCase();
       const promo = promoData[kodePromo];
+      selectedKodePromo = '';
       if (!promo) {
         promoMsg.text('Kode promo tidak ditemukan.').addClass('text-danger').removeClass('text-success text-warning');
         return;
@@ -3080,6 +3086,7 @@ $(document).ready(function () {
       const now = new Date();
       const hariIni = now.toLocaleString('id-ID', { weekday: 'long' });
       const jam = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
       const isHariAktif = promo.hari.includes(hariIni);
       const isJamAktif = jam >= promo.jam_mulai && jam <= promo.jam_selesai;
 
@@ -3088,6 +3095,7 @@ $(document).ready(function () {
         return;
       }
 
+      // Hitung harga setelah promo
       let hargaSetelahPromo = selectedHarga;
       if (promo.tipe === 'diskon_persen') {
         hargaSetelahPromo -= (selectedHarga * promo.nilai / 100);
@@ -3095,17 +3103,33 @@ $(document).ready(function () {
         hargaSetelahPromo -= promo.nilai;
       }
 
-      if (hargaSetelahPromo < 0) hargaSetelahPromo = 0;
+      hargaFinal = Math.ceil(Math.max(0, hargaSetelahPromo));
+      selectedKodePromo = kodePromo;
 
       totalBayarEl.html(`
-        <del>Rp ${selectedHarga.toLocaleString('id-ID')}</del>
-        Rp ${Math.ceil(hargaSetelahPromo).toLocaleString('id-ID')}
-        <span class="badge bg-success">${kodePromo}</span>
+        <div>Total Bayar : 
+          <del>Rp ${selectedHarga.toLocaleString('id-ID')}</del>
+          Rp ${hargaFinal.toLocaleString('id-ID')}
+          <span class="badge bg-success">${kodePromo}</span>
+        </div>
       `);
       promoMsg.text('Promo berhasil diterapkan.').addClass('text-success').removeClass('text-danger text-warning');
     });
+
+    // Saat klik tombol pembayaran
+    $('#btnBayar').on('click', function () {
+      const finalHarga = hargaFinal || selectedHarga;
+      const promoTeks = (hargaFinal !== selectedHarga && selectedKodePromo)
+        ? `<br><small class="text-muted">Promo ${selectedKodePromo}: <del>Rp ${selectedHarga.toLocaleString('id-ID')}</del></small>`
+        : '';
+
+      const hargaHTML = `<strong>Total Bayar:</strong> Rp ${finalHarga.toLocaleString('id-ID')}${promoTeks}`;
+
+      $('#qrisTotal, #bankTotal, #ewalletTotal').html(hargaHTML);
+    });
   });
 </script>
+
 
 
 
