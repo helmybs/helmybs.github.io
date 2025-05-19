@@ -907,7 +907,7 @@ del { color: #6c757d; opacity: 0.8; }
     <input type="text" class="form-control" id="promoCode" placeholder="Masukkan kode promo">
     <span class="input-group-btn">
       <button class="btn btn-success" type="button" id="applyPromo">
-        <i class="fa fa-check"></i> Promo
+        <i class="fa fa-tags"></i> Promo
       </button>
     </span>
   </div>
@@ -925,7 +925,7 @@ del { color: #6c757d; opacity: 0.8; }
 
                             <div class="form-group" style="margin-top: 10px;">
                                 <button class="btn btn-warning btn-block" id="cekStokBtn" type="button">
-                                    <i class="fa fa-check-square-o"></i> CEK STOK
+                                    <i class="fa fa-database"></i> CEK STOK
                                 </button>
                             </div>
                         </form>
@@ -1015,9 +1015,16 @@ del { color: #6c757d; opacity: 0.8; }
         <div class="payment-instruction">
           <h4 id="bankProduct" style="margin-top: 0;"></h4>
           <p>Silakan transfer ke salah satu rekening berikut:</p>
-          <ul>
-            <li><strong>BCA</strong>: 7960490066 a.n. HELMY BAGUS S</li>
-            </ul>
+<ul>
+  <li>
+    <strong>BCA</strong>: 
+    <span id="bcaRek">7960490066</span> a.n. HELMY BAGUS S
+    <button type="button" class="btn btn-sm btn-outline-primary ms-2" onclick="copyToClipboard('bcaRek', this)">
+      <i class="fa fa-copy"></i>
+    </button>
+  </li>
+</ul>
+
         </div>
         
         <h4 class="text-primary" id="bankTotal"></h4>
@@ -1051,12 +1058,30 @@ del { color: #6c757d; opacity: 0.8; }
         <div class="payment-instruction">
           <h4 id="ewalletProduct" style="margin-top: 0;"></h4>
           <p>Silakan transfer ke salah satu eWallet berikut:</p>
-          <ul>
-            <li><strong>SHOPEEPAY</strong>: 083842915722</li>
-            <li><strong>DANA</strong>: 083842915722</li>
-            <li><strong>GOPAY</strong>: 083842915722</li>
-            <li>a.n.<strong>HELMY BAGUS S</strong></li>
-          </ul>
+<ul>
+  <li>
+    <strong>SHOPEEPAY</strong>: 
+    <span id="shopeepayNo">083842915722</span>
+    <button type="button" class="btn btn-sm btn-outline-primary ms-2" onclick="copyToClipboard('shopeepayNo', this)">
+      <i class="fa fa-copy"></i> 
+    </button>
+  </li>
+  <li>
+    <strong>DANA</strong>: 
+    <span id="danaNo">083842915722</span>
+    <button type="button" class="btn btn-sm btn-outline-primary ms-2" onclick="copyToClipboard('danaNo', this)">
+      <i class="fa fa-copy"></i> 
+    </button>
+  </li>
+  <li>
+    <strong>GOPAY</strong>: 
+    <span id="gopayNo">083842915722</span>
+    <button type="button" class="btn btn-sm btn-outline-primary ms-2" onclick="copyToClipboard('gopayNo', this)">
+      <i class="fa fa-copy"></i> 
+    </button>
+  </li>
+</ul>
+
         </div>
         
         <h4 class="text-primary" id="ewalletTotal"></h4>
@@ -2755,8 +2780,7 @@ $(document).ready(function() {
 </script>
 <!-- Anti View Source + Izinkan Paste Hanya di Nomor HP -->
 <script>
-  // Blokir klik kanan
-  document.addEventListener('contextmenu', event => event.preventDefault());
+
 
   // Blokir shortcut DevTools
   document.onkeydown = function (e) {
@@ -2837,60 +2861,6 @@ $(document).ready(function() {
   });
 </script>
 
-<script>
-
-// fungsi promokode
-  function isPromoValid(promo, now) {
-    const dayNames = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-    const hariIni = dayNames[now.getDay()];
-    const jam = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-
-    return promo.hari.includes(hariIni) &&
-      jam >= promo.jam_mulai && jam <= promo.jam_selesai;
-  }
-
-  $("#applyPromo").click(function () {
-    const kode = $("#promoCode").val().trim().toUpperCase();
-    const val = $("#product").val();
-    if (!kode || !val) {
-      $("#promoMessage").text("Masukkan kode promo dan pilih kuota").addClass("text-warning").removeClass("text-danger text-success");
-      return;
-    }
-
-    db.ref("promo/" + kode).once("value", snapshot => {
-      const promo = snapshot.val();
-      if (!promo) {
-        $("#promoMessage").text("Kode promo tidak ditemukan.").addClass("text-danger").removeClass("text-warning text-success");
-        return;
-      }
-
-      const now = new Date();
-      if (!isPromoValid(promo, now)) {
-        $("#promoMessage").text("Promo tidak berlaku saat ini.").addClass("text-danger").removeClass("text-warning text-success");
-        return;
-      }
-
-      const match = val.match(/Rp\.\s?([\d.]+)/);
-      if (!match) return;
-      const harga = parseInt(match[1].replace(/\./g, ""));
-      let total = harga;
-
-      if (promo.tipe === "diskon_persen") {
-        total -= Math.round(harga * (promo.nilai / 100));
-      } else if (promo.tipe === "diskon_nominal") {
-        total -= promo.nilai;
-      }
-
-      hargaSetelahDiskon = total;
-      const formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(total);
-      $("#promoMessage").text("Promo berhasil diterapkan!").addClass("text-success").removeClass("text-danger text-warning");
-      $("#totalBayar").html(`<del>${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(harga)}</del> ${formatted} <span class="badge bg-success">${kode}</span>`);
-      $("#totalBayarContainer").removeClass("d-none");
-    });
-  });
-</script>
-
-
 
 <script>
     jQuery(document).ready(function($){
@@ -2946,34 +2916,6 @@ $("#successModal").on("shown.bs.modal", () => updateStepper(4));
 
 </script>
 
-<!-- best-seller -->
-<script>
-    $(document).ready(function () {
-  $('#product option').each(function () {
-    if ($(this).data('best-seller') === true || $(this).data('best-seller') === "true") {
-      const text = $(this).text();
-      if (!text.includes("★")) {
-        $(this).text(text + ' ★ Best Seller');
-      }
-    }
-  });
-});
-
-$(document).ready(function () {
-  const bestSellerOptions = [];
-
-  $('#product option').each(function () {
-    if ($(this).data('best-seller') === "true" || $(this).data('best-seller') === true) {
-      bestSellerOptions.push($(this).clone());
-      $(this).remove();
-    }
-  });
-
-  $('#product').prepend(bestSellerOptions);
-});
-
-</script>
-
 
 <script>
   // Wajib hubungi cs
@@ -3005,9 +2947,6 @@ $(document).ready(function () {
 
 
 <script>
-  
- 
-
   const paketSelect = $('#product');
   const descriptionBox = $('#description');
   const detailContainer = $('#detailPaketContainer');
@@ -3067,7 +3006,7 @@ $(document).ready(function () {
         selectedKodePromo = '';
 
         detailContainer.removeClass('d-none');
-        totalBayarEl.html(`Total Bayar : Rp ${selectedHarga.toLocaleString('id-ID')}`);
+        totalBayarEl.html(`Rp ${selectedHarga.toLocaleString('id-ID')}`);
         totalBayarContainer.removeClass('d-none');
         promoMsg.text('');
         promoInput.val('');
@@ -3107,11 +3046,7 @@ $(document).ready(function () {
       selectedKodePromo = kodePromo;
 
       totalBayarEl.html(`
-        <div>Total Bayar : 
-          <del>Rp ${selectedHarga.toLocaleString('id-ID')}</del>
-          Rp ${hargaFinal.toLocaleString('id-ID')}
-          <span class="badge bg-success">${kodePromo}</span>
-        </div>
+        <div>Rp ${hargaFinal}</div>
       `);
       promoMsg.text('Promo berhasil diterapkan.').addClass('text-success').removeClass('text-danger text-warning');
     });
@@ -3130,6 +3065,25 @@ $(document).ready(function () {
   });
 </script>
 
+<script>
+function copyToClipboard(elementId, btn) {
+  const text = document.getElementById(elementId).innerText;
+  navigator.clipboard.writeText(text).then(function() {
+    // Ubah tampilan tombol sementara
+    const original = btn.innerHTML;
+    btn.innerHTML = '<i class="fa fa-check text-success"></i> ';
+    btn.classList.remove('btn-outline-primary');
+    btn.classList.add('btn-success');
+    setTimeout(function() {
+      btn.innerHTML = original;
+      btn.classList.remove('btn-success');
+      btn.classList.add('btn-outline-primary');
+    }, 1500);
+  }, function() {
+    alert('Gagal menyalin ke clipboard, Silahkan salin manual.');
+  });
+}
+</script>
 
 
 
