@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Halaman Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap & Font Awesome -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+  <style>
+    body { padding: 20px; font-family: sans-serif; background: #f4f6f9; }
+    .tab-content { margin-top: 20px; }
+    input, select, button, textarea { margin: 6px 0; padding: 8px; width: 100%; box-sizing: border-box; }
+    table { width: 100%; margin-top: 10px; border-collapse: collapse; }
+    th, td { padding: 8px; border: 1px solid #ddd; text-align: center; }
+    th { background: #f0f0f0; }
+    .nav-tabs { margin-bottom: 0; }
+    .nav-tabs > li > a { color: #333; }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-bottom-color: transparent;
+    }
+    /* Kelola Paket style */
+    #kelolaPaketTab .form-group label { font-weight: bold; }
+    #kelolaPaketTab .table th, #kelolaPaketTab .table td { vertical-align: middle !important; }
+    #kelolaPaketTab .container { padding: 0; }
+    /* Responsive Table */
+    .table-responsive { width: 100%; overflow-x: auto; }
+    /* Responsive Form */
+    @media (max-width: 768px) {
+      body { padding: 5px; }
+      h2, h3, h4 { font-size: 1.2em; }
+      .nav-tabs > li > a { padding: 8px 6px; font-size: 0.95em; }
+      .tab-content { margin-top: 10px; }
+      .form-group label, label { font-size: 0.95em; }
+      input, select, button, textarea { font-size: 1em; }
+      table, th, td { font-size: 0.95em; }
+      .btn, button { font-size: 0.95em; padding: 6px 8px; }
+      .container { padding: 0; }
+      #kelolaPaketTab .container { padding: 0; }
+      .table-responsive, table { width: 100%; }
+      .form-group, form { margin-bottom: 10px; }
+      /* Stack filter row in Riwayat */
+      #riwayatTab .row { display: block; }
+      #riwayatTab .col-sm-3, #riwayatTab .col-sm-4, #riwayatTab .col-sm-5 { width: 100%; float: none; margin-bottom: 8px; }
+      #riwayatTab .text-right { text-align: left !important; }
+    }
+    /* Hide scroll bar but allow scrolling */
+    .table-responsive::-webkit-scrollbar { height: 6px; background: #eee; }
+    .table-responsive::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+  </style>
+
+  <!-- Firebase dan Library -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <h2><i class="fa fa-cogs"></i> Halaman Admin</h2>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#promoTab">Promo</a></li>
+    <li><a data-toggle="tab" href="#riwayatTab">Riwayat</a></li>
+    <li><a data-toggle="tab" href="#stokTab">Stok</a></li>
+    <li><a data-toggle="tab" href="#kelolaPaketTab">Kelola Paket</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <!-- Promo -->
+    <div id="promoTab" class="tab-pane fade in active">
+      <h3>Manajemen Promo</h3>
+      <form id="promoForm">
+        <input type="text" id="kode" placeholder="Kode Promo (unik)" required />
+        <select id="tipe" required>
+          <option value="">-- Pilih Tipe --</option>
+          <option value="diskon_persen">Diskon Persen</option>
+          <option value="diskon_nominal">Diskon Nominal</option>
+        </select>
+        <input type="number" id="nilai" placeholder="Nilai Diskon" required />
+        <input type="time" id="jam_mulai" required />
+        <input type="time" id="jam_selesai" required />
+        <label>Hari Berlaku:</label>
+        <div id="hariContainer">
+          <label><input type="checkbox" value="Senin"> Senin</label>
+          <label><input type="checkbox" value="Selasa"> Selasa</label>
+          <label><input type="checkbox" value="Rabu"> Rabu</label>
+          <label><input type="checkbox" value="Kamis"> Kamis</label>
+          <label><input type="checkbox" value="Jumat"> Jumat</label>
+          <label><input type="checkbox" value="Sabtu"> Sabtu</label>
+          <label><input type="checkbox" value="Minggu"> Minggu</label>
+        </div>
+        <button type="submit">Simpan</button>
+      </form>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Kode</th>
+              <th>Tipe</th>
+              <th>Nilai</th>
+              <th>Jam</th>
+              <th>Hari</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="promoTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Riwayat -->
+    <div id="riwayatTab" class="tab-pane fade">
+      <h3>Riwayat Pembelian</h3>
+      <div class="row">
+        <div class="col-sm-3"><input type="text" id="filterNomor" class="form-control" placeholder="Filter Nomor HP"></div>
+        <div class="col-sm-5"><input type="text" id="filterProduk" class="form-control" placeholder="Filter Produk"></div>
+        <div class="col-sm-4 text-right">
+          <button class="btn btn-success" onclick="exportToExcel()"><i class="fa fa-file-excel-o"></i> Export Excel</button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped" id="riwayatTable">
+          <thead>
+            <tr><th>Tanggal</th><th>Nomor HP</th><th>Produk</th><th>Harga</th><th>Pembayaran</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="adminRiwayatTbody">
+            <tr><td colspan="6">Memuat data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Stok -->
+    <div id="stokTab" class="tab-pane fade">
+      <h3>Kelola Stok</h3>
+      <label>Kode Produk:</label>
+      <input type="text" id="kodeStok" placeholder="contoh: RES35" />
+      <br>
+      <label>Jumlah:</label>
+      <input type="number" id="jumlahStok" />
+      <br>
+      <label>Aksi:</label><br>
+      <input type="radio" name="aksi" value="tambah" checked /> Tambah
+      <input type="radio" name="aksi" value="kurangi" /> Kurangi
+      <input type="radio" name="aksi" value="hapus" /> Hapus Stok Produk
+      <input type="radio" name="aksi" value="hapus-semua" /> Hapus Semua Varian
+      <br><br>
+      <button onclick="prosesStok()">Proses</button>
+      <hr>
+      <h4>Daftar Stok Produk</h4>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Kode Produk</th>
+              <th>Jumlah</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="stokTableBody">
+            <tr><td colspan="3">Memuat data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Kelola Paket (dari admin_form_kelola_paket.html) -->
+    <div id="kelolaPaketTab" class="tab-pane fade">
+      <div class="container">
+        <h2>Admin - Kelola Paket Kuota</h2>
+        <form id="paketForm">
+          <input type="hidden" id="editMode" value="">
+          <div class="form-group">
+            <label for="kode">Kode Produk</label>
+            <input type="text" class="form-control" id="kode" required>
+          </div>
+          <div class="form-group">
+            <label for="nama">Nama Paket</label>
+            <input type="text" class="form-control" id="nama" required>
+          </div>
+          <div class="form-group">
+            <label for="harga">Harga (Rp)</label>
+            <input type="number" class="form-control" id="harga" required>
+          </div>
+          <div class="form-group">
+            <label for="deskripsi">Deskripsi Paket</label>
+            <textarea class="form-control" id="deskripsi" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="stok">Stok</label>
+            <input type="number" class="form-control" id="stok" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Simpan Paket</button>
+          <button type="reset" class="btn btn-default" onclick="resetForm()">Batal</button>
+        </form>
+        <hr>
+        <div id="message" class="alert" style="display: none;"></div>
+        <h3>Daftar Paket Kuota</h3>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped" id="paketTable">
+            <thead>
+              <tr>
+                <th>Kode</th>
+                <th>Nama</th>
+                <th>Harga</th>
+                <th>Stok</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAm9pbEAyp7iEwlAStQnJPzVwIV23xOsMg",
+      authDomain: "toko-kuota-stok.firebaseapp.com",
+      databaseURL: "https://toko-kuota-stok-default-rtdb.firebaseio.com",
+      projectId: "toko-kuota-stok",
+      storageBucket: "toko-kuota-stok.appspot.com",
+      messagingSenderId: "321145437639",
+      appId: "1:321145437639:web:21c425d46679158e376de2"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const db = firebase.database();
+    const promoRef = db.ref("promo");
+
+    // Promo
+    const promoForm = document.getElementById("promoForm");
+    const promoTableBody = document.getElementById("promoTableBody");
+
+    function renderPromo() {
+      promoRef.on("value", snapshot => {
+        promoTableBody.innerHTML = '';
+        snapshot.forEach(child => {
+          const p = child.val();
+          const row = `
+            <tr>
+              <td>${child.key}</td>
+              <td>${p.tipe}</td>
+              <td>${p.nilai}</td>
+              <td>${p.jam_mulai} - ${p.jam_selesai}</td>
+              <td>${(p.hari || []).join(', ')}</td>
+              <td>
+                <button onclick="editPromo('${child.key}')">Edit</button>
+                <button onclick="deletePromo('${child.key}')">Hapus</button>
+              </td>
+            </tr>`;
+          promoTableBody.innerHTML += row;
+        });
+      });
+    }
+
+    promoForm.onsubmit = function(e) {
+      e.preventDefault();
+      const kode = document.getElementById("kode").value.trim().toUpperCase();
+      const tipe = document.getElementById("tipe").value;
+      const nilai = parseInt(document.getElementById("nilai").value);
+      const jam_mulai = document.getElementById("jam_mulai").value;
+      const jam_selesai = document.getElementById("jam_selesai").value;
+      const hari = Array.from(document.querySelectorAll('#hariContainer input:checked')).map(cb => cb.value);
+      promoRef.child(kode).set({ tipe, nilai, jam_mulai, jam_selesai, hari });
+      promoForm.reset();
+    };
+
+    function editPromo(kode) {
+      promoRef.child(kode).once("value").then(snapshot => {
+        const p = snapshot.val();
+        document.getElementById("kode").value = kode;
+        document.getElementById("tipe").value = p.tipe;
+        document.getElementById("nilai").value = p.nilai;
+        document.getElementById("jam_mulai").value = p.jam_mulai;
+        document.getElementById("jam_selesai").value = p.jam_selesai;
+        document.querySelectorAll('#hariContainer input').forEach(cb => cb.checked = (p.hari || []).includes(cb.value));
+      });
+    }
+
+    function deletePromo(kode) {
+      if (confirm("Yakin hapus promo?")) promoRef.child(kode).remove();
+    }
+
+    renderPromo();
+
+    // Riwayat
+    let allData = {};
+    const tbody = document.getElementById("adminRiwayatTbody");
+
+    function loadRiwayat() {
+      db.ref("riwayat").orderByChild("timestamp").once("value", snapshot => {
+        allData = snapshot.val() || {};
+        tampilkanData();
+      });
+    }
+
+    function tampilkanData() {
+      const nomorFilter = document.getElementById("filterNomor").value.toLowerCase();
+      const produkFilter = document.getElementById("filterProduk").value.toLowerCase();
+      tbody.innerHTML = "";
+      const keys = Object.keys(allData).sort((a, b) => allData[b].timestamp - allData[a].timestamp);
+      let count = 0;
+      keys.forEach(key => {
+        const item = allData[key];
+        if (
+          (!nomorFilter || item.phone.toLowerCase().includes(nomorFilter)) &&
+          (!produkFilter || item.product.toLowerCase().includes(produkFilter))
+        ) {
+          tbody.innerHTML += `
+            <tr>
+              <td>${new Date(item.timestamp).toLocaleString('id-ID')}</td>
+              <td>${item.phone}</td>
+              <td>${item.product}</td>
+              <td>Rp ${item.harga?.toLocaleString('id-ID') ?? '0'}</td>
+              <td>${item.metode}</td>
+              <td>
+                <button class="btn btn-success btn-sm" onclick="updateStatus('${key}')">Sukses</button>
+                <button class="btn btn-danger btn-sm" onclick="hapusRiwayat('${key}')">Hapus</button>
+              </td>
+            </tr>`;
+          count++;
+        }
+      });
+      if (!count) tbody.innerHTML = "<tr><td colspan='6'>Tidak ada data cocok.</td></tr>";
+    }
+
+    function hapusRiwayat(key) {
+      if (confirm("Yakin ingin menghapus data ini?")) {
+        db.ref("riwayat/" + key).remove().then(loadRiwayat);
+      }
+    }
+
+    function exportToExcel() {
+      const wb = XLSX.utils.book_new();
+      const ws_data = [["Tanggal", "Nomor HP", "Produk", "Harga", "Pembayaran"]];
+      Object.values(allData).forEach(item => {
+        ws_data.push([
+          new Date(item.timestamp).toLocaleString('id-ID'),
+          item.phone,
+          item.product,
+          item.harga ?? 0,
+          item.metode
+        ]);
+      });
+      const ws = XLSX.utils.aoa_to_sheet(ws_data);
+      XLSX.utils.book_append_sheet(wb, ws, "Riwayat");
+      XLSX.writeFile(wb, "riwayat_pembelian.xlsx");
+    }
+
+    document.getElementById("filterNomor").addEventListener("input", tampilkanData);
+    document.getElementById("filterProduk").addEventListener("input", tampilkanData);
+    loadRiwayat();
+
+    // Stok
+    function loadStokList() {
+      const tbody = document.getElementById("stokTableBody");
+      db.ref("stok").on("value", snapshot => {
+        tbody.innerHTML = "";
+        if (!snapshot.exists()) {
+          tbody.innerHTML = "<tr
