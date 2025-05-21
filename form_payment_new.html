@@ -882,16 +882,17 @@ del { color: #6c757d; opacity: 0.8; }
                                 </div>
                             </div>
                             <!-- Package Details (Initially Hidden) -->
-                            <div class="form-group d-none" id="detailPaketContainer">
-                                <label for="description"><i class="fa fa-info-circle"></i> Detail Paket</label>
-                                <textarea class="form-control" id="description" readonly rows="8"></textarea>
-                            </div>
-
+                            <div class="form-group d-none" id="detailPaketContainer">       <label for="description"><i class="fa fa-info-circle"></i> Detail Paket</label>
+    <div class="alert alert-info" id="description" style="white-space: pre-line; margin-bottom:0;">
+        <!-- Isi detail paket akan muncul di sini -->
+    </div>
+</div>
                             <!-- Total Price (Initially Hidden) -->
-                            <div class="total-price d-none" id="totalBayarContainer">
-                                <div id="totalBayar"></div>
-                            </div>
-
+                            <div class="form-group d-none" id="totalBayarContainer">
+    <div class="alert alert-success text-center mb-2" id="totalBayar" style="font-weight:bold; margin-bottom:0;">
+        <!-- Total bayar akan muncul di sini -->
+    </div>
+</div>
                             <!-- Payment Method -->
                             <div class="form-group">
                                 <label for="metodePembayaran"><i class="fa fa-credit-card"></i> Pilih Metode Pembayaran</label>
@@ -1937,8 +1938,7 @@ del { color: #6c757d; opacity: 0.8; }
         } else {
           // Tampilkan detail paket
           $("#detailPaketContainer").removeClass('d-none');
-          $("#description").val(descriptions[index]);
-          
+         $("#description").text(descriptions[index]);
           // Tampilkan total bayar
           const val = $(this).val();
           const match = val.match(/Rp\.\s?([\d.]+)/);
@@ -2427,7 +2427,7 @@ $("#ewalletTotal").text("Total: " + formatted);
         const phone = $('#phone').val();
         const product = $('#product').val();
         const total = $('#qrisTotal').text().replace('Total: ', '');
-        const description = $('#description').val();
+        const description = $("#description").text();
         
         handleUpload('#buktiBayar', '#progressWrapper', '#uploadProgressBar', function (url) {
           // Format pesan WhatsApp
@@ -2465,7 +2465,7 @@ $("#ewalletTotal").text("Total: " + formatted);
       const phone = $('#phone').val();
       const product = $('#product').val();
       const total = $('#bankTotal').text().replace('Total: ', '');
-      const description = $('#description').val();
+      const description = $("#description").text();
       
       handleUpload('#buktiBayarBank', '#progressWrapperBank', '#uploadProgressBarBank', function (url) {
         // Format pesan WhatsApp
@@ -2504,7 +2504,7 @@ $("#ewalletTotal").text("Total: " + formatted);
         const phone = $('#phone').val();
         const product = $('#product').val();
         const total = $('#ewalletTotal').text().replace('Total: ', '');
-        const description = $('#description').val();
+        const description = $("#description").text();
         
         handleUpload('#buktiBayarEwallet', '#progressWrapperEwallet', '#uploadProgressBarEwallet', function (url) {
           // Format pesan WhatsApp
@@ -2541,7 +2541,7 @@ $("#ewalletTotal").text("Total: " + formatted);
       const phone = $('#phone').val();
       const product = $('#product').val();
       const total = $('#bankTotal').text().replace('Total: ', '');
-      const description = $('#description').val();
+      const description = $("#description").text();
       
       handleUpload('#buktiBayarBank', '#progressWrapperBank', '#uploadProgressBarBank', function (url) {
         // Format pesan WhatsApp
@@ -2998,59 +2998,64 @@ $("#successModal").on("shown.bs.modal", () => updateStepper(4));
     });
 
     paketSelect.on('change', function () {
-      const kode = $(this).val();
-      const paket = paketData[kode];
-      if (paket) {
-        descriptionBox.val(paket.deskripsi || 'Tidak ada deskripsi');
-        selectedHarga = paket.harga || 0;
-        hargaFinal = selectedHarga;
-        selectedKodePromo = '';
+  const kode = $(this).val();
+  const paket = paketData[kode];
+  if (paket) {
+    descriptionBox.text(paket.deskripsi || 'Tidak ada deskripsi');
+    selectedHarga = paket.harga || 0;
+    hargaFinal = selectedHarga;
+    selectedKodePromo = '';
+    kodeUnikQris = 0;
 
-        detailContainer.removeClass('d-none');
-        totalBayarEl.html(`Rp ${selectedHarga.toLocaleString('id-ID')}`);
-        totalBayarContainer.removeClass('d-none');
-        promoMsg.text('');
-        promoInput.val('');
-      }
-    });
+    // Harga normal
+    const hargaNormal = `Rp ${selectedHarga.toLocaleString('id-ID')}`;
+    totalBayarEl.html(hargaNormal);
+    $('#qrisTotal').html(hargaNormal);
+    $('#bankTotal').html(hargaNormal);
+    $('#ewalletTotal').html(hargaNormal);
+
+    detailContainer.removeClass('d-none');
+    totalBayarContainer.removeClass('d-none');
+    promoMsg.text('');
+    promoInput.val('');
+  }
+});
+
 
     promoBtn.on('click', function () {
-      const kodePromo = promoInput.val().trim().toUpperCase();
-      const promo = promoData[kodePromo];
-      selectedKodePromo = '';
-      if (!promo) {
-        promoMsg.text('Kode promo tidak ditemukan.').addClass('text-danger').removeClass('text-success text-warning');
-        return;
-      }
+  const kodePromo = promoInput.val().trim().toUpperCase();
+  const promo = promoData[kodePromo];
+  selectedKodePromo = '';
+  if (!promo) {
+    promoMsg.text('Kode promo tidak ditemukan.').addClass('text-danger').removeClass('text-success text-warning');
+    return;
+  }
 
-      const now = new Date();
-      const hariIni = now.toLocaleString('id-ID', { weekday: 'long' });
-      const jam = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+  // ... validasi hari & jam promo
 
-      const isHariAktif = promo.hari.includes(hariIni);
-      const isJamAktif = jam >= promo.jam_mulai && jam <= promo.jam_selesai;
+  // Hitung harga setelah promo
+  let hargaSetelahPromo = selectedHarga;
+  if (promo.tipe === 'diskon_persen') {
+    hargaSetelahPromo -= (selectedHarga * promo.nilai / 100);
+  } else if (promo.tipe === 'diskon_nominal') {
+    hargaSetelahPromo -= promo.nilai;
+  }
+  hargaFinal = Math.ceil(Math.max(0, hargaSetelahPromo));
+  selectedKodePromo = kodePromo;
 
-      if (!isHariAktif || !isJamAktif) {
-        promoMsg.text('Promo tidak aktif saat ini.').addClass('text-warning').removeClass('text-success text-danger');
-        return;
-      }
+  // Format harga
+  const hargaAwal = `Rp ${selectedHarga.toLocaleString('id-ID')}`;
+  const hargaPromo = `Rp ${hargaFinal.toLocaleString('id-ID')}`;
+  const hargaHTML = `${hargaPromo}`;
 
-      // Hitung harga setelah promo
-      let hargaSetelahPromo = selectedHarga;
-      if (promo.tipe === 'diskon_persen') {
-        hargaSetelahPromo -= (selectedHarga * promo.nilai / 100);
-      } else if (promo.tipe === 'diskon_nominal') {
-        hargaSetelahPromo -= promo.nilai;
-      }
+  // Update semua tampilan total harga
+  totalBayarEl.html(hargaHTML);
+  $('#qrisTotal').html(hargaHTML);
+  $('#bankTotal').html(hargaHTML);
+  $('#ewalletTotal').html(hargaHTML);
 
-      hargaFinal = Math.ceil(Math.max(0, hargaSetelahPromo));
-      selectedKodePromo = kodePromo;
-
-      totalBayarEl.html(`
-        <div>Rp ${hargaFinal}</div>
-      `);
-      promoMsg.text('Promo berhasil diterapkan.').addClass('text-success').removeClass('text-danger text-warning');
-    });
+  promoMsg.text('Promo berhasil diterapkan.').addClass('text-success').removeClass('text-danger text-warning');
+});
 
     // Saat klik tombol pembayaran
     $('#btnBayar').on('click', function () {
